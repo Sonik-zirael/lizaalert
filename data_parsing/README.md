@@ -14,10 +14,10 @@
     "Additional": [
       "нуждается в медпомощи"
     ],
-    "MissedDate": "2020-09-12 00:00:00",
-    "PublishedDate": "2020-09-16 19:51:30",
-    "StartDate": null,
-    "FoundDate": "2020-09-25 16:50:40",
+    "MissedDate": "2020-11-16T00:00:00",
+    "PublishedDate": "2020-11-17T06:42:11",
+    "StartDate": "2020-11-17T06:43:47",
+    "FoundDate": "2020-11-17T07:30:22",
     "Name": {
       "first": "Виктор",
       "last": "Максаков",
@@ -52,11 +52,6 @@
     ],
     "Age": {
       "years": 59
-    },
-    "LostDate": {
-      "year": 2020,
-      "month": "сентябрь",
-      "day": 12
     },
     "Signs": [
       [

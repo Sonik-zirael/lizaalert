@@ -14,7 +14,7 @@ def parallel_parsing(post, post_data, okrug, region):
     content_array[0] += ', фо ' + okrug + ', ' + region
     content = '\n'.join(content_array)
     content = remove_stuff(content)
-    published = datetime.fromisoformat(first_message['timestamp']).replace(tzinfo=None)
+    published = datetime.fromisoformat(first_message['timestamp']).replace(tzinfo=None).isoformat()
 
     # Ищем дополнительную информацию о пропавшем
     matches = get_matches(ADD, " ".join(first_message['contents']))
@@ -34,7 +34,7 @@ def parallel_parsing(post, post_data, okrug, region):
         hours = 0 if matches.get('hours') is None else matches.get('hours')
         minutes = 0 if matches.get('minutes') is None else matches.get('minutes')
         try:
-            missed = datetime(year, matches.get('month'), matches.get('day'), hours, minutes)
+            missed = datetime(year, matches.get('month'), matches.get('day'), hours, minutes).isoformat()
         except:
             pass
     # Если дату пропажи не нашли, ищем все даты, которые есть в сообщении, и выбираем ту, которая ближе к
@@ -46,7 +46,7 @@ def parallel_parsing(post, post_data, okrug, region):
             hours = 0 if match.get('hours') is None else match.get('hours')
             minutes = 0 if match.get('minutes') is None else match.get('minutes')
             try:
-                date = datetime(year, match.get('month'), match.get('day'), hours, minutes)
+                date = datetime(year, match.get('month'), match.get('day'), hours, minutes).isoformat()
                 if missed is None or published > date and published - date < published - missed:
                     missed = date
             except:
@@ -60,12 +60,12 @@ def parallel_parsing(post, post_data, okrug, region):
         if found is None:
             matches = get_match(STATUS, text)
             if matches is not None and matches.get('value') != 'не найден':
-                found = datetime.fromisoformat(message['timestamp']).replace(tzinfo=None)
+                found = datetime.fromisoformat(message['timestamp']).replace(tzinfo=None).isoformat()
         # Ищем дату начала поисков
         if start is None:
             matches = get_match(VOLUNTEER, text)
             if matches is not None:
-                date = datetime.fromisoformat(message['timestamp']).replace(tzinfo=None)
+                date = datetime.fromisoformat(message['timestamp']).replace(tzinfo=None).isoformat()
                 start = date
     print(title)
     return {
@@ -80,7 +80,6 @@ def parallel_parsing(post, post_data, okrug, region):
         'Gender': gender(title),
         'Location': location(content),
         'Age': age(title, content),
-        'LostDate': lost_date(content),
         'Signs': signs(content)
     }
 

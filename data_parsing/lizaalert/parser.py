@@ -1,15 +1,20 @@
 import time
 from datetime import datetime
 from data_parsing.lizaalert.rules import *
+from data_parsing.lizaalert.text_parser import *
 import json
 from joblib import Parallel, delayed
 from tqdm import tqdm
 
 
-def parallel_parsing(post, post_data):
+def parallel_parsing(post, post_data, okrug, region):
     first_message = post_data['posts'][0]
     title = post_data['title']
-    published = datetime.fromisoformat(first_message['timestamp']).replace(tzinfo=None)
+    content_array = first_message['contents']
+    content_array[0] += ', фо ' + okrug + ', ' + region
+    content = '\n'.join(content_array)
+    content = remove_stuff(content)
+    published = datetime.fromisoformat(first_message['timestamp']).replace(tzinfo=None).isoformat()
 
     # Ищем дополнительную информацию о пропавшем
     matches = get_matches(ADD, " ".join(first_message['contents']))
@@ -29,7 +34,7 @@ def parallel_parsing(post, post_data):
         hours = 0 if matches.get('hours') is None else matches.get('hours')
         minutes = 0 if matches.get('minutes') is None else matches.get('minutes')
         try:
-            missed = datetime(year, matches.get('month'), matches.get('day'), hours, minutes)
+            missed = datetime(year, matches.get('month'), matches.get('day'), hours, minutes).isoformat()
         except:
             pass
     # Если дату пропажи не нашли, ищем все даты, которые есть в сообщении, и выбираем ту, которая ближе к
@@ -41,7 +46,7 @@ def parallel_parsing(post, post_data):
             hours = 0 if match.get('hours') is None else match.get('hours')
             minutes = 0 if match.get('minutes') is None else match.get('minutes')
             try:
-                date = datetime(year, match.get('month'), match.get('day'), hours, minutes)
+                date = datetime(year, match.get('month'), match.get('day'), hours, minutes).isoformat()
                 if missed is None or published > date and published - date < published - missed:
                     missed = date
             except:
@@ -55,16 +60,28 @@ def parallel_parsing(post, post_data):
         if found is None:
             matches = get_match(STATUS, text)
             if matches is not None and matches.get('value') != 'не найден':
-                found = datetime.fromisoformat(message['timestamp']).replace(tzinfo=None)
+                found = datetime.fromisoformat(message['timestamp']).replace(tzinfo=None).isoformat()
         # Ищем дату начала поисков
         if start is None:
             matches = get_match(VOLUNTEER, text)
             if matches is not None:
-                date = datetime.fromisoformat(message['timestamp']).replace(tzinfo=None)
+                date = datetime.fromisoformat(message['timestamp']).replace(tzinfo=None).isoformat()
                 start = date
-
-    return {'URL': post, 'Status': status, 'Additional': additional, 'MissedDate': missed,
-            'PublishedDate': published, 'StartDate': start, 'FoundDate': found}
+    print(title)
+    return {
+        'URL': post,
+        'Status': status,
+        'Additional': additional,
+        'MissedDate': missed,
+        'PublishedDate': published,
+        'StartDate': start,
+        'FoundDate': found,
+        'Name': name(content),
+        'Gender': gender(title),
+        'Location': location(content),
+        'Age': age(title, content),
+        'Signs': signs(content)
+    }
 
 
 def parse_json(data):
@@ -73,7 +90,7 @@ def parse_json(data):
         for region, region_data in tqdm(okrug_data.items()):
             # Параллелим и задействуем все cpu кроме одного
             json_dict += Parallel(n_jobs=-2)(
-                delayed(parallel_parsing)(post, post_data) for post, post_data in region_data.items())
+                delayed(parallel_parsing)(post, post_data, okrug, region) for post, post_data in region_data.items())
             # for post, post_data in region_data.items():
-            #     json_dict.append(parallel_parsing(post, post_data))
+            #     json_dict.append(parallel_parsing(post, post_data, okrug, region))
     return json.loads(json.dumps(json_dict, ensure_ascii=False, default=str))

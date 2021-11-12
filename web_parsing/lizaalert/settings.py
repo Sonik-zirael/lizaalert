@@ -35,6 +35,9 @@ ROBOTSTXT_OBEY = True
 # Disable cookies (enabled by default)
 #COOKIES_ENABLED = False
 
+RETRY_ENABLED = False
+HTTPERROR_ALLOWED_CODES = [404,500]
+
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
 

@@ -18,5 +18,5 @@ class LizaalertPipeline:
         return item
 
     def close_spider(self, spider):
-        with open("result.json", "w", encoding='utf8') as o_f:
+        with open("result-2.json", "w", encoding='utf8') as o_f:
             json.dump(spider.results_by_region, o_f, ensure_ascii=False, indent=4)

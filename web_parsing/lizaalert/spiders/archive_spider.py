@@ -9,6 +9,11 @@ class ArchiveSearchSpider(scrapy.Spider):
     start_urls = [
         'https://lizaalert.org/forum/viewforum.php?f=133',
     ]
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'lizaalert.pipelines.LizaalertArchivePipeline': 400
+        }
+    }
     results_by_region={}
     counter = 1
     all_visited_links_set = {'https://lizaalert.org/forum/viewforum.php?f=133'}

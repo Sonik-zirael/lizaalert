@@ -67,9 +67,10 @@ HTTPERROR_ALLOWED_CODES = [404,500]
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   'lizaalert.pipelines.LizaalertPipeline': 300,
-}
+# ITEM_PIPELINES = {
+   # 'lizaalert.pipelines.LizaalertRegionsPipeline': 300,
+   # 'lizaalert.pipelines.LizaalertArchivePipeline': 400,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

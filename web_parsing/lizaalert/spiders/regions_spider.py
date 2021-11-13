@@ -9,6 +9,11 @@ class RegionsSpider(scrapy.Spider):
     start_urls = [
         'https://lizaalert.org/forum/viewforum.php?f=119',
     ]
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'lizaalert.pipelines.LizaalertRegionsPipeline': 400
+        }
+    }
     results_by_region={}
     counter = 1
     all_visited_links_set = {'https://lizaalert.org/forum/viewforum.php?f=119'}

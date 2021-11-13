@@ -3,20 +3,20 @@ from scrapy.http import Response
 from scrapy.selector import SelectorList
 
 
-class RegionsSpider(scrapy.Spider):
-    name = "regions"
+class ArchiveSearchSpider(scrapy.Spider):
+    name = "archive"
     allowed_domains = ["lizaalert.org"]
     start_urls = [
-        'https://lizaalert.org/forum/viewforum.php?f=119',
+        'https://lizaalert.org/forum/viewforum.php?f=133',
     ]
     custom_settings = {
         'ITEM_PIPELINES': {
-            'lizaalert.pipelines.LizaalertRegionsPipeline': 400
+            'lizaalert.pipelines.LizaalertArchivePipeline': 400
         }
     }
     results_by_region={}
     counter = 1
-    all_visited_links_set = {'https://lizaalert.org/forum/viewforum.php?f=119'}
+    all_visited_links_set = {'https://lizaalert.org/forum/viewforum.php?f=133'}
     next_pages, subforums, topics = set(), set(), set()
 
     def parse(self, response: Response):
@@ -28,9 +28,9 @@ class RegionsSpider(scrapy.Spider):
         # if self.counter % 500 == 0:
         #     print()
 
-        # receive data from page https://lizaalert.org/forum/viewforum.php?f=119
+        # receive data from page https://lizaalert.org/forum/viewforum.php?f=133
         subforums_section = response.xpath('//div[@class="forabg"]')
-        topics_section = response.xpath('//div[@class="forumbg"]')
+        topics_section = response.xpath('//div[@class="forumbg"]') 
         next_page_button = response.xpath(
             '//div[@class="action-bar bar-top"]/div[@class="pagination"]//li[@class="arrow next"]')
 

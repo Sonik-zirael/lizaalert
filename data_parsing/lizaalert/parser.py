@@ -1,7 +1,7 @@
 import sys
 from datetime import datetime
-from lizaalert.rules import *
-from lizaalert.text_parser import *
+from data_parsing.lizaalert.rules import *
+from data_parsing.lizaalert.text_parser import *
 import json
 from joblib import Parallel, delayed
 import logging

@@ -13,7 +13,7 @@ from yargy.interpretation import (
     fact,
     attribute
 )
-from lizaalert.constants import *
+from data_parsing.lizaalert.constants import *
 
 
 def name_grammar():

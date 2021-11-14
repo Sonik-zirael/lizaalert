@@ -1,7 +1,7 @@
 import sys
 from datetime import datetime
-from data_parsing.lizaalert.rules import *
-from data_parsing.lizaalert.text_parser import *
+from lizaalert.rules import *
+from lizaalert.text_parser import *
 import json
 from joblib import Parallel, delayed
 import logging
@@ -34,7 +34,7 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
     matches = get_match(DATE_MISSED, " ".join(first_message['contents']))
     missed = None
     if matches is not None and matches.get('day') is not None and matches.get('month') is not None:
-        year = published.year if matches.get('year') is None else matches.get('year')
+        year = published.year if matches.get('year', None) is None else matches.get('year')
         hours = 0 if matches.get('hours') is None else matches.get('hours')
         minutes = 0 if matches.get('minutes') is None else matches.get('minutes')
         try:
@@ -75,7 +75,7 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
         'URL': post,
         'Status': status,
         'Additional': additional,
-        'MissedDate': None if missed is None else missed.isoformat(),
+        'MissedDate': missed,
         'PublishedDate': published.isoformat(),
         'StartDate': start,
         'FoundDate': found,

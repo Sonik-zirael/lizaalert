@@ -30,7 +30,7 @@ class ArchiveSearchSpider(scrapy.Spider):
 
         # receive data from page https://lizaalert.org/forum/viewforum.php?f=133
         subforums_section = response.xpath('//div[@class="forabg"]')
-        topics_section = response.xpath('//div[@class="forumbg"]') 
+        topics_section = response.xpath('//div[@class="forumbg"]')
         next_page_button = response.xpath(
             '//div[@class="action-bar bar-top"]/div[@class="pagination"]//li[@class="arrow next"]')
 
@@ -45,14 +45,17 @@ class ArchiveSearchSpider(scrapy.Spider):
 
     def _parse_pagination(self, response: Response):
         self.all_visited_links_set.add(response.url)
+        if response.status in [404, 500]:
+            print('='*30+'\n'+'RECEIVED 500 OR 404 ERROR-CODE\n'+'='*30)
+        else:
+            subforums_section = response.xpath('//div[@class="forabg"]')
+            topics_section = response.xpath('//div[@class="forumbg"]')
+
+            self.subforums.update(self._extract_links(subforums_section, 'forums'))
+            self.topics.update(self._extract_links(topics_section, 'topics'))
+
         next_page_button = response.xpath(
             '//div[@class="action-bar bar-top"]/div[@class="pagination"]//li[@class="arrow next"]')
-
-        subforums_section = response.xpath('//div[@class="forabg"]')
-        topics_section = response.xpath('//div[@class="forumbg"]')
-
-        self.subforums.update(self._extract_links(subforums_section, 'forums'))
-        self.topics.update(self._extract_links(topics_section, 'topics'))
 
         if len(next_page_button) != 0:
             new_page = next_page_button.xpath('a/@href').get()
@@ -69,6 +72,8 @@ class ArchiveSearchSpider(scrapy.Spider):
 
     def _parse_subforum(self, response: Response):
         self.all_visited_links_set.add(response.url)
+        if response.status in [404, 500]:
+            print('='*30+'\n'+'RECEIVED 500 OR 404 ERROR-CODE\n'+'='*30)
         next_page_button = response.xpath(
             '//div[@class="action-bar bar-top"]/div[@class="pagination"]//li[@class="arrow next"]')
         if len(next_page_button) != 0:
@@ -94,88 +99,90 @@ class ArchiveSearchSpider(scrapy.Spider):
 
     def _parse_topic(self, response: Response) -> None:
         self.all_visited_links_set.add(response.url)
-        # print(F'STARTED PARSING TOPIC {response.url}')
-        PRIMARY_REGION_POSITION = 4
-        SECONDARY_REGION_POSITION = 5
+        if response.status in [404, 500]:
+            print('='*30+'\n'+'RECEIVED 500 OR 404 ERROR-CODE\n'+'='*30)
+        else:
+            PRIMARY_REGION_POSITION = 4
+            SECONDARY_REGION_POSITION = 5
 
-        path_to_region = '//li[@class="breadcrumbs"][1]/span[{}]/a/span/text()'
+            path_to_region = '//li[@class="breadcrumbs"][1]/span[{}]/a/span/text()'
 
-        primary_region = response.xpath(path_to_region.format(PRIMARY_REGION_POSITION)).get()
-        secondary_region = response.xpath(path_to_region.format(SECONDARY_REGION_POSITION)).get()
-        if not secondary_region:
-            secondary_region = "undefined"
+            primary_region = response.xpath(path_to_region.format(PRIMARY_REGION_POSITION)).get()
+            secondary_region = response.xpath(path_to_region.format(SECONDARY_REGION_POSITION)).get()
+            if not secondary_region:
+                secondary_region = "undefined"
 
-        if primary_region not in self.results_by_region.keys():
-            self.results_by_region[primary_region] = {}
+            if primary_region not in self.results_by_region.keys():
+                self.results_by_region[primary_region] = {}
 
-        if secondary_region not in self.results_by_region[primary_region].keys():
-            self.results_by_region[primary_region][secondary_region] = {}
+            if secondary_region not in self.results_by_region[primary_region].keys():
+                self.results_by_region[primary_region][secondary_region] = {}
 
-        topic_url_subdomain, topic_url_params = response.url.split('?')
-        topic_params_unique = list(
-            filter(
-                (lambda param:
-                    param.startswith('f=') or param.startswith('t=')),
-                topic_url_params.split('&')
-            )
-        )
-        new_topic_params = '&'.join(topic_params_unique)
-        unique_topic_url = '?'.join((topic_url_subdomain, new_topic_params))
-        if unique_topic_url not in self.results_by_region[primary_region][secondary_region].keys():
-            title = response.xpath('//h2[@class="topic-title"]/a/text()').get()
-            self.results_by_region[primary_region][secondary_region][unique_topic_url] = {
-                'title': title,
-                'posts': [],
-            }
-
-        posts_in_topic_selector = response.xpath('//div[starts-with(@class, "post ")]')
-        for post_selector in posts_in_topic_selector:
-            post_id = post_selector.xpath('//div[starts-with(@class, "post ")]/@id').get()
-
-            author_details = post_selector.xpath('div[@class="inner"]/dl[@class="postprofile"]')
-            if len(author_details.xpath('dt/a')):
-                author_username = author_details.xpath('dt/a/text()').get()
-                author_url_subdomain, author_url_params = author_details.xpath('dt/a/@href').get().split('?')
-                author_ids_in_url = list(
-                    filter(
-                        (lambda param:
-                            param.startswith('u=')),
-                        author_url_params.split('&')
-                    )
+            topic_url_subdomain, topic_url_params = response.url.split('?')
+            topic_params_unique = list(
+                filter(
+                    (lambda param:
+                        param.startswith('f=') or param.startswith('t=')),
+                    topic_url_params.split('&')
                 )
-                author_id = author_ids_in_url[0] if author_ids_in_url else None
-                author_url = '?'.join((author_url_subdomain, author_id))
-            else:
-                author_username = author_details.xpath('dt//*[starts-with(@class, "username")]/text()').get()
-                author_url = None
+            )
+            new_topic_params = '&'.join(topic_params_unique)
+            unique_topic_url = '?'.join((topic_url_subdomain, new_topic_params))
+            if unique_topic_url not in self.results_by_region[primary_region][secondary_region].keys():
+                title = response.xpath('//h2[@class="topic-title"]/a/text()').get()
+                self.results_by_region[primary_region][secondary_region][unique_topic_url] = {
+                    'title': title,
+                    'posts': [],
+                }
 
-            author = {
-                'username': author_username,
-                'profile_url': author_url
-            }
+            posts_in_topic_selector = response.xpath('//div[starts-with(@class, "post ")]')
+            for post_selector in posts_in_topic_selector:
+                post_id = post_selector.xpath('//div[starts-with(@class, "post ")]/@id').get()
 
-            post_contents = post_selector.xpath('div[1]/div[@class="postbody"]/div[1]/' \
-                                                'div[@class="content"]//text()').getall()
-            post_images = post_selector.xpath('div[1]/div[@class="postbody"]/div[1]/' \
-                                              'div[@class="content"]//img/@src').getall()
-            post_timestamp = post_selector.xpath('div[1]/div[@class="postbody"]//p[@class="author"]' \
-                                                 '/time/@datetime').get()
-            post = {
-                'author': author,
-                'contents': post_contents,
-                'media': post_images,
-                'timestamp': post_timestamp
-            }
-            self.results_by_region[primary_region][secondary_region][unique_topic_url]['posts'].append(post)
+                author_details = post_selector.xpath('div[@class="inner"]/dl[@class="postprofile"]')
+                if len(author_details.xpath('dt/a')):
+                    author_username = author_details.xpath('dt/a/text()').get()
+                    author_url_subdomain, author_url_params = author_details.xpath('dt/a/@href').get().split('?')
+                    author_ids_in_url = list(
+                        filter(
+                            (lambda param:
+                                param.startswith('u=')),
+                            author_url_params.split('&')
+                        )
+                    )
+                    author_id = author_ids_in_url[0] if author_ids_in_url else None
+                    author_url = '?'.join((author_url_subdomain, author_id))
+                else:
+                    author_username = author_details.xpath('dt//*[starts-with(@class, "username")]/text()').get()
+                    author_url = None
 
-        # description = posts_in_topic_selector[0].xpath('div[1]/div[@class="postbody"]/div[1]/' \
-        #                                                'div[@class="content"]//text()').getall()
-        # description = ' '.join(description)
+                author = {
+                    'username': author_username,
+                    'profile_url': author_url
+                }
 
-        # self.results_by_region[primary_region][secondary_region][unique_topic_url].append({
-        #     "title": title,
-        #     "description": description
-        # })
+                post_contents = post_selector.xpath('div[1]/div[@class="postbody"]/div[1]/' \
+                                                    'div[@class="content"]//text()').getall()
+                post_images = post_selector.xpath('div[1]/div[@class="postbody"]/div[1]/' \
+                                                'div[@class="content"]//img/@src').getall()
+                post_timestamp = post_selector.xpath('div[1]/div[@class="postbody"]//p[@class="author"]' \
+                                                    '/time/@datetime').get()
+                post = {
+                    'author': author,
+                    'contents': post_contents,
+                    'media': post_images,
+                    'timestamp': post_timestamp
+                }
+                self.results_by_region[primary_region][secondary_region][unique_topic_url]['posts'].append(post)
+
+            # description = posts_in_topic_selector[0].xpath('div[1]/div[@class="postbody"]/div[1]/' \
+            #                                                'div[@class="content"]//text()').getall()
+            # description = ' '.join(description)
+
+            # self.results_by_region[primary_region][secondary_region][unique_topic_url].append({
+            #     "title": title,
+            #     "description": description
+            # })
 
         next_page_button = response.xpath(
             '//div[@class="action-bar bar-top"]/div[@class="pagination"]//li[@class="arrow next"]')

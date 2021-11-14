@@ -197,13 +197,3 @@ class ArchiveSearchSpider(scrapy.Spider):
     def _extract_links(self, section: SelectorList, type: str) -> 'list[str]':
         topic_list = section.xpath(f'//ul[@class="topiclist {type}"]/li/dl/dt/div')
         return [topic_div.css('a::attr(href)').get() for topic_div in topic_list]
-
-    def parse_regions(self, response):
-        region_amount = {}
-        list_item = 1
-        while response.xpath('//*[@id="page-body"]/div[2]/div/ul[2]/li['+ str(list_item) +']/dl/dt/div/a[1]').get() is not None:
-            region = response.xpath('//*[@id="page-body"]/div[2]/div/ul[2]/li['+ str(list_item) +']/dl/dt/div/a[1]/text()').get()
-            topics_num = response.xpath('//*[@id="page-body"]/div[2]/div/ul[2]/li['+ str(list_item) +']/dl/dd[1]/text()').get()
-            region_amount[region] = topics_num
-            list_item = list_item + 1
-        print(region_amount)

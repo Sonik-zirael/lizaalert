@@ -7,11 +7,12 @@ from joblib import Parallel, delayed
 from tqdm import tqdm
 
 
-def parallel_parsing(post, post_data, okrug, region):
+def parallel_parsing(post, post_data, okrug=None, region=None):
     first_message = post_data['posts'][0]
     title = post_data['title']
     content_array = first_message['contents']
-    content_array[0] += ', фо ' + okrug + ', ' + region
+    if okrug and region:
+        content_array[0] += ', фо ' + okrug + ', ' + region
     content = '\n'.join(content_array)
     content = remove_stuff(content)
     published = datetime.fromisoformat(first_message['timestamp']).replace(tzinfo=None).isoformat()
@@ -67,7 +68,6 @@ def parallel_parsing(post, post_data, okrug, region):
             if matches is not None:
                 date = datetime.fromisoformat(message['timestamp']).replace(tzinfo=None).isoformat()
                 start = date
-    print(title)
     return {
         'URL': post,
         'Status': status,
@@ -84,7 +84,7 @@ def parallel_parsing(post, post_data, okrug, region):
     }
 
 
-def parse_json(data):
+def parse_okrug_json(data):
     json_dict = []
     for okrug, okrug_data in tqdm(data.items()):
         for region, region_data in tqdm(okrug_data.items()):
@@ -93,4 +93,16 @@ def parse_json(data):
                 delayed(parallel_parsing)(post, post_data, okrug, region) for post, post_data in region_data.items())
             # for post, post_data in region_data.items():
             #     json_dict.append(parallel_parsing(post, post_data, okrug, region))
+    return json.loads(json.dumps(json_dict, ensure_ascii=False, default=str))
+
+
+def parse_archive_json(data):
+    json_dict = []
+    for section_1, section_data in tqdm(data.items()):
+        for year, people_data in tqdm(section_data.items()):
+            # Параллелим и задействуем все cpu кроме одного
+            json_dict += Parallel(n_jobs=-2)(
+                delayed(parallel_parsing)(post, post_data) for post, post_data in people_data.items())
+            # for post, post_data in people_data.items():
+            #     json_dict.append(parallel_parsing(post, post_data))
     return json.loads(json.dumps(json_dict, ensure_ascii=False, default=str))

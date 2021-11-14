@@ -186,6 +186,9 @@ def remove_stuff(text):
         if not words_and_number or info_org or phone_number or coord or orient or sbor or headquarters:
             continue
 
+        line = re.sub(r'\[[^\]]+\]', '', line)
+        line = re.sub(r'МО', 'Московская область', line)
+        line = re.sub(r'ЛО', 'Ленинградская область', line)
         formatted_lines.append(line)
     text = '\n'.join(formatted_lines)
     return text

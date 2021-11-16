@@ -19,8 +19,10 @@
 ### Запуск
 
 1. Настроить виртуальное окружение _python -m venv .venv_
-2. Загрузить пакет Scrapy _pip install Scrapy_
-3. Из папки, в которой лежит файл scrapy.cfg, запустить команду для старта парсинга _scrapy crawl regions_. Команда начнёт заново скачивать данные и заносить их в result.json (result.json не отформатирован, pretty_json отформатирован)
+2. Загрузить все необходимые зависимости с помощью _pip install -r requirements.txt_
+3. Из папки, в которой лежит файл scrapy.cfg, запустить команду для старта парсинга _scrapy crawl <spider name>_. На аднный момент доступны пауки:
+* regions - данные с форумов https://lizaalert.org/forum/viewforum.php?f=119 - запись происходит в result.json
+* archive - данные с форума https://lizaalert.org/forum/viewforum.php?f=133 - запись происодит в result-2.json.
 
 ### Структура result.json
 

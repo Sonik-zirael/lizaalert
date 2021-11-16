@@ -1,10 +1,13 @@
-import time
+import sys
 from datetime import datetime
 from data_parsing.lizaalert.rules import *
 from data_parsing.lizaalert.text_parser import *
 import json
 from joblib import Parallel, delayed
-from tqdm import tqdm
+import logging
+from pathlib import Path
+
+logging.basicConfig(stream=sys.stdout, level=logging.WARNING)
 
 
 def parallel_parsing(post, post_data, okrug=None, region=None):
@@ -15,7 +18,7 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
         content_array[0] += ', фо ' + okrug + ', ' + region
     content = '\n'.join(content_array)
     content = remove_stuff(content)
-    published = datetime.fromisoformat(first_message['timestamp']).replace(tzinfo=None).isoformat()
+    published = datetime.fromisoformat(first_message['timestamp']).replace(tzinfo=None)
 
     # Ищем дополнительную информацию о пропавшем
     matches = get_matches(ADD, " ".join(first_message['contents']))
@@ -35,7 +38,7 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
         hours = 0 if matches.get('hours') is None else matches.get('hours')
         minutes = 0 if matches.get('minutes') is None else matches.get('minutes')
         try:
-            missed = datetime(year, matches.get('month'), matches.get('day'), hours, minutes).isoformat()
+            missed = datetime(year, matches.get('month'), matches.get('day'), hours, minutes)
         except:
             pass
     # Если дату пропажи не нашли, ищем все даты, которые есть в сообщении, и выбираем ту, которая ближе к
@@ -47,7 +50,7 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
             hours = 0 if match.get('hours') is None else match.get('hours')
             minutes = 0 if match.get('minutes') is None else match.get('minutes')
             try:
-                date = datetime(year, match.get('month'), match.get('day'), hours, minutes).isoformat()
+                date = datetime(year, match.get('month'), match.get('day'), hours, minutes)
                 if missed is None or published > date and published - date < published - missed:
                     missed = date
             except:
@@ -72,8 +75,8 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
         'URL': post,
         'Status': status,
         'Additional': additional,
-        'MissedDate': missed,
-        'PublishedDate': published,
+        'MissedDate': None if missed is None else missed.isoformat(),
+        'PublishedDate': published.isoformat(),
         'StartDate': start,
         'FoundDate': found,
         'Name': name(content),
@@ -84,25 +87,71 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
     }
 
 
-def parse_okrug_json(data):
+def parse_okrug_json(data, batch_size=1000, start_batch=0, batch_number=None):
+    Path("../temp").mkdir(parents=True, exist_ok=True)
+    process_data = []
+    for okrug, okrug_data in data.items():
+        for region, region_data in okrug_data.items():
+            process_data += [d + (okrug, region) for d in region_data.items()]
+    offset = start_batch * batch_size
+    cur_batch = start_batch
+    logging.info("Start parsing okrug")
     json_dict = []
-    for okrug, okrug_data in tqdm(data.items()):
-        for region, region_data in tqdm(okrug_data.items()):
-            # Параллелим и задействуем все cpu кроме одного
-            json_dict += Parallel(n_jobs=-2)(
-                delayed(parallel_parsing)(post, post_data, okrug, region) for post, post_data in region_data.items())
-            # for post, post_data in region_data.items():
-            #     json_dict.append(parallel_parsing(post, post_data, okrug, region))
-    return json.loads(json.dumps(json_dict, ensure_ascii=False, default=str))
+    while offset < len(process_data) and (batch_number is None or cur_batch - start_batch < batch_number):
+        # Параллелим вычисления внутри пакета и задействуем все cpu кроме одного
+        try:
+            json_dict = Parallel(n_jobs=-2)(
+                delayed(parallel_parsing)(post, post_data, okrug, region) for post, post_data, okrug, region in
+                process_data[offset:offset + batch_size])
+            with open("../temp/okrug_parsed_{}.json".format(cur_batch), "w") as write_file:
+                write_file.write(json.dumps(json_dict, ensure_ascii=False))
+        except Exception as e:
+            logging.exception("Okrug batch {} was not parsed: {}".format(cur_batch, e))
+        offset += batch_size
+        cur_batch += 1
+        # Без распараллеливания
+        # try:
+        #     json_dict.append(parallel_parsing(*process_data[offset]))
+        #     if (offset + 1) % batch_size == 0 or offset == len(process_data) - 1:
+        #         with open("../temp/okrug_parsed_{}.json".format(cur_batch), "w") as write_file:
+        #             write_file.write(json.dumps(json_dict, ensure_ascii=False))
+        #         json_dict.clear()
+        #         cur_batch += 1
+        # except Exception as e:
+        #     logging.error("Batch {} was not parsed: {}".format(cur_batch, e))
+        # offset += 1
 
 
-def parse_archive_json(data):
+def parse_archive_json(data, batch_size=1000, start_batch=0, batch_number=None):
+    Path("../temp").mkdir(parents=True, exist_ok=True)
+    process_data = []
+    for section_1, section_data in data.items():
+        for year, people_data in section_data.items():
+            process_data += people_data.items()
+    offset = start_batch * batch_size
+    cur_batch = start_batch
+    logging.info("Start parsing achieve")
     json_dict = []
-    for section_1, section_data in tqdm(data.items()):
-        for year, people_data in tqdm(section_data.items()):
-            # Параллелим и задействуем все cpu кроме одного
-            json_dict += Parallel(n_jobs=-2)(
-                delayed(parallel_parsing)(post, post_data) for post, post_data in people_data.items())
-            # for post, post_data in people_data.items():
-            #     json_dict.append(parallel_parsing(post, post_data))
-    return json.loads(json.dumps(json_dict, ensure_ascii=False, default=str))
+    while offset < len(process_data) and (batch_number is None or cur_batch - start_batch < batch_number):
+        # Параллелим вычисления внутри пакета и задействуем все cpu кроме одного
+        try:
+            json_dict = Parallel(n_jobs=-2)(
+                delayed(parallel_parsing)(post, post_data) for post, post_data in
+                process_data[offset:offset + batch_size])
+            with open("../temp/archive_parsed_{}.json".format(cur_batch), "w") as write_file:
+                write_file.write(json.dumps(json_dict, ensure_ascii=False))
+        except Exception as e:
+            logging.exception("Batch {} was not parsed: {}".format(cur_batch, e))
+        offset += batch_size
+        cur_batch += 1
+        # Без распараллеливания
+        # try:
+        #     json_dict.append(parallel_parsing(*process_data[offset]))
+        #     if (offset + 1) % batch_size == 0 or offset == len(process_data) - 1:
+        #         with open("../temp/archive_parsed_{}.json".format(cur_batch), "w") as write_file:
+        #             write_file.write(json.dumps(json_dict, ensure_ascii=False))
+        #         json_dict.clear()
+        #         cur_batch += 1
+        # except Exception as e:
+        #     logging.error("Archive batch {} was not parsed: {}".format(cur_batch, e))
+        # offset += 1

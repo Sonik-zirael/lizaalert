@@ -1,4 +1,5 @@
 import sys
+import traceback
 from datetime import datetime
 from data_parsing.lizaalert.rules import *
 from data_parsing.lizaalert.text_parser import *
@@ -14,7 +15,7 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
     first_message = post_data['posts'][0]
     title = post_data['title']
     content_array = first_message['contents']
-    if okrug and region:
+    if okrug and region and content_array:
         content_array[0] += ', фо ' + okrug + ', ' + region
     content = '\n'.join(content_array)
     content = remove_stuff(content)

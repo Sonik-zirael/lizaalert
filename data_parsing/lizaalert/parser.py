@@ -106,7 +106,7 @@ def parse_okrug_json(data, batch_size=1000, start_batch=0, batch_number=None):
             with open("../temp/okrug_parsed_{}.json".format(cur_batch), "w") as write_file:
                 write_file.write(json.dumps(json_dict, ensure_ascii=False))
         except Exception as e:
-            logging.exception("Okrug batch {} was not parsed: {}".format(cur_batch, e))
+            logging.error("Okrug batch {} was not parsed: {}".format(cur_batch, e))
         offset += batch_size
         cur_batch += 1
         # Без распараллеливания
@@ -118,7 +118,7 @@ def parse_okrug_json(data, batch_size=1000, start_batch=0, batch_number=None):
         #         json_dict.clear()
         #         cur_batch += 1
         # except Exception as e:
-        #     logging.error("Batch {} was not parsed: {}".format(cur_batch, e))
+        #     logging.error("Okrug batch {} was not parsed: {}".format(cur_batch, e))
         # offset += 1
 
 
@@ -141,7 +141,7 @@ def parse_archive_json(data, batch_size=1000, start_batch=0, batch_number=None):
             with open("../temp/archive_parsed_{}.json".format(cur_batch), "w") as write_file:
                 write_file.write(json.dumps(json_dict, ensure_ascii=False))
         except Exception as e:
-            logging.exception("Batch {} was not parsed: {}".format(cur_batch, e))
+            logging.error("Archive batch {} was not parsed: {}".format(cur_batch, e))
         offset += batch_size
         cur_batch += 1
         # Без распараллеливания

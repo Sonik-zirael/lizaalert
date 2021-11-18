@@ -1,3 +1,5 @@
+from yargy.token import is_morph_token
+
 from data_parsing.lizaalert.grammar import *
 from yargy import Parser
 from yargy.pipelines import (
@@ -94,7 +96,7 @@ def gender_by_name(title):
     count_female = 0
     if match:
         for s in match.tokens:
-            if not s.forms:
+            if not is_morph_token(s) or not s.forms:
                 continue
 
             for form in s.forms:

@@ -1,4 +1,5 @@
 import sys
+import traceback
 from datetime import datetime
 from data_parsing.lizaalert.rules import *
 from data_parsing.lizaalert.text_parser import *
@@ -14,7 +15,7 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
     first_message = post_data['posts'][0]
     title = post_data['title']
     content_array = first_message['contents']
-    if okrug and region:
+    if okrug and region and content_array:
         content_array[0] += ', фо ' + okrug + ', ' + region
     content = '\n'.join(content_array)
     content = remove_stuff(content)
@@ -106,7 +107,7 @@ def parse_okrug_json(data, batch_size=1000, start_batch=0, batch_number=None):
             with open("../temp/okrug_parsed_{}.json".format(cur_batch), "w") as write_file:
                 write_file.write(json.dumps(json_dict, ensure_ascii=False))
         except Exception as e:
-            logging.exception("Okrug batch {} was not parsed: {}".format(cur_batch, e))
+            logging.error("Okrug batch {} was not parsed: {}".format(cur_batch, e))
         offset += batch_size
         cur_batch += 1
         # Без распараллеливания
@@ -118,7 +119,7 @@ def parse_okrug_json(data, batch_size=1000, start_batch=0, batch_number=None):
         #         json_dict.clear()
         #         cur_batch += 1
         # except Exception as e:
-        #     logging.error("Batch {} was not parsed: {}".format(cur_batch, e))
+        #     logging.error("Okrug batch {} was not parsed: {}".format(cur_batch, e))
         # offset += 1
 
 
@@ -141,7 +142,7 @@ def parse_archive_json(data, batch_size=1000, start_batch=0, batch_number=None):
             with open("../temp/archive_parsed_{}.json".format(cur_batch), "w") as write_file:
                 write_file.write(json.dumps(json_dict, ensure_ascii=False))
         except Exception as e:
-            logging.exception("Batch {} was not parsed: {}".format(cur_batch, e))
+            logging.error("Archive batch {} was not parsed: {}".format(cur_batch, e))
         offset += batch_size
         cur_batch += 1
         # Без распараллеливания

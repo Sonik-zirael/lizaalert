@@ -186,8 +186,6 @@ class ArchiveSearchSpider(scrapy.Spider):
                 }
             }
         }
-        # tmp_dict[unique_topic_url] = self.results_by_region[primary_region][secondary_region][unique_topic_url]
-        print(tmp_dict)
         publish_message(self.publisher, 'archive_topic', 'topic', tmp_dict)
 
         if len(self.subforums) != 0:

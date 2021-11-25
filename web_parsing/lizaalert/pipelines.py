@@ -8,8 +8,14 @@
 from itemadapter import ItemAdapter
 import json
 
+from lizaalert.kafka_utils import connect_kafka_producer
+from lizaalert.kafka_utils import publish_message
+
 
 class LizaalertRegionsPipeline:
+    def open_spider(self, spider):
+        spider.publisher = connect_kafka_producer()
+
     def process_item(self, item, spider):
         spider.counter += 1
         print(f'processing link {spider.counter:07d}. Total links: {len(spider.all_visited_links_set):07d}', end='\r')
@@ -18,10 +24,16 @@ class LizaalertRegionsPipeline:
         return item
 
     def close_spider(self, spider):
-        with open("result.json", "w", encoding='utf8') as o_f:
+        if spider.publisher is not None:
+            publish_message(spider.publisher, 'regions_topic', 'topic', 'end')
+            spider.publisher.close()
+        with open("tmp_r.json", "w", encoding='utf8') as o_f:
             json.dump(spider.results_by_region, o_f, ensure_ascii=False, indent=4)
 
 class LizaalertArchivePipeline:
+    def open_spider(self, spider):
+        spider.publisher = connect_kafka_producer()
+
     def process_item(self, item, spider):
         spider.counter += 1
         print(f'processing link {spider.counter:07d}. Total links: {len(spider.all_visited_links_set):07d}', end='\r')
@@ -30,5 +42,8 @@ class LizaalertArchivePipeline:
         return item
 
     def close_spider(self, spider):
-        with open("result-2.json", "w", encoding='utf8') as o_f:
+        if spider.publisher is not None:
+            publish_message(spider.publisher, 'archive_topic', 'topic', 'end')
+            spider.publisher.close()
+        with open("tmp_a.json", "w", encoding='utf8') as o_f:
             json.dump(spider.results_by_region, o_f, ensure_ascii=False, indent=4)

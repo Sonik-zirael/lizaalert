@@ -1,13 +1,12 @@
+import os
 import sys
 from datetime import datetime
-from data_parsing.lizaalert.rules import *
-from data_parsing.lizaalert.text_parser import *
+from lizaalert.rules import *
+from lizaalert.text_parser import *
 import json
 from joblib import Parallel, delayed
 import logging
 from pathlib import Path
-
-logging.basicConfig(stream=sys.stdout, level=logging.WARNING)
 
 
 def parallel_parsing(post, post_data, okrug=None, region=None):
@@ -85,6 +84,90 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
         'Age': age(title, content),
         'Signs': signs(content)
     }
+
+
+def parse_general(data: dict,
+                  batch_size: int = 1000,
+                  start_batch: int = 0,
+                  batch_number: int = None,
+                  n_proc: int = -2,
+                  result_dir: str = '../tmp',
+                  regions_as_keys: bool = True,
+                  parsed_common_prefix: str = ''):
+    Path(result_dir).mkdir(parents=True, exist_ok=True)
+    error_batch = False
+    process_data = []
+    json_dict = []
+    cur_batch = -1
+    offset = 0
+    for okrug, okrug_data in data.items():
+        for region, region_data in okrug_data.items():
+            if not regions_as_keys:
+                okrug = None
+                region = None
+
+            for post, post_data in region_data.items():
+                if (offset + 1) % batch_size == 0:
+                    error_batch = False
+                    cur_batch += 1
+                if offset < start_batch * batch_size or error_batch or \
+                        batch_number != -1 and cur_batch >= start_batch + batch_number:
+                    offset += 1
+                    continue
+
+                # Параллелим вычисления внутри пакета и задействуем все cpu кроме одного
+                process_data.append((post, post_data, okrug, region))
+                if len(process_data) == batch_size:
+                    try:
+                        json_dict = Parallel(n_jobs=n_proc)(
+                            delayed(parallel_parsing)(post, post_data, okrug, region) for post, post_data, okrug, region
+                            in process_data)
+                        batch_file_name = parsed_common_prefix + str(cur_batch) + '.json'
+                        batch_file_path = os.path.join(result_dir, batch_file_name)
+                        with open(batch_file_path, "w", encoding='utf-8') as out_file:
+                            json.dump(json_dict, out_file, ensure_ascii=False, indent=4)
+                    except Exception as e:
+                        logging.error("Batch {} was not parsed: {}".format(cur_batch, e))
+                        process_data.clear()
+                    process_data.clear()
+
+                # Без распараллеливания
+                # try:
+                #     json_dict.append(parallel_parsing(post, post_data, okrug, region))
+                #     if (offset + 1) % batch_size == 0:
+                #         batch_file_name = parsed_common_prefix + str(cur_batch) + '.json'
+                #         batch_file_path = os.path.join(result_dir, batch_file_name)
+                #         with open(batch_file_path, "w", encoding='utf-8') as out_file:
+                #             json.dump(json_dict, out_file, ensure_ascii=False, indent=4)
+                #         json_dict.clear()
+                # except Exception as e:
+                #     logging.error("Batch {} was not parsed: {}".format(cur_batch, e))
+                #     json_dict.clear()
+                #     error_batch = True
+
+                offset += 1
+
+    # Оставшийся неполный пакет с распараллеливанием
+    if process_data:
+        try:
+            json_dict = Parallel(n_jobs=n_proc)(
+                delayed(parallel_parsing)(post, post_data, okrug, region) for post, post_data, okrug, region in
+                process_data)
+            batch_file_name = parsed_common_prefix + str(cur_batch) + '.json'
+            batch_file_path = os.path.join(result_dir, batch_file_name)
+            with open(batch_file_path, "w", encoding='utf-8') as out_file:
+                json.dump(json_dict, out_file, ensure_ascii=False, indent=4)
+        except Exception as e:
+            logging.error("Batch {} was not parsed: {}".format(cur_batch + 1, e))
+        process_data.clear()
+
+    # Оставшийся неполный пакет без распараллеливания
+    # if json_dict:
+    #     with open("../temp/okrug_parsed_{}.json".format(cur_batch + 1), "w") as write_file:
+    #         write_file.write(json.dumps(json_dict, ensure_ascii=False))
+    #     json_dict.clear()
+
+    pass
 
 
 def parse_okrug_json(data, batch_size=1000, start_batch=0, batch_number=None):

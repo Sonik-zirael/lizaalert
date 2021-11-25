@@ -1,6 +1,7 @@
 import scrapy
 from scrapy.http import Response
 from scrapy.selector import SelectorList
+from lizaalert.kafka_utils import connect_kafka_producer, publish_message
 
 
 class ArchiveSearchSpider(scrapy.Spider):
@@ -18,15 +19,9 @@ class ArchiveSearchSpider(scrapy.Spider):
     counter = 1
     all_visited_links_set = {'https://lizaalert.org/forum/viewforum.php?f=133'}
     next_pages, subforums, topics = set(), set(), set()
+    publisher = None
 
     def parse(self, response: Response):
-        # if response.url in self.links_set:
-        #     return
-        # self.counter += 1
-        # self.links_set.add(response.url)
-        # print(f'processing link {self.counter:07d}. Total links: {len(self.links_set):07d}', end='\r')
-        # if self.counter % 500 == 0:
-        #     print()
 
         # receive data from page https://lizaalert.org/forum/viewforum.php?f=133
         subforums_section = response.xpath('//div[@class="forabg"]')
@@ -175,14 +170,6 @@ class ArchiveSearchSpider(scrapy.Spider):
                 }
                 self.results_by_region[primary_region][secondary_region][unique_topic_url]['posts'].append(post)
 
-            # description = posts_in_topic_selector[0].xpath('div[1]/div[@class="postbody"]/div[1]/' \
-            #                                                'div[@class="content"]//text()').getall()
-            # description = ' '.join(description)
-
-            # self.results_by_region[primary_region][secondary_region][unique_topic_url].append({
-            #     "title": title,
-            #     "description": description
-            # })
 
         next_page_button = response.xpath(
             '//div[@class="action-bar bar-top"]/div[@class="pagination"]//li[@class="arrow next"]')
@@ -191,6 +178,17 @@ class ArchiveSearchSpider(scrapy.Spider):
             new_page = next_page_button.xpath('a/@href').get()
             new_url = response.urljoin(new_page)
             return scrapy.Request(new_url, dont_filter=True, callback=self._parse_topic)
+
+        tmp_dict = {
+            primary_region: {
+                secondary_region: {
+                    unique_topic_url: self.results_by_region[primary_region][secondary_region][unique_topic_url]
+                }
+            }
+        }
+        # tmp_dict[unique_topic_url] = self.results_by_region[primary_region][secondary_region][unique_topic_url]
+        print(tmp_dict)
+        publish_message(self.publisher, 'archive_topic', 'topic', tmp_dict)
 
         if len(self.subforums) != 0:
             new_page = self.subforums.pop()

@@ -1,6 +1,7 @@
 import scrapy
 from scrapy.http import Response
 from scrapy.selector import SelectorList
+from lizaalert.kafka_utils import connect_kafka_producer, publish_message
 
 
 class RegionsSpider(scrapy.Spider):
@@ -18,6 +19,7 @@ class RegionsSpider(scrapy.Spider):
     counter = 1
     all_visited_links_set = {'https://lizaalert.org/forum/viewforum.php?f=119'}
     next_pages, subforums, topics = set(), set(), set()
+    publisher = None
 
     def parse(self, response: Response):
         # if response.url in self.links_set:
@@ -184,6 +186,15 @@ class RegionsSpider(scrapy.Spider):
             new_page = next_page_button.xpath('a/@href').get()
             new_url = response.urljoin(new_page)
             return scrapy.Request(new_url, dont_filter=True, callback=self._parse_topic)
+
+        tmp_dict = {
+            primary_region: {
+                secondary_region: {
+                    unique_topic_url: self.results_by_region[primary_region][secondary_region][unique_topic_url]
+                }
+            }
+        }
+        publish_message(self.publisher, 'regions_topic', 'topic', tmp_dict)
 
         if len(self.subforums) != 0:
             new_page = self.subforums.pop()

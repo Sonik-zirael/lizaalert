@@ -85,6 +85,9 @@ mappingsElastic = {
         "MissedDate": {
           "type": "date"
         },
+        "MissedDays": {
+          "type": "long"
+        },
         "Name": {
           "properties": {
             "first": {

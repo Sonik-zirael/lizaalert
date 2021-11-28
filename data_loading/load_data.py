@@ -9,8 +9,9 @@ import certifi
 import ssl
 import geopy.geocoders
 from geopy.geocoders import Nominatim
+from datetime import datetime
 
-from var import mappingsElastic
+from variables import mappingsElastic
 
 ctx = ssl.create_default_context(cafile=certifi.where())
 geopy.geocoders.options.default_ssl_context = ctx
@@ -26,8 +27,8 @@ es.indices.create(index=indices, body=mappingsElastic) # this will create index 
 parsed_data_zip = zipfile.ZipFile(r"parsed.zip", "r")
 
 topics = None
-with open("data.json", "r", encoding='utf-8') as read_file:
-    topics = json.loads(read_file.read())
+with parsed_data_zip.open("data.json", "r") as read_file:
+    topics = json.loads(read_file.read().decode('utf-8'))
 
 
 regions_coords = {}
@@ -54,8 +55,13 @@ for topic in topics:
     if coordinates is not None:
         if coordinates.latitude > 40 and coordinates.longitude > 20 and coordinates.longitude < 180:
             topic["LocationCoordinates"] = f"{coordinates.latitude},{coordinates.longitude}"
+    if topic["FoundDate"] is not None:
+        dateFound = datetime.strptime(topic["FoundDate"], "%Y-%m-%dT%H:%M:%S")
+        datePublished = datetime.strptime(topic["PublishedDate"], "%Y-%m-%dT%H:%M:%S")
+        searchTime = dateFound - datePublished
+        topic["MissedDays"] = searchTime.days + 1
     es.index(
-        index='topics',
+        index=indices,
         document=topic
     )
 

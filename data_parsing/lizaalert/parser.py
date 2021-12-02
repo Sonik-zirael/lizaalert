@@ -57,7 +57,11 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
 
     found = None
     start = None
+    posts = 0
+    users = []
     for message in post_data['posts'][1:]:
+        posts += 1
+        users.append(message['author']['username'])
         text = " ".join(message['contents'])
         # Ищем дату когда человека нашли
         if found is None:
@@ -82,7 +86,9 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
         'Gender': gender(title),
         'Location': location(content),
         'Age': age(title, content),
-        'Signs': signs(content)
+        'Signs': signs(content),
+        'AnswersNumber': posts,
+        'UniqueUsers': len(set(users))
     }
 
 

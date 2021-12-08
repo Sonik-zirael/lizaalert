@@ -1,6 +1,8 @@
 import os
 import sys
 from datetime import datetime
+
+from kafka.producer.kafka import KafkaProducer
 from lizaalert.rules import *
 from lizaalert.text_parser import *
 import json
@@ -94,7 +96,7 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
 
 
 def parse_general(data: dict,
-                  process_type: str,
+                  producer,
                   batch_size: int = 1000,
                   start_batch: int = 0,
                   batch_number: int = None,
@@ -119,21 +121,27 @@ def parse_general(data: dict,
                 if (offset + 1) % batch_size == 0:
                     error_batch = False
                     cur_batch += 1
-                if offset < start_batch * batch_size or error_batch or \
-                        batch_number != -1 and cur_batch >= start_batch + batch_number:
-                    offset += 1
-                    continue
+                # if (batch_number == -1 and offset < start_batch * batch_size) or error_batch or \
+                #         batch_number != -1 and cur_batch >= start_batch + batch_number:
+                #     offset += 1
+                #     print('1')
+                #     continue
+
+                print('2')
 
                 if process_type == "consistent":
                     # Без распараллеливания
                     try:
-                        json_dict.append(parallel_parsing(post, post_data, okrug, region))
-                        if (offset + 1) % batch_size == 0:
-                            batch_file_name = parsed_common_prefix + str(cur_batch) + '.json'
-                            batch_file_path = os.path.join(result_dir, batch_file_name)
-                            with open(batch_file_path, "w", encoding='utf-8') as out_file:
-                                json.dump(json_dict, out_file, ensure_ascii=False, indent=4)
-                            json_dict.clear()
+                        json_dict = Parallel(n_jobs=n_proc)(
+                            delayed(parallel_parsing)(post, post_data, okrug, region) for post, post_data, okrug, region
+                            in process_data)
+                        batch_file_name = parsed_common_prefix + str(cur_batch) + '.json'
+                        batch_file_path = os.path.join(result_dir, batch_file_name)
+                        with open(batch_file_path, "w", encoding='utf-8') as out_file:
+                            json.dump(json_dict, out_file, ensure_ascii=False, indent=4)
+                        print('Send message to data loading')
+                        producer.send('parsed_data_1', json.dumps(json_dict).encode('utf-8'))
+                        producer.flush()
                     except Exception as e:
                         logging.error("Batch {} was not parsed: {}".format(cur_batch, e))
                         json_dict.clear()

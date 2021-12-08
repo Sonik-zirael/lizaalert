@@ -1,6 +1,6 @@
 from yargy.token import is_morph_token
 
-from data_parsing.lizaalert.grammar import *
+from lizaalert.grammar import *
 from yargy import Parser
 from yargy.pipelines import (
     morph_pipeline

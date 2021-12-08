@@ -166,16 +166,22 @@ else:
     regions_topic = 'regions_topic'
     archive_topic = 'archive_topic'
     topic_name = 'archive_topic'
-    consumer = KafkaConsumer(archive_topic, auto_offset_reset='earliest',
-                             bootstrap_servers=['localhost:9092'], api_version=(0, 10), consumer_timeout_ms=1000,
-                             group_id='auto1')
+    consumer = KafkaConsumer(topic_name, auto_offset_reset='earliest',
+                             bootstrap_servers=['localhost:9092'], api_version=(0, 10),
+                             consumer_timeout_ms=1000,
+                             group_id='parse_data_group',
+                             session_timeout_ms=25000,
+                             max_poll_records=5)
+    producer = KafkaProducer(bootstrap_servers=['localhost:9092'], api_version=(0, 10))
     is_end_flag = False
     iterations_without_change = 0
     while True:
         iterations_without_change += 1
         if is_end_flag or iterations_without_change > ITERATIONS_NO_CHANGE_KAFKA_CONSUMER_LIFETIME:
-            break
+            print('bye')
+            # break
         for message in consumer:
+            print('Msg')
             consumer.commit()
             iterations_without_change = 0
             message_string = message.value.decode('utf-8')
@@ -187,11 +193,11 @@ else:
             except JSONDecodeError as jde:
                 logging.warning('Received message %s in topic %s which is not in json format',
                                 message_string, topic_name)
-
             ns.start_batch += 1
             parse_general(process_type=ns.process_type,
                           spark_context=sc,
                           data=message_data,
+                          producer=producer,
                           batch_size=ns.batch_size,
                           start_batch=ns.start_batch,
                           batch_number=ns.batches_to_process,

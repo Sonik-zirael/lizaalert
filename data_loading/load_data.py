@@ -65,11 +65,6 @@ for topic in topics:
         topic["LocationCoordinates"] = regions_coords[newLocation]["LocationCoordinates"]
         topic["ShortLocation"] = regions_coords[newLocation]["region"]
         print(regions_coords[newLocation]["region"])
-    if topic["FoundDate"] is not None:
-        dateFound = datetime.strptime(topic["FoundDate"], "%Y-%m-%dT%H:%M:%S")
-        datePublished = datetime.strptime(topic["PublishedDate"], "%Y-%m-%dT%H:%M:%S")
-        searchTime = dateFound - datePublished
-        topic["MissedDays"] = searchTime.days + 1
     es.index(
         index=indices,
         document=topic

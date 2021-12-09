@@ -9,6 +9,7 @@ class ArchiveSearchSpider(scrapy.Spider):
     allowed_domains = ["lizaalert.org"]
     start_urls = [
         'https://lizaalert.org/forum/viewforum.php?f=133',
+        'https://lizaalert.org/forum/viewforum.php?f=119',
     ]
     custom_settings = {
         'ITEM_PIPELINES': {

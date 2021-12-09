@@ -20,11 +20,6 @@ geopy.geocoders.options.default_ssl_context = ctx
 
 es = Elasticsearch()
 
-indices = ['topics']
-# es.delete_by_query(index=indices, body={"query": {"match_all": {}}})    # this will clean all data in db
-# es.indices.delete(index=indices)    # this will drop index
-# es.indices.create(index=indices, body=mappingsElastic)  # this will create index with mapping. Nesseccery to store coordinates as geo_point
-
 parser = argparse.ArgumentParser(description='This part manages data loading')
 parser.add_argument('--mode', type=str, required=True,
                         choices=("kafka", "archive"),
@@ -35,6 +30,11 @@ args = parser.parse_args()
 
 if (args.mode) == 'archive':
     print('Work with archive')
+    indices = ['topics']
+    # es.delete_by_query(index=indices, body={"query": {"match_all": {}}})    # this will clean all data in db
+    # es.indices.delete(index=indices)    # this will drop index
+    es.indices.create(index=indices, body=mappingsElastic)  # this will create index with mapping. Nesseccery to store coordinates as geo_point
+
     parsed_data_zip = zipfile.ZipFile(r"../parsed.zip", "r")
 
     topics = None
@@ -79,17 +79,17 @@ if (args.mode) == 'archive':
             topic["LocationCoordinates"] = regions_coords[newLocation]["LocationCoordinates"]
             topic["ShortLocation"] = regions_coords[newLocation]["region"]
             print(regions_coords[newLocation]["region"])
-        if topic["FoundDate"] is not None:
-            dateFound = datetime.strptime(topic["FoundDate"], "%Y-%m-%dT%H:%M:%S")
-            datePublished = datetime.strptime(topic["PublishedDate"], "%Y-%m-%dT%H:%M:%S")
-            searchTime = dateFound - datePublished
-            topic["MissedDays"] = searchTime.days + 1
         es.index(
             index=indices,
             document=topic
         )
 else:
     print('Work with kafka')
+    indices = ['pipeline']
+    if es.indices.exists(index=indices):
+        es.delete_by_query(index=indices, body={"query": {"match_all": {}}})    # this will clean all data in db
+        es.indices.delete(index=indices)    # this will drop index
+    es.indices.create(index=indices, body=mappingsElastic)  # this will create index with mapping. Nesseccery to store coordinates as geo_point
     topic_name = "parsed_data_1"
     consumer = KafkaConsumer(topic_name, auto_offset_reset='earliest',
                              bootstrap_servers=['localhost:9092'], api_version=(0, 10), consumer_timeout_ms=1000,
@@ -150,45 +150,13 @@ else:
                 message_data["LocationCoordinates"] = regions_coords[newLocation]["LocationCoordinates"]
                 message_data["ShortLocation"] = regions_coords[newLocation]["region"]
                 print(regions_coords[newLocation]["region"])
-            if message_data["FoundDate"] is not None:
-                dateFound = datetime.strptime(message_data["FoundDate"], "%Y-%m-%dT%H:%M:%S")
-                datePublished = datetime.strptime(message_data["PublishedDate"], "%Y-%m-%dT%H:%M:%S")
-                searchTime = dateFound - datePublished
-                message_data["MissedDays"] = searchTime.days + 1
-            # es.index(
-            #     index=indices,
-            #     document=message_data
-            # )
+            es.index(
+                index=indices,
+                document=message_data
+            )
             print(message_data)
 
-    if newLocation not in regions_coords:
-        if newLocation is not None:
-            coordinates = geolocator.geocode(newLocation)
-            region = None
-            if coordinates is not None:
-                locationList = coordinates.address.split(', ')
-                if locationList[-1] == "Россия":
-                    for i in range(len(locationList) - 1, 0, -1):
-                        if "федеральный округ" in locationList[i]:
-                            region = locationList[i - 1]
-                            break
-                elif locationList[-1] in ["Беларусь", "Україна", "Қазақстан"]:
-                    region = newLocation + ", " + locationList[-1]
-                    for i in range(len(locationList) - 1, 0, -1):
-                        if "область" in locationList[i] or "район" in locationList[i] or "округ" in locationList[i]:
-                            region = locationList[i] + ", " + locationList[-1]
-                            break
-                regions_coords[newLocation] = {
-                    "region": region,
-                    "LocationCoordinates": f"{coordinates.latitude},{coordinates.longitude}"
-                }
-    if regions_coords.get(newLocation) is not None:
-        topic["LocationCoordinates"] = regions_coords[newLocation]["LocationCoordinates"]
-        topic["ShortLocation"] = regions_coords[newLocation]["region"]
-        print(regions_coords[newLocation]["region"])
-    es.index(
-        index=indices,
-        document=topic
-    )
+    consumer.commit()
+    consumer.close()
 
 print('Done data loading')

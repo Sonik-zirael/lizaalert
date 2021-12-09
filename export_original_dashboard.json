@@ -1,0 +1,1997 @@
+{
+  "version": "7.15.2",
+  "objects": [
+    {
+      "id": "154fa100-5854-11ec-9d7d-13c530dff790",
+      "type": "dashboard",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-09T16:47:21.056Z",
+      "version": "WzE1MjQzLDE3XQ==",
+      "attributes": {
+        "title": "Lizaalert analytics",
+        "hits": 0,
+        "description": "This dashboard contains solutions for analytics tasks from Lizaalert project",
+        "panelsJSON": "[{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":10,\"y\":0,\"w\":10,\"h\":8,\"i\":\"b44812f3-5e98-4656-98df-994fa08f2cb6\"},\"panelIndex\":\"b44812f3-5e98-4656-98df-994fa08f2cb6\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsMetric\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-layer-e01ee4eb-169d-4cd4-8789-401fc836228b\"}],\"state\":{\"visualization\":{\"layerId\":\"e01ee4eb-169d-4cd4-8789-401fc836228b\",\"accessor\":\"8fc60f92-cdb8-4834-ad9b-9884fd6ba733\",\"layerType\":\"data\"},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"e01ee4eb-169d-4cd4-8789-401fc836228b\":{\"columns\":{\"8fc60f92-cdb8-4834-ad9b-9884fd6ba733\":{\"label\":\"Средний возраст пропавших\",\"dataType\":\"number\",\"operationType\":\"average\",\"sourceField\":\"Age.years\",\"isBucketed\":false,\"scale\":\"ratio\",\"customLabel\":true,\"params\":{\"format\":{\"id\":\"number\",\"params\":{\"decimals\":0}}}}},\"columnOrder\":[\"8fc60f92-cdb8-4834-ad9b-9884fd6ba733\"],\"incompleteColumns\":{}}}}}}},\"enhancements\":{},\"hidePanelTitles\":true}},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":20,\"y\":0,\"w\":10,\"h\":8,\"i\":\"d05624bc-1a7a-40ad-9741-6260bc94d840\"},\"panelIndex\":\"d05624bc-1a7a-40ad-9741-6260bc94d840\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsMetric\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-layer-89f7770e-570a-4b02-a76e-06f4dbc38735\"},{\"name\":\"filter-index-pattern-0\",\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\"}],\"state\":{\"visualization\":{\"layerId\":\"89f7770e-570a-4b02-a76e-06f4dbc38735\",\"accessor\":\"6a61ac2a-f259-40b4-bd72-ce9635059c83\",\"layerType\":\"data\"},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[{\"meta\":{\"params\":{\"gte\":0,\"lt\":101},\"alias\":null,\"negate\":false,\"disabled\":false,\"type\":\"range\",\"key\":\"Age.years\",\"indexRefName\":\"filter-index-pattern-0\"},\"range\":{\"Age.years\":{\"gte\":0,\"lt\":101}},\"$state\":{\"store\":\"appState\"}}],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"89f7770e-570a-4b02-a76e-06f4dbc38735\":{\"columns\":{\"6a61ac2a-f259-40b4-bd72-ce9635059c83X0\":{\"label\":\"Part of Средний шанс быть найденным\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"filter\":{\"query\":\"Status.keyword : (жив or найден or погиб)\",\"language\":\"kuery\"},\"customLabel\":true},\"6a61ac2a-f259-40b4-bd72-ce9635059c83X1\":{\"label\":\"Part of Средний шанс быть найденным\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"customLabel\":true},\"6a61ac2a-f259-40b4-bd72-ce9635059c83X2\":{\"label\":\"Part of Средний шанс быть найденным\",\"dataType\":\"number\",\"operationType\":\"math\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"tinymathAst\":{\"type\":\"function\",\"name\":\"divide\",\"args\":[\"6a61ac2a-f259-40b4-bd72-ce9635059c83X0\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X1\"],\"location\":{\"min\":0,\"max\":64},\"text\":\"count(kql='Status.keyword : (жив or найден or погиб)') / count()\"}},\"references\":[\"6a61ac2a-f259-40b4-bd72-ce9635059c83X0\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X1\"],\"customLabel\":true},\"6a61ac2a-f259-40b4-bd72-ce9635059c83\":{\"label\":\"Средний шанс быть найденным\",\"dataType\":\"number\",\"operationType\":\"formula\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"formula\":\"count(kql='Status.keyword : (жив or найден or погиб)') / count()\",\"isFormulaBroken\":false,\"format\":{\"id\":\"percent\",\"params\":{\"decimals\":1}}},\"references\":[\"6a61ac2a-f259-40b4-bd72-ce9635059c83X2\"],\"customLabel\":true}},\"columnOrder\":[\"6a61ac2a-f259-40b4-bd72-ce9635059c83\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X2\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X0\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X1\"],\"incompleteColumns\":{}}}}}}},\"enhancements\":{},\"hidePanelTitles\":true}},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":30,\"y\":0,\"w\":10,\"h\":8,\"i\":\"c1e031c6-5a55-4823-9d8a-ef7daa3e4fad\"},\"panelIndex\":\"c1e031c6-5a55-4823-9d8a-ef7daa3e4fad\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsMetric\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-layer-51900cc2-e5a4-4606-b8ae-db4c8158c4fb\"}],\"state\":{\"visualization\":{\"layerId\":\"51900cc2-e5a4-4606-b8ae-db4c8158c4fb\",\"accessor\":\"f3853763-22f8-43d7-9f25-964a1b54810e\",\"layerType\":\"data\"},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"51900cc2-e5a4-4606-b8ae-db4c8158c4fb\":{\"columns\":{\"f3853763-22f8-43d7-9f25-964a1b54810e\":{\"label\":\"Средний срок поисков в днях\",\"dataType\":\"number\",\"operationType\":\"average\",\"sourceField\":\"MissedDays\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"format\":{\"id\":\"number\",\"params\":{\"decimals\":0}}},\"customLabel\":true}},\"columnOrder\":[\"f3853763-22f8-43d7-9f25-964a1b54810e\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":true,\"enhancements\":{}}},{\"version\":\"7.15.2\",\"type\":\"visualization\",\"gridData\":{\"x\":0,\"y\":8,\"w\":48,\"h\":9,\"i\":\"ee78ec14-c056-4568-9ad4-56c6f6fcc75f\"},\"panelIndex\":\"ee78ec14-c056-4568-9ad4-56c6f6fcc75f\",\"embeddableConfig\":{\"savedVis\":{\"title\":\"\",\"description\":\"\",\"type\":\"markdown\",\"params\":{\"fontSize\":12,\"openLinksInNewTab\":false,\"markdown\":\"## Анализ ситуации по регионам\\n\\nДанная группа графиков позволяет получить представление о ситуации в регионах. \\n* Больше всего заявок на поиск оставляют жители центральных регионов\\n* К сожалению, в отдалённых от центра регионах вероятность найти человека погибшим выше\\n* Вероятность того, что пропавшего в итоге найдут (живым или мёртвым), достаточно высока, порядка 90%, что говорит о пользе движения \\\"ЛизаАлерт\\\"\"},\"uiState\":{},\"data\":{\"aggs\":[],\"searchSource\":{\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filter\":[]}}},\"hidePanelTitles\":true,\"enhancements\":{}}},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":17,\"w\":24,\"h\":15,\"i\":\"34dd711d-8ea3-4229-8187-28373f169994\"},\"panelIndex\":\"34dd711d-8ea3-4229-8187-28373f169994\",\"embeddableConfig\":{\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"1-1. В каких регионах чаще всего пропадают люди\",\"panelRefName\":\"panel_34dd711d-8ea3-4229-8187-28373f169994\"},{\"version\":\"7.15.2\",\"type\":\"map\",\"gridData\":{\"x\":24,\"y\":17,\"w\":24,\"h\":15,\"i\":\"2fc711cc-5ba6-4ef9-b03c-34d1f5c4903d\"},\"panelIndex\":\"2fc711cc-5ba6-4ef9-b03c-34d1f5c4903d\",\"embeddableConfig\":{\"mapCenter\":{\"lat\":58.94481,\"lon\":92.37828,\"zoom\":1.68},\"mapBuffer\":{\"minLon\":0,\"minLat\":0,\"maxLon\":270,\"maxLat\":85.05113},\"isLayerTOCOpen\":false,\"openTOCDetails\":[],\"hiddenLayers\":[\"42404036-a0c3-416c-9f1f-ca804c6f55f6\"],\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"1-2. В каких регионах чаще всего пропадают люди\",\"panelRefName\":\"panel_2fc711cc-5ba6-4ef9-b03c-34d1f5c4903d\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":32,\"w\":24,\"h\":15,\"i\":\"a51a4391-0df3-4414-be77-6f8caabe67ce\"},\"panelIndex\":\"a51a4391-0df3-4414-be77-6f8caabe67ce\",\"embeddableConfig\":{\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"2-1. Регионы, где чаще находят (процент от общего числа найденных во всех регионах)\",\"panelRefName\":\"panel_a51a4391-0df3-4414-be77-6f8caabe67ce\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":32,\"w\":24,\"h\":15,\"i\":\"b6d27e38-cdc6-4ac2-9b90-e2692a8c98d0\"},\"panelIndex\":\"b6d27e38-cdc6-4ac2-9b90-e2692a8c98d0\",\"embeddableConfig\":{\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"2-2. Регионы, где чаще находят (процент найденных от общего числа заявок в регионе)\",\"panelRefName\":\"panel_b6d27e38-cdc6-4ac2-9b90-e2692a8c98d0\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":47,\"w\":24,\"h\":15,\"i\":\"51386e35-82aa-4fb2-a665-05992c50916b\"},\"panelIndex\":\"51386e35-82aa-4fb2-a665-05992c50916b\",\"embeddableConfig\":{\"enhancements\":{},\"hidePanelTitles\":false},\"title\":\"3-1. Регионы, где чаще погибают (процент от общего числа погибших во всех регионах)\",\"panelRefName\":\"panel_51386e35-82aa-4fb2-a665-05992c50916b\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":47,\"w\":24,\"h\":15,\"i\":\"87d96375-7f5f-4c2b-8e55-ad9d3fd7f606\"},\"panelIndex\":\"87d96375-7f5f-4c2b-8e55-ad9d3fd7f606\",\"embeddableConfig\":{\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"3-2. Регионы, где чаще погибают (процент погибших от общего числа найденных в регионе)\",\"panelRefName\":\"panel_87d96375-7f5f-4c2b-8e55-ad9d3fd7f606\"},{\"version\":\"7.15.2\",\"type\":\"visualization\",\"gridData\":{\"x\":0,\"y\":62,\"w\":48,\"h\":11,\"i\":\"d6450053-3b9c-4a88-9f96-c6cb10f33596\"},\"panelIndex\":\"d6450053-3b9c-4a88-9f96-c6cb10f33596\",\"embeddableConfig\":{\"savedVis\":{\"title\":\"\",\"description\":\"\",\"type\":\"markdown\",\"params\":{\"fontSize\":12,\"openLinksInNewTab\":false,\"markdown\":\"## Анализ поведения людей на форуме\\n\\nДля решения этой группы задач анализировалось поведение людей в топиках на форуме.\\n* Обычно человек присылает два сообщения: \\\"готов к выезду\\\" и \\\"дома\\\"\\n* В центральной части России в движении участвует больше людей\\n* Люди активнее участвуют в поисках, если пропавший ребёнок или человек зрелого возраста\\n* Не замечено сильной корреляции между полом пропавшего и активностью в топике\"},\"uiState\":{},\"data\":{\"aggs\":[],\"searchSource\":{\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filter\":[]}}},\"hidePanelTitles\":true,\"enhancements\":{}}},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":73,\"w\":16,\"h\":10,\"i\":\"b8776061-4568-4cf6-858c-9f6c9d3d5723\"},\"panelIndex\":\"b8776061-4568-4cf6-858c-9f6c9d3d5723\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsMetric\",\"type\":\"lens\",\"references\":[{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\",\"type\":\"index-pattern\"},{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-a586e33f-ef59-42d1-9d4d-38082bb664de\",\"type\":\"index-pattern\"}],\"state\":{\"visualization\":{\"layerId\":\"a586e33f-ef59-42d1-9d4d-38082bb664de\",\"accessor\":\"741601f7-30d1-4350-9c53-73384c1d2863\",\"layerType\":\"data\"},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"a586e33f-ef59-42d1-9d4d-38082bb664de\":{\"columns\":{\"741601f7-30d1-4350-9c53-73384c1d2863\":{\"label\":\"Среднее число отвечающих\",\"dataType\":\"number\",\"operationType\":\"average\",\"sourceField\":\"UniqueUsers\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"format\":{\"id\":\"number\",\"params\":{\"decimals\":0}}},\"customLabel\":true}},\"columnOrder\":[\"741601f7-30d1-4350-9c53-73384c1d2863\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"4-1. Среднее число отвечающих в топике\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":16,\"y\":73,\"w\":16,\"h\":10,\"i\":\"d11bcb8a-1c32-49d6-bdc1-c58a905a2e17\"},\"panelIndex\":\"d11bcb8a-1c32-49d6-bdc1-c58a905a2e17\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsMetric\",\"type\":\"lens\",\"references\":[{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\",\"type\":\"index-pattern\"},{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-a586e33f-ef59-42d1-9d4d-38082bb664de\",\"type\":\"index-pattern\"}],\"state\":{\"visualization\":{\"layerId\":\"a586e33f-ef59-42d1-9d4d-38082bb664de\",\"accessor\":\"741601f7-30d1-4350-9c53-73384c1d2863\",\"layerType\":\"data\"},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"a586e33f-ef59-42d1-9d4d-38082bb664de\":{\"columns\":{\"741601f7-30d1-4350-9c53-73384c1d2863\":{\"label\":\"Медианное число отвечающих\",\"dataType\":\"number\",\"operationType\":\"median\",\"sourceField\":\"UniqueUsers\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"format\":{\"id\":\"number\",\"params\":{\"decimals\":0}}},\"customLabel\":true}},\"columnOrder\":[\"741601f7-30d1-4350-9c53-73384c1d2863\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"4-2. Медианное число отвечающих в топике\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":32,\"y\":73,\"w\":16,\"h\":10,\"i\":\"15da80b6-85e9-4d40-b3c0-1f559621f67c\"},\"panelIndex\":\"15da80b6-85e9-4d40-b3c0-1f559621f67c\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsMetric\",\"type\":\"lens\",\"references\":[{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\",\"type\":\"index-pattern\"},{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-2fd8846f-bc54-4b2a-b82e-d7c8996e8ac8\",\"type\":\"index-pattern\"}],\"state\":{\"visualization\":{\"layerId\":\"2fd8846f-bc54-4b2a-b82e-d7c8996e8ac8\",\"accessor\":\"191d933c-0f87-4f48-9edc-6eed7ea3ea3f\",\"layerType\":\"data\"},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"2fd8846f-bc54-4b2a-b82e-d7c8996e8ac8\":{\"columns\":{\"191d933c-0f87-4f48-9edc-6eed7ea3ea3fX0\":{\"label\":\"Part of sum(AnswersNumber) / sum(UniqueUsers)\",\"dataType\":\"number\",\"operationType\":\"sum\",\"sourceField\":\"AnswersNumber\",\"isBucketed\":false,\"scale\":\"ratio\",\"customLabel\":true},\"191d933c-0f87-4f48-9edc-6eed7ea3ea3fX1\":{\"label\":\"Part of sum(AnswersNumber) / sum(UniqueUsers)\",\"dataType\":\"number\",\"operationType\":\"sum\",\"sourceField\":\"UniqueUsers\",\"isBucketed\":false,\"scale\":\"ratio\",\"customLabel\":true},\"191d933c-0f87-4f48-9edc-6eed7ea3ea3fX2\":{\"label\":\"Part of sum(AnswersNumber) / sum(UniqueUsers)\",\"dataType\":\"number\",\"operationType\":\"math\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"tinymathAst\":{\"type\":\"function\",\"name\":\"divide\",\"args\":[\"191d933c-0f87-4f48-9edc-6eed7ea3ea3fX0\",\"191d933c-0f87-4f48-9edc-6eed7ea3ea3fX1\"],\"location\":{\"min\":0,\"max\":37},\"text\":\"sum(AnswersNumber) / sum(UniqueUsers)\"}},\"references\":[\"191d933c-0f87-4f48-9edc-6eed7ea3ea3fX0\",\"191d933c-0f87-4f48-9edc-6eed7ea3ea3fX1\"],\"customLabel\":true},\"191d933c-0f87-4f48-9edc-6eed7ea3ea3f\":{\"label\":\"Среднее число ответов от одного пользователя\",\"dataType\":\"number\",\"operationType\":\"formula\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"formula\":\"sum(AnswersNumber) / sum(UniqueUsers)\",\"isFormulaBroken\":false,\"format\":{\"id\":\"number\",\"params\":{\"decimals\":0}}},\"references\":[\"191d933c-0f87-4f48-9edc-6eed7ea3ea3fX2\"],\"customLabel\":true}},\"columnOrder\":[\"191d933c-0f87-4f48-9edc-6eed7ea3ea3f\",\"191d933c-0f87-4f48-9edc-6eed7ea3ea3fX0\",\"191d933c-0f87-4f48-9edc-6eed7ea3ea3fX1\",\"191d933c-0f87-4f48-9edc-6eed7ea3ea3fX2\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"4-3. Среднее число ответов от одного пользователя в топике\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":83,\"w\":24,\"h\":15,\"i\":\"2300f537-6380-4192-a3fa-09a2719b0c87\"},\"panelIndex\":\"2300f537-6380-4192-a3fa-09a2719b0c87\",\"embeddableConfig\":{\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"5. Количество отвечающих в топиках по регионам\",\"panelRefName\":\"panel_2300f537-6380-4192-a3fa-09a2719b0c87\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":83,\"w\":24,\"h\":15,\"i\":\"a3454aa4-b009-4d9f-8bc1-a424d18becda\"},\"panelIndex\":\"a3454aa4-b009-4d9f-8bc1-a424d18becda\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\",\"type\":\"index-pattern\"},{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-8502bc26-3154-41b4-904e-f05ae8556b40\",\"type\":\"index-pattern\"}],\"state\":{\"visualization\":{\"legend\":{\"isVisible\":true,\"position\":\"right\",\"isInside\":false,\"verticalAlignment\":\"bottom\",\"horizontalAlignment\":\"right\",\"shouldTruncate\":false},\"valueLabels\":\"hide\",\"fittingFunction\":\"None\",\"yLeftExtent\":{\"mode\":\"full\"},\"yRightExtent\":{\"mode\":\"full\"},\"axisTitlesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"tickLabelsVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"labelsOrientation\":{\"x\":0,\"yLeft\":0,\"yRight\":0},\"gridlinesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"preferredSeriesType\":\"bar_percentage_stacked\",\"layers\":[{\"layerId\":\"8502bc26-3154-41b4-904e-f05ae8556b40\",\"accessors\":[\"eff72a1a-a111-4488-aac1-195d51d74133\"],\"position\":\"top\",\"seriesType\":\"bar_percentage_stacked\",\"showGridlines\":false,\"layerType\":\"data\",\"xAccessor\":\"fa87e555-8338-4a51-a9fe-595e16150d9d\",\"splitAccessor\":\"fccff62e-3e3e-486d-9ccd-75148d610c3f\",\"palette\":{\"type\":\"palette\",\"name\":\"temperature\"}}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"8502bc26-3154-41b4-904e-f05ae8556b40\":{\"columns\":{\"fa87e555-8338-4a51-a9fe-595e16150d9d\":{\"label\":\"Количество ответов\",\"dataType\":\"number\",\"operationType\":\"range\",\"sourceField\":\"AnswersNumber\",\"isBucketed\":true,\"scale\":\"interval\",\"params\":{\"type\":\"histogram\",\"ranges\":[{\"from\":0,\"to\":1000,\"label\":\"\"}],\"maxBars\":100},\"customLabel\":true},\"fccff62e-3e3e-486d-9ccd-75148d610c3f\":{\"label\":\"Top values of Status.keyword\",\"dataType\":\"string\",\"operationType\":\"terms\",\"scale\":\"ordinal\",\"sourceField\":\"Status.keyword\",\"isBucketed\":true,\"params\":{\"size\":5,\"orderBy\":{\"type\":\"alphabetical\",\"fallback\":false},\"orderDirection\":\"asc\",\"otherBucket\":false,\"missingBucket\":false}},\"eff72a1a-a111-4488-aac1-195d51d74133\":{\"label\":\"Пропавшие\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"customLabel\":true}},\"columnOrder\":[\"fa87e555-8338-4a51-a9fe-595e16150d9d\",\"fccff62e-3e3e-486d-9ccd-75148d610c3f\",\"eff72a1a-a111-4488-aac1-195d51d74133\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"8. Зависимость шанса быть найденным от количества ответов в топике\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":98,\"w\":24,\"h\":15,\"i\":\"68e493f4-1318-4db9-9707-1641000ffa65\"},\"panelIndex\":\"68e493f4-1318-4db9-9707-1641000ffa65\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\",\"type\":\"index-pattern\"},{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-8502bc26-3154-41b4-904e-f05ae8556b40\",\"type\":\"index-pattern\"}],\"state\":{\"visualization\":{\"legend\":{\"isVisible\":true,\"position\":\"right\",\"isInside\":false,\"verticalAlignment\":\"bottom\",\"horizontalAlignment\":\"right\",\"shouldTruncate\":false},\"valueLabels\":\"hide\",\"fittingFunction\":\"None\",\"yLeftExtent\":{\"mode\":\"full\"},\"yRightExtent\":{\"mode\":\"full\"},\"axisTitlesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"tickLabelsVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"labelsOrientation\":{\"x\":0,\"yLeft\":0,\"yRight\":0},\"gridlinesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"preferredSeriesType\":\"line\",\"layers\":[{\"layerId\":\"8502bc26-3154-41b4-904e-f05ae8556b40\",\"accessors\":[\"cef6acd1-8099-4363-a80a-a29e6f519238\",\"eff72a1a-a111-4488-aac1-195d51d74133\"],\"position\":\"top\",\"seriesType\":\"line\",\"showGridlines\":false,\"layerType\":\"data\",\"xAccessor\":\"fa87e555-8338-4a51-a9fe-595e16150d9d\",\"yConfig\":[{\"forAccessor\":\"cef6acd1-8099-4363-a80a-a29e6f519238\",\"color\":\"#e7664c\"},{\"forAccessor\":\"eff72a1a-a111-4488-aac1-195d51d74133\",\"color\":\"#6092c0\"}]}],\"yTitle\":\"Число ответов\"},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"8502bc26-3154-41b4-904e-f05ae8556b40\":{\"columns\":{\"fa87e555-8338-4a51-a9fe-595e16150d9d\":{\"label\":\"Возраст пропавшего\",\"dataType\":\"number\",\"operationType\":\"terms\",\"scale\":\"ordinal\",\"sourceField\":\"Age.years\",\"isBucketed\":true,\"params\":{\"size\":100,\"orderBy\":{\"type\":\"alphabetical\",\"fallback\":false},\"orderDirection\":\"asc\",\"otherBucket\":false,\"missingBucket\":false},\"customLabel\":true},\"eff72a1a-a111-4488-aac1-195d51d74133\":{\"label\":\"Медианное число ответов\",\"dataType\":\"number\",\"operationType\":\"median\",\"sourceField\":\"AnswersNumber\",\"isBucketed\":false,\"scale\":\"ratio\",\"customLabel\":true},\"cef6acd1-8099-4363-a80a-a29e6f519238\":{\"label\":\"Среднее число ответов\",\"dataType\":\"number\",\"operationType\":\"average\",\"sourceField\":\"AnswersNumber\",\"isBucketed\":false,\"scale\":\"ratio\",\"customLabel\":true,\"params\":{\"format\":{\"id\":\"number\",\"params\":{\"decimals\":0}}}}},\"columnOrder\":[\"fa87e555-8338-4a51-a9fe-595e16150d9d\",\"cef6acd1-8099-4363-a80a-a29e6f519238\",\"eff72a1a-a111-4488-aac1-195d51d74133\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"10-1. Количество ответов от возраста пропавшего\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":98,\"w\":24,\"h\":15,\"i\":\"346ce78c-5be8-49d3-a37e-16e5022358e0\"},\"panelIndex\":\"346ce78c-5be8-49d3-a37e-16e5022358e0\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\",\"type\":\"index-pattern\"},{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-0d272cfb-0a95-404f-bd80-6cd8241f9bab\",\"type\":\"index-pattern\"}],\"state\":{\"visualization\":{\"legend\":{\"isVisible\":true,\"position\":\"right\"},\"valueLabels\":\"hide\",\"fittingFunction\":\"None\",\"yTitle\":\"Число ответов\",\"yLeftExtent\":{\"mode\":\"full\"},\"yRightExtent\":{\"mode\":\"full\"},\"axisTitlesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"tickLabelsVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"labelsOrientation\":{\"x\":0,\"yLeft\":0,\"yRight\":0},\"gridlinesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"preferredSeriesType\":\"bar\",\"layers\":[{\"layerId\":\"0d272cfb-0a95-404f-bd80-6cd8241f9bab\",\"seriesType\":\"line\",\"xAccessor\":\"f9897c88-a36c-4cff-8dbc-067bdba9408e\",\"accessors\":[\"a3a9853a-b537-40ec-9324-ada0081bdd86\",\"bcf0e92f-b1fe-4ebe-b0bd-7ad66d8dd36f\"],\"yConfig\":[{\"forAccessor\":\"a3a9853a-b537-40ec-9324-ada0081bdd86\",\"color\":\"#e7664c\",\"axisMode\":\"auto\"}],\"layerType\":\"data\"}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"0d272cfb-0a95-404f-bd80-6cd8241f9bab\":{\"columns\":{\"f9897c88-a36c-4cff-8dbc-067bdba9408e\":{\"label\":\"Времена года\",\"dataType\":\"string\",\"operationType\":\"filters\",\"scale\":\"ordinal\",\"isBucketed\":true,\"params\":{\"filters\":[{\"input\":{\"query\":\"MissedDate >= 2021-06 and MissedDate < 2021-09 or MissedDate >= 2020-06 and MissedDate < 2020-09 or MissedDate >= 2019-06 and MissedDate < 2019-09 or MissedDate >= 2018-06 and MissedDate < 2018-09 or MissedDate >= 2017-06 and MissedDate < 2017-09\",\"language\":\"kuery\"},\"label\":\"Лето\"},{\"input\":{\"query\":\"MissedDate >= 2021-09 and MissedDate < 2021-12 or MissedDate >= 2020-09 and MissedDate < 2020-12 or MissedDate >= 2019-09 and MissedDate < 2019-12 or MissedDate >= 2018-09 and MissedDate < 2018-12 or MissedDate >= 2017-09 and MissedDate < 2017-12\",\"language\":\"kuery\"},\"label\":\"Осень\"},{\"input\":{\"query\":\"MissedDate >= 2020-12 and MissedDate < 2021-03 or MissedDate >= 2019-12 and MissedDate < 2020-03 or MissedDate >= 2018-12 and MissedDate < 2019-03 or MissedDate >= 2017-12 and MissedDate < 2018-03 or MissedDate >= 2016-12 and MissedDate < 2017-03\",\"language\":\"kuery\"},\"label\":\"Зима\"},{\"label\":\"Весна\",\"input\":{\"query\":\"MissedDate >= 2021-03 and MissedDate < 2021-06 or MissedDate >= 2020-03 and MissedDate < 2020-06 or MissedDate >= 2019-03 and MissedDate < 2019-06 or MissedDate >= 2018-03 and MissedDate < 2018-06 or MissedDate >= 2017-03 and MissedDate < 2017-06\",\"language\":\"kuery\"}}]},\"customLabel\":true},\"a3a9853a-b537-40ec-9324-ada0081bdd86\":{\"label\":\"Среднее число ответов\",\"dataType\":\"number\",\"operationType\":\"average\",\"sourceField\":\"AnswersNumber\",\"isBucketed\":false,\"scale\":\"ratio\",\"filter\":{\"query\":\"Status.keyword : \\\"погиб\\\" \",\"language\":\"kuery\"},\"customLabel\":true,\"params\":{\"format\":{\"id\":\"number\",\"params\":{\"decimals\":0}}}},\"bcf0e92f-b1fe-4ebe-b0bd-7ad66d8dd36f\":{\"label\":\"Медианное число ответов\",\"dataType\":\"number\",\"operationType\":\"median\",\"sourceField\":\"AnswersNumber\",\"isBucketed\":false,\"scale\":\"ratio\",\"customLabel\":true}},\"columnOrder\":[\"f9897c88-a36c-4cff-8dbc-067bdba9408e\",\"a3a9853a-b537-40ec-9324-ada0081bdd86\",\"bcf0e92f-b1fe-4ebe-b0bd-7ad66d8dd36f\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"10-2. Количество ответов от времени года\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":13,\"y\":113,\"w\":24,\"h\":15,\"i\":\"f7f6a469-c87b-4160-913d-6118853c67e3\"},\"panelIndex\":\"f7f6a469-c87b-4160-913d-6118853c67e3\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\",\"type\":\"index-pattern\"},{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-0d272cfb-0a95-404f-bd80-6cd8241f9bab\",\"type\":\"index-pattern\"}],\"state\":{\"visualization\":{\"legend\":{\"isVisible\":true,\"position\":\"right\",\"isInside\":false},\"valueLabels\":\"hide\",\"fittingFunction\":\"None\",\"yTitle\":\"Число ответов\",\"yLeftExtent\":{\"mode\":\"full\"},\"yRightExtent\":{\"mode\":\"full\"},\"axisTitlesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"tickLabelsVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"labelsOrientation\":{\"x\":0,\"yLeft\":0,\"yRight\":0},\"gridlinesVisibilitySettings\":{\"x\":false,\"yLeft\":true,\"yRight\":true},\"preferredSeriesType\":\"bar\",\"layers\":[{\"layerId\":\"0d272cfb-0a95-404f-bd80-6cd8241f9bab\",\"seriesType\":\"bar\",\"xAccessor\":\"f9897c88-a36c-4cff-8dbc-067bdba9408e\",\"accessors\":[\"a3a9853a-b537-40ec-9324-ada0081bdd86\",\"bcf0e92f-b1fe-4ebe-b0bd-7ad66d8dd36f\"],\"yConfig\":[{\"forAccessor\":\"a3a9853a-b537-40ec-9324-ada0081bdd86\",\"color\":\"#e7664c\",\"axisMode\":\"auto\"}],\"layerType\":\"data\"}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"0d272cfb-0a95-404f-bd80-6cd8241f9bab\":{\"columns\":{\"f9897c88-a36c-4cff-8dbc-067bdba9408e\":{\"label\":\"Пол пропавшего\",\"dataType\":\"string\",\"operationType\":\"terms\",\"scale\":\"ordinal\",\"sourceField\":\"Gender.keyword\",\"isBucketed\":true,\"params\":{\"size\":3,\"orderBy\":{\"type\":\"column\",\"columnId\":\"a3a9853a-b537-40ec-9324-ada0081bdd86\"},\"orderDirection\":\"desc\",\"otherBucket\":true,\"missingBucket\":false},\"customLabel\":true},\"a3a9853a-b537-40ec-9324-ada0081bdd86\":{\"label\":\"Среднее число ответов\",\"dataType\":\"number\",\"operationType\":\"average\",\"sourceField\":\"AnswersNumber\",\"isBucketed\":false,\"scale\":\"ratio\",\"filter\":{\"query\":\"Status.keyword : \\\"погиб\\\" \",\"language\":\"kuery\"},\"customLabel\":true,\"params\":{\"format\":{\"id\":\"number\",\"params\":{\"decimals\":0}}}},\"bcf0e92f-b1fe-4ebe-b0bd-7ad66d8dd36f\":{\"label\":\"Медианное число ответов\",\"dataType\":\"number\",\"operationType\":\"median\",\"sourceField\":\"AnswersNumber\",\"isBucketed\":false,\"scale\":\"ratio\",\"customLabel\":true}},\"columnOrder\":[\"f9897c88-a36c-4cff-8dbc-067bdba9408e\",\"a3a9853a-b537-40ec-9324-ada0081bdd86\",\"bcf0e92f-b1fe-4ebe-b0bd-7ad66d8dd36f\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"10-3. Количество ответов от пола пропавшего\"},{\"version\":\"7.15.2\",\"type\":\"visualization\",\"gridData\":{\"x\":0,\"y\":128,\"w\":48,\"h\":9,\"i\":\"77cf465d-75bd-4bb8-9cd7-da16e71dbfcf\"},\"panelIndex\":\"77cf465d-75bd-4bb8-9cd7-da16e71dbfcf\",\"embeddableConfig\":{\"savedVis\":{\"title\":\"\",\"description\":\"\",\"type\":\"markdown\",\"params\":{\"fontSize\":12,\"openLinksInNewTab\":false,\"markdown\":\"## Анализ топиков на форуме\\n\\nВ этой части исследования мы анализировали непосредственно оформление первого поста топика, где указывается информация о пропавшем, время публикации, указанные приметы.\\n\\n* Чем быстрее после пропажи опубликована запись, тем больше шансов удачно и быстро закончить поиски\\n* Количество указанных примет не влияет ни на скорость поиска, ни на шанс быть найденным\\n* Чаще всего в качестве примет указывают рост, цвет волос, цвет глаз и во что пропавший был одет.\"},\"uiState\":{},\"data\":{\"aggs\":[],\"searchSource\":{\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filter\":[]}}},\"hidePanelTitles\":true,\"enhancements\":{}}},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":137,\"w\":24,\"h\":15,\"i\":\"eeac104c-08b0-49e0-8166-ea52d9fc3015\"},\"panelIndex\":\"eeac104c-08b0-49e0-8166-ea52d9fc3015\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\",\"type\":\"index-pattern\"},{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-60b02af6-e0c7-43a4-a22d-cd6a5aa28858\",\"type\":\"index-pattern\"}],\"state\":{\"visualization\":{\"legend\":{\"isVisible\":true,\"position\":\"right\"},\"valueLabels\":\"hide\",\"fittingFunction\":\"None\",\"yTitle\":\"Пропавшие\",\"yLeftExtent\":{\"mode\":\"full\"},\"yRightExtent\":{\"mode\":\"full\"},\"axisTitlesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"tickLabelsVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"labelsOrientation\":{\"x\":-90,\"yLeft\":0,\"yRight\":0},\"gridlinesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"preferredSeriesType\":\"bar_percentage_stacked\",\"layers\":[{\"layerId\":\"60b02af6-e0c7-43a4-a22d-cd6a5aa28858\",\"seriesType\":\"bar_percentage_stacked\",\"xAccessor\":\"d954f096-646f-4720-8813-fa23642b129c\",\"accessors\":[\"eedf4997-ff1f-4cf5-a82b-107a2973c195\"],\"yConfig\":[],\"layerType\":\"data\",\"splitAccessor\":\"40a30cd4-03df-4f62-9847-01696d38adff\",\"palette\":{\"type\":\"palette\",\"name\":\"temperature\"}}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"60b02af6-e0c7-43a4-a22d-cd6a5aa28858\":{\"columns\":{\"d954f096-646f-4720-8813-fa23642b129c\":{\"label\":\"Когда опубликована запись\",\"dataType\":\"string\",\"operationType\":\"filters\",\"scale\":\"ordinal\",\"isBucketed\":true,\"params\":{\"filters\":[{\"label\":\"В тот же день\",\"input\":{\"query\":\"DaysBeforePublishing : 0\",\"language\":\"kuery\"}},{\"input\":{\"query\":\"DaysBeforePublishing : 1\",\"language\":\"kuery\"},\"label\":\"На следующий день\"},{\"input\":{\"query\":\"DaysBeforePublishing > 1 and DaysBeforePublishing <= 7\",\"language\":\"kuery\"},\"label\":\"В течение недели\"},{\"input\":{\"query\":\"DaysBeforePublishing > 7 and DaysBeforePublishing <= 14\",\"language\":\"kuery\"},\"label\":\"В течение двух недель\"},{\"input\":{\"query\":\"DaysBeforePublishing > 14 and DaysBeforePublishing <= 30\",\"language\":\"kuery\"},\"label\":\"В течение месяца\"},{\"input\":{\"query\":\"DaysBeforePublishing > 30 and DaysBeforePublishing <= 183\",\"language\":\"kuery\"},\"label\":\"В течение полугода\"},{\"input\":{\"query\":\"DaysBeforePublishing > 183\",\"language\":\"kuery\"},\"label\":\"Позднее, чем через полгода\"}]},\"customLabel\":true},\"eedf4997-ff1f-4cf5-a82b-107a2973c195\":{\"label\":\"Count of records\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\"},\"40a30cd4-03df-4f62-9847-01696d38adff\":{\"label\":\"Top values of Status.keyword\",\"dataType\":\"string\",\"operationType\":\"terms\",\"scale\":\"ordinal\",\"sourceField\":\"Status.keyword\",\"isBucketed\":true,\"params\":{\"size\":4,\"orderBy\":{\"type\":\"alphabetical\",\"fallback\":false},\"orderDirection\":\"asc\",\"otherBucket\":false,\"missingBucket\":false}}},\"columnOrder\":[\"d954f096-646f-4720-8813-fa23642b129c\",\"40a30cd4-03df-4f62-9847-01696d38adff\",\"eedf4997-ff1f-4cf5-a82b-107a2973c195\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"11-1. Шанс быть найденным от скорости публикации записи\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":137,\"w\":24,\"h\":15,\"i\":\"9ecc08ce-6240-46e2-a04e-3659ddde91d3\"},\"panelIndex\":\"9ecc08ce-6240-46e2-a04e-3659ddde91d3\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\",\"type\":\"index-pattern\"},{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-60b02af6-e0c7-43a4-a22d-cd6a5aa28858\",\"type\":\"index-pattern\"}],\"state\":{\"visualization\":{\"legend\":{\"isVisible\":true,\"position\":\"right\"},\"valueLabels\":\"hide\",\"fittingFunction\":\"None\",\"yTitle\":\"Опубликовано\",\"yLeftExtent\":{\"mode\":\"full\"},\"yRightExtent\":{\"mode\":\"full\"},\"axisTitlesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"tickLabelsVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"labelsOrientation\":{\"x\":-90,\"yLeft\":0,\"yRight\":0},\"gridlinesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"preferredSeriesType\":\"bar_percentage_stacked\",\"layers\":[{\"layerId\":\"60b02af6-e0c7-43a4-a22d-cd6a5aa28858\",\"seriesType\":\"bar_percentage_stacked\",\"accessors\":[\"eedf4997-ff1f-4cf5-a82b-107a2973c195\"],\"yConfig\":[],\"layerType\":\"data\",\"splitAccessor\":\"40a30cd4-03df-4f62-9847-01696d38adff\",\"palette\":{\"type\":\"palette\",\"name\":\"temperature\"},\"xAccessor\":\"59dc2003-2a02-4e8e-8492-9d9a937cb71c\"}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"60b02af6-e0c7-43a4-a22d-cd6a5aa28858\":{\"columns\":{\"eedf4997-ff1f-4cf5-a82b-107a2973c195\":{\"label\":\"Count of records\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\"},\"40a30cd4-03df-4f62-9847-01696d38adff\":{\"label\":\"Когда опубликована запись\",\"dataType\":\"string\",\"operationType\":\"filters\",\"scale\":\"ordinal\",\"isBucketed\":true,\"params\":{\"filters\":[{\"label\":\"В тот же день\",\"input\":{\"query\":\"DaysBeforePublishing : 0\",\"language\":\"kuery\"}},{\"input\":{\"query\":\"DaysBeforePublishing : 1\",\"language\":\"kuery\"},\"label\":\"На следующий день\"},{\"input\":{\"query\":\"DaysBeforePublishing > 1 and DaysBeforePublishing <= 7\",\"language\":\"kuery\"},\"label\":\"В течение недели\"},{\"input\":{\"query\":\"DaysBeforePublishing > 7 and DaysBeforePublishing <= 14\",\"language\":\"kuery\"},\"label\":\"В течение двух недель\"},{\"input\":{\"query\":\"DaysBeforePublishing > 14 and DaysBeforePublishing <= 30\",\"language\":\"kuery\"},\"label\":\"В течение месяца\"},{\"input\":{\"query\":\"DaysBeforePublishing > 30 and DaysBeforePublishing <= 183\",\"language\":\"kuery\"},\"label\":\"В течение полугода\"},{\"input\":{\"query\":\"DaysBeforePublishing > 183\",\"language\":\"kuery\"},\"label\":\"Позднее, чем через полгода\"}]},\"customLabel\":true},\"59dc2003-2a02-4e8e-8492-9d9a937cb71c\":{\"label\":\"Как быстро нашли\",\"dataType\":\"string\",\"operationType\":\"filters\",\"scale\":\"ordinal\",\"isBucketed\":true,\"params\":{\"filters\":[{\"label\":\"В тот же день\",\"input\":{\"query\":\"MissedDays : 1\",\"language\":\"kuery\"}},{\"input\":{\"query\":\"MissedDays : 2\",\"language\":\"kuery\"},\"label\":\"На следующий день\"},{\"input\":{\"query\":\"MissedDays > 2 and MissedDays <= 8\",\"language\":\"kuery\"},\"label\":\"В течение недели\"},{\"input\":{\"query\":\"MissedDays > 8 and MissedDays <= 15\",\"language\":\"kuery\"},\"label\":\"В течение двух недель\"},{\"input\":{\"query\":\"MissedDays > 15 and MissedDays <= 31\",\"language\":\"kuery\"},\"label\":\"В течение месяца\"},{\"input\":{\"query\":\"MissedDays > 31 and MissedDays <= 184\",\"language\":\"kuery\"},\"label\":\"В течение полугода\"},{\"input\":{\"query\":\"MissedDays > 184\",\"language\":\"kuery\"},\"label\":\"Позднее, чем через полгода\"}]},\"customLabel\":true}},\"columnOrder\":[\"40a30cd4-03df-4f62-9847-01696d38adff\",\"59dc2003-2a02-4e8e-8492-9d9a937cb71c\",\"eedf4997-ff1f-4cf5-a82b-107a2973c195\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"11-2. Как скорость нахождения зависит от скорости публикации\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":152,\"w\":24,\"h\":15,\"i\":\"4e18c545-47c3-479d-a41d-ef7586a27b43\"},\"panelIndex\":\"4e18c545-47c3-479d-a41d-ef7586a27b43\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\",\"type\":\"index-pattern\"},{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-cb7c9cb8-7e9b-478e-a5e3-8fe3287829f2\",\"type\":\"index-pattern\"}],\"state\":{\"visualization\":{\"title\":\"Empty XY chart\",\"legend\":{\"isVisible\":true,\"position\":\"right\",\"shouldTruncate\":false},\"valueLabels\":\"hide\",\"preferredSeriesType\":\"bar_stacked\",\"layers\":[{\"layerId\":\"cb7c9cb8-7e9b-478e-a5e3-8fe3287829f2\",\"accessors\":[\"e7dcb422-c03b-47b4-890f-10023ed7cac3\"],\"position\":\"top\",\"seriesType\":\"bar_percentage_stacked\",\"showGridlines\":false,\"layerType\":\"data\",\"xAccessor\":\"f1579df2-bb22-46aa-888f-9345745360ac\",\"splitAccessor\":\"b28bd05c-f89b-414e-aaa1-234f2d545247\",\"palette\":{\"type\":\"palette\",\"name\":\"temperature\"}}],\"yRightExtent\":{\"mode\":\"full\"},\"yLeftExtent\":{\"mode\":\"full\"}},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"cb7c9cb8-7e9b-478e-a5e3-8fe3287829f2\":{\"columns\":{\"f1579df2-bb22-46aa-888f-9345745360ac\":{\"label\":\"Число указанных примет\",\"dataType\":\"number\",\"operationType\":\"range\",\"sourceField\":\"SignsNumber\",\"isBucketed\":true,\"scale\":\"interval\",\"params\":{\"type\":\"histogram\",\"ranges\":[{\"from\":0,\"to\":1000,\"label\":\"\"}],\"maxBars\":50.5},\"customLabel\":true},\"e7dcb422-c03b-47b4-890f-10023ed7cac3\":{\"label\":\"Пропавшие\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"customLabel\":true},\"b28bd05c-f89b-414e-aaa1-234f2d545247\":{\"label\":\"Top values of Status.keyword\",\"dataType\":\"string\",\"operationType\":\"terms\",\"scale\":\"ordinal\",\"sourceField\":\"Status.keyword\",\"isBucketed\":true,\"params\":{\"size\":4,\"orderBy\":{\"type\":\"alphabetical\",\"fallback\":false},\"orderDirection\":\"asc\",\"otherBucket\":false,\"missingBucket\":false}}},\"columnOrder\":[\"f1579df2-bb22-46aa-888f-9345745360ac\",\"b28bd05c-f89b-414e-aaa1-234f2d545247\",\"e7dcb422-c03b-47b4-890f-10023ed7cac3\"],\"incompleteColumns\":{}}}}}}},\"enhancements\":{},\"hidePanelTitles\":false},\"title\":\"11-3. Шанс быть найденным от числа примет\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":152,\"w\":24,\"h\":15,\"i\":\"a5303de3-f79f-4d31-9d93-0bf786878c23\"},\"panelIndex\":\"a5303de3-f79f-4d31-9d93-0bf786878c23\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\",\"type\":\"index-pattern\"},{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-60b02af6-e0c7-43a4-a22d-cd6a5aa28858\",\"type\":\"index-pattern\"}],\"state\":{\"visualization\":{\"legend\":{\"isVisible\":true,\"position\":\"right\"},\"valueLabels\":\"hide\",\"fittingFunction\":\"None\",\"yTitle\":\"Число примет\",\"yLeftExtent\":{\"mode\":\"full\"},\"yRightExtent\":{\"mode\":\"full\"},\"axisTitlesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"tickLabelsVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"labelsOrientation\":{\"x\":-90,\"yLeft\":0,\"yRight\":0},\"gridlinesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"preferredSeriesType\":\"bar_percentage_stacked\",\"layers\":[{\"layerId\":\"60b02af6-e0c7-43a4-a22d-cd6a5aa28858\",\"seriesType\":\"line\",\"accessors\":[\"eedf4997-ff1f-4cf5-a82b-107a2973c195\",\"9a4196b1-0e04-48c7-8d02-cd50176139ae\"],\"yConfig\":[{\"forAccessor\":\"eedf4997-ff1f-4cf5-a82b-107a2973c195\",\"color\":\"#e7664c\"},{\"forAccessor\":\"9a4196b1-0e04-48c7-8d02-cd50176139ae\",\"color\":\"#6092c0\"}],\"layerType\":\"data\",\"xAccessor\":\"59dc2003-2a02-4e8e-8492-9d9a937cb71c\"}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"60b02af6-e0c7-43a4-a22d-cd6a5aa28858\":{\"columns\":{\"eedf4997-ff1f-4cf5-a82b-107a2973c195\":{\"label\":\"Среднее число примет\",\"dataType\":\"number\",\"operationType\":\"average\",\"sourceField\":\"SignsNumber\",\"isBucketed\":false,\"scale\":\"ratio\",\"customLabel\":true},\"59dc2003-2a02-4e8e-8492-9d9a937cb71c\":{\"label\":\"Как быстро нашли\",\"dataType\":\"string\",\"operationType\":\"filters\",\"scale\":\"ordinal\",\"isBucketed\":true,\"params\":{\"filters\":[{\"label\":\"В тот же день\",\"input\":{\"query\":\"MissedDays : 1\",\"language\":\"kuery\"}},{\"input\":{\"query\":\"MissedDays : 2\",\"language\":\"kuery\"},\"label\":\"На следующий день\"},{\"input\":{\"query\":\"MissedDays > 2 and MissedDays <= 8\",\"language\":\"kuery\"},\"label\":\"В течение недели\"},{\"input\":{\"query\":\"MissedDays > 8 and MissedDays <= 15\",\"language\":\"kuery\"},\"label\":\"В течение двух недель\"},{\"input\":{\"query\":\"MissedDays > 15 and MissedDays <= 31\",\"language\":\"kuery\"},\"label\":\"В течение месяца\"},{\"input\":{\"query\":\"MissedDays > 31 and MissedDays <= 184\",\"language\":\"kuery\"},\"label\":\"В течение полугода\"},{\"input\":{\"query\":\"MissedDays > 184\",\"language\":\"kuery\"},\"label\":\"Позднее, чем через полгода\"}]},\"customLabel\":true},\"9a4196b1-0e04-48c7-8d02-cd50176139ae\":{\"label\":\"Медианное число примет\",\"dataType\":\"number\",\"operationType\":\"median\",\"sourceField\":\"SignsNumber\",\"isBucketed\":false,\"scale\":\"ratio\",\"customLabel\":true}},\"columnOrder\":[\"59dc2003-2a02-4e8e-8492-9d9a937cb71c\",\"eedf4997-ff1f-4cf5-a82b-107a2973c195\",\"9a4196b1-0e04-48c7-8d02-cd50176139ae\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"11-4. Как скорость нахождения зависит от числа примет\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":11,\"y\":167,\"w\":24,\"h\":15,\"i\":\"97976765-105b-4c5a-b4bb-64647f27378b\"},\"panelIndex\":\"97976765-105b-4c5a-b4bb-64647f27378b\",\"embeddableConfig\":{\"enhancements\":{},\"hidePanelTitles\":false},\"title\":\"15. Какие приметы чаще указывают\",\"panelRefName\":\"panel_97976765-105b-4c5a-b4bb-64647f27378b\"},{\"version\":\"7.15.2\",\"type\":\"visualization\",\"gridData\":{\"x\":0,\"y\":182,\"w\":48,\"h\":12,\"i\":\"25d398ee-2c03-4c02-839d-120069c16e58\"},\"panelIndex\":\"25d398ee-2c03-4c02-839d-120069c16e58\",\"embeddableConfig\":{\"savedVis\":{\"title\":\"\",\"description\":\"\",\"type\":\"markdown\",\"params\":{\"fontSize\":12,\"openLinksInNewTab\":false,\"markdown\":\"## Анализ мест и ситуаций, когда пропадают люди\\n\\nВ этой части проводится анализ когда, где и при каких условиях пропадают люди.\\n\\n* В большинстве случаев человека удаётся найти, и при этом более чем в половине заявок человека удаётся найти живым\\n* Люди чаще пропадают летом, а в случае пропажи зимой чаще погибают\\n* В лесу пропадает не так много людей, как ожидалось. Статистика говорит, что если вы заблудились, то шанс оказаться спасённым составляет 3 из 4, что вселяет надежду.\\n* Пропавших на воде ещё меньше, однако тут половина шансов на то, что человек будет найден погибшим. Поэтому на водоёмах надо вести себя аккуратно.\\n* Небольшой процент пропавших нуждается в медицинской помощи, которую зачастую оказывают волонтёры на месте\\n* По местам пропажи нет полной информации, чтобы можно было делать выводы.\"},\"uiState\":{},\"data\":{\"aggs\":[],\"searchSource\":{\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filter\":[]}}},\"hidePanelTitles\":true,\"enhancements\":{}}},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":194,\"w\":24,\"h\":15,\"i\":\"78147437-06ab-48ed-a044-87bac893a359\"},\"panelIndex\":\"78147437-06ab-48ed-a044-87bac893a359\",\"embeddableConfig\":{\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"18-1. Процентное соотношение пропавших (за всё время 2010-2021)\",\"panelRefName\":\"panel_78147437-06ab-48ed-a044-87bac893a359\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":194,\"w\":24,\"h\":15,\"i\":\"771778cb-185c-4801-9fd4-470973fd39d8\"},\"panelIndex\":\"771778cb-185c-4801-9fd4-470973fd39d8\",\"embeddableConfig\":{\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"18-2. Процентное соотношение пропавших (за 2021)\",\"panelRefName\":\"panel_771778cb-185c-4801-9fd4-470973fd39d8\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":209,\"w\":24,\"h\":15,\"i\":\"f0f352c8-0324-4bf1-95fa-9cf1f61e5a95\"},\"panelIndex\":\"f0f352c8-0324-4bf1-95fa-9cf1f61e5a95\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\",\"type\":\"index-pattern\"},{\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-0d272cfb-0a95-404f-bd80-6cd8241f9bab\",\"type\":\"index-pattern\"}],\"state\":{\"visualization\":{\"title\":\"Empty XY chart\",\"legend\":{\"isVisible\":true,\"position\":\"right\",\"isInside\":false,\"showSingleSeries\":true},\"valueLabels\":\"hide\",\"preferredSeriesType\":\"bar_stacked\",\"layers\":[{\"layerId\":\"0d272cfb-0a95-404f-bd80-6cd8241f9bab\",\"accessors\":[\"a3a9853a-b537-40ec-9324-ada0081bdd86\"],\"position\":\"top\",\"seriesType\":\"bar_stacked\",\"showGridlines\":false,\"layerType\":\"data\",\"xAccessor\":\"dc0b61ee-8244-47f9-b426-1b7bb6ff2f49\",\"splitAccessor\":\"85e48494-4d6f-447c-a2d5-35a51bdc33c2\",\"palette\":{\"type\":\"palette\",\"name\":\"temperature\"}}],\"yRightExtent\":{\"mode\":\"full\"},\"yLeftExtent\":{\"mode\":\"full\"},\"gridlinesVisibilitySettings\":{\"x\":false,\"yLeft\":true,\"yRight\":true},\"tickLabelsVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true}},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"0d272cfb-0a95-404f-bd80-6cd8241f9bab\":{\"columns\":{\"dc0b61ee-8244-47f9-b426-1b7bb6ff2f49\":{\"label\":\"Времена года\",\"dataType\":\"string\",\"operationType\":\"filters\",\"scale\":\"ordinal\",\"isBucketed\":true,\"params\":{\"filters\":[{\"input\":{\"query\":\"MissedDate >= 2021-06 and MissedDate < 2021-09 or MissedDate >= 2020-06 and MissedDate < 2020-09 or MissedDate >= 2019-06 and MissedDate < 2019-09 or MissedDate >= 2018-06 and MissedDate < 2018-09 or MissedDate >= 2017-06 and MissedDate < 2017-09\",\"language\":\"kuery\"},\"label\":\"Лето\"},{\"input\":{\"query\":\"MissedDate >= 2021-09 and MissedDate < 2021-12 or MissedDate >= 2020-09 and MissedDate < 2020-12 or MissedDate >= 2019-09 and MissedDate < 2019-12 or MissedDate >= 2018-09 and MissedDate < 2018-12 or MissedDate >= 2017-09 and MissedDate < 2017-12\",\"language\":\"kuery\"},\"label\":\"Осень\"},{\"input\":{\"query\":\"MissedDate >= 2020-12 and MissedDate < 2021-03 or MissedDate >= 2019-12 and MissedDate < 2020-03 or MissedDate >= 2018-12 and MissedDate < 2019-03 or MissedDate >= 2017-12 and MissedDate < 2018-03 or MissedDate >= 2016-12 and MissedDate < 2017-03\",\"language\":\"kuery\"},\"label\":\"Зима\"},{\"label\":\"Весна\",\"input\":{\"query\":\"MissedDate >= 2021-03 and MissedDate < 2021-06 or MissedDate >= 2020-03 and MissedDate < 2020-06 or MissedDate >= 2019-03 and MissedDate < 2019-06 or MissedDate >= 2018-03 and MissedDate < 2018-06 or MissedDate >= 2017-03 and MissedDate < 2017-06\",\"language\":\"kuery\"}}]},\"customLabel\":true},\"a3a9853a-b537-40ec-9324-ada0081bdd86\":{\"label\":\"Кол-во пропавших\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"customLabel\":true,\"params\":{\"format\":{\"id\":\"number\",\"params\":{\"decimals\":0}}}},\"85e48494-4d6f-447c-a2d5-35a51bdc33c2\":{\"label\":\"Статус\",\"dataType\":\"string\",\"operationType\":\"terms\",\"scale\":\"ordinal\",\"sourceField\":\"Status.keyword\",\"isBucketed\":true,\"params\":{\"size\":5,\"orderBy\":{\"type\":\"alphabetical\",\"fallback\":false},\"orderDirection\":\"asc\",\"otherBucket\":true,\"missingBucket\":false},\"customLabel\":true}},\"columnOrder\":[\"dc0b61ee-8244-47f9-b426-1b7bb6ff2f49\",\"85e48494-4d6f-447c-a2d5-35a51bdc33c2\",\"a3a9853a-b537-40ec-9324-ada0081bdd86\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"9-1. В какое время года пропадает больше людей (за последние 5 лет)\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":209,\"w\":24,\"h\":15,\"i\":\"82c493d3-b67e-45f7-ad5e-cf9d73c9038b\"},\"panelIndex\":\"82c493d3-b67e-45f7-ad5e-cf9d73c9038b\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-0d272cfb-0a95-404f-bd80-6cd8241f9bab\"}],\"state\":{\"visualization\":{\"legend\":{\"isVisible\":true,\"position\":\"right\"},\"valueLabels\":\"hide\",\"fittingFunction\":\"None\",\"yLeftExtent\":{\"mode\":\"full\"},\"yRightExtent\":{\"mode\":\"full\"},\"axisTitlesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"tickLabelsVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"labelsOrientation\":{\"x\":0,\"yLeft\":0,\"yRight\":0},\"gridlinesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"preferredSeriesType\":\"bar_percentage_stacked\",\"layers\":[{\"layerId\":\"0d272cfb-0a95-404f-bd80-6cd8241f9bab\",\"seriesType\":\"bar_percentage_stacked\",\"xAccessor\":\"f9897c88-a36c-4cff-8dbc-067bdba9408e\",\"accessors\":[\"a3a9853a-b537-40ec-9324-ada0081bdd86\",\"617107f1-d18b-4d25-8b42-66826f050b54\"],\"yConfig\":[{\"forAccessor\":\"a3a9853a-b537-40ec-9324-ada0081bdd86\",\"color\":\"#e7664c\",\"axisMode\":\"auto\"},{\"forAccessor\":\"617107f1-d18b-4d25-8b42-66826f050b54\",\"color\":\"#b4d2f0\"}],\"layerType\":\"data\"}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"0d272cfb-0a95-404f-bd80-6cd8241f9bab\":{\"columns\":{\"a3a9853a-b537-40ec-9324-ada0081bdd86\":{\"label\":\"Погибли\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"customLabel\":true,\"filter\":{\"query\":\"Status.keyword : \\\"погиб\\\" \",\"language\":\"kuery\"}},\"f9897c88-a36c-4cff-8dbc-067bdba9408e\":{\"label\":\"Времена года\",\"dataType\":\"string\",\"operationType\":\"filters\",\"scale\":\"ordinal\",\"isBucketed\":true,\"params\":{\"filters\":[{\"input\":{\"query\":\"MissedDate >= 2021-06 and MissedDate < 2021-09 or MissedDate >= 2020-06 and MissedDate < 2020-09 or MissedDate >= 2019-06 and MissedDate < 2019-09 or MissedDate >= 2018-06 and MissedDate < 2018-09 or MissedDate >= 2017-06 and MissedDate < 2017-09\",\"language\":\"kuery\"},\"label\":\"Лето\"},{\"input\":{\"query\":\"MissedDate >= 2021-09 and MissedDate < 2021-12 or MissedDate >= 2020-09 and MissedDate < 2020-12 or MissedDate >= 2019-09 and MissedDate < 2019-12 or MissedDate >= 2018-09 and MissedDate < 2018-12 or MissedDate >= 2017-09 and MissedDate < 2017-12\",\"language\":\"kuery\"},\"label\":\"Осень\"},{\"input\":{\"query\":\"MissedDate >= 2020-12 and MissedDate < 2021-03 or MissedDate >= 2019-12 and MissedDate < 2020-03 or MissedDate >= 2018-12 and MissedDate < 2019-03 or MissedDate >= 2017-12 and MissedDate < 2018-03 or MissedDate >= 2016-12 and MissedDate < 2017-03\",\"language\":\"kuery\"},\"label\":\"Зима\"},{\"label\":\"Весна\",\"input\":{\"query\":\"MissedDate >= 2021-03 and MissedDate < 2021-06 or MissedDate >= 2020-03 and MissedDate < 2020-06 or MissedDate >= 2019-03 and MissedDate < 2019-06 or MissedDate >= 2018-03 and MissedDate < 2018-06 or MissedDate >= 2017-03 and MissedDate < 2017-06\",\"language\":\"kuery\"}}]},\"customLabel\":true},\"617107f1-d18b-4d25-8b42-66826f050b54\":{\"label\":\"Живы\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"filter\":{\"query\":\"Status.keyword : \\\"жив\\\" \",\"language\":\"kuery\"},\"customLabel\":true}},\"columnOrder\":[\"f9897c88-a36c-4cff-8dbc-067bdba9408e\",\"a3a9853a-b537-40ec-9324-ada0081bdd86\",\"617107f1-d18b-4d25-8b42-66826f050b54\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"9-2. В какое время года люди чаще погибают (за последние 5 лет)\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":224,\"w\":24,\"h\":15,\"i\":\"5e95e4b7-0086-41bc-8a14-54331b70f65f\"},\"panelIndex\":\"5e95e4b7-0086-41bc-8a14-54331b70f65f\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsPie\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-layer-30cd2d13-ea43-4293-93aa-06d10e7668ed\"}],\"state\":{\"visualization\":{\"shape\":\"pie\",\"layers\":[{\"layerId\":\"30cd2d13-ea43-4293-93aa-06d10e7668ed\",\"groups\":[\"24e00e59-26e1-4d2c-a0d6-396ac99c6e6f\"],\"metric\":\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\",\"numberDisplay\":\"percent\",\"categoryDisplay\":\"default\",\"legendDisplay\":\"default\",\"nestedLegend\":false,\"layerType\":\"data\"}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"30cd2d13-ea43-4293-93aa-06d10e7668ed\":{\"columns\":{\"24e00e59-26e1-4d2c-a0d6-396ac99c6e6f\":{\"label\":\"Filters\",\"dataType\":\"string\",\"operationType\":\"filters\",\"scale\":\"ordinal\",\"isBucketed\":true,\"params\":{\"filters\":[{\"input\":{\"query\":\"Additional.keyword : \\\"пропал в лесу\\\" \",\"language\":\"kuery\"},\"label\":\"Пропал в лесу\"},{\"input\":{\"query\":\"not Additional.keyword : \\\"пропал в лесу\\\" \",\"language\":\"kuery\"},\"label\":\"Пропал не в лесу\"}]}},\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\":{\"label\":\"Count of records\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\"}},\"columnOrder\":[\"24e00e59-26e1-4d2c-a0d6-396ac99c6e6f\",\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"14-1. Пропавшие в лесах\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":224,\"w\":24,\"h\":15,\"i\":\"99958a8c-ae14-4209-80f5-139dc075b23b\"},\"panelIndex\":\"99958a8c-ae14-4209-80f5-139dc075b23b\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsPie\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-layer-30cd2d13-ea43-4293-93aa-06d10e7668ed\"}],\"state\":{\"visualization\":{\"shape\":\"pie\",\"layers\":[{\"layerId\":\"30cd2d13-ea43-4293-93aa-06d10e7668ed\",\"groups\":[\"cfd7bb37-0a17-4f9d-8741-6628fc842078\"],\"metric\":\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\",\"numberDisplay\":\"percent\",\"categoryDisplay\":\"default\",\"legendDisplay\":\"default\",\"nestedLegend\":false,\"layerType\":\"data\"}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"30cd2d13-ea43-4293-93aa-06d10e7668ed\":{\"columns\":{\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\":{\"label\":\"Count of records\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\"},\"cfd7bb37-0a17-4f9d-8741-6628fc842078\":{\"label\":\"Filters\",\"dataType\":\"string\",\"operationType\":\"filters\",\"scale\":\"ordinal\",\"isBucketed\":true,\"params\":{\"filters\":[{\"input\":{\"query\":\"Additional.keyword : \\\"пропал в лесу\\\"  and Status : \\\"жив\\\"\",\"language\":\"kuery\"},\"label\":\"Жив\"},{\"input\":{\"query\":\"Additional.keyword : \\\"пропал в лесу\\\"  and not Status : (\\\"жив\\\" or \\\"найден\\\" or \\\"погиб\\\")\",\"language\":\"kuery\"},\"label\":\"Не найден\"},{\"input\":{\"query\":\"Additional.keyword : \\\"пропал в лесу\\\"  and Status : (\\\"погиб\\\")\",\"language\":\"kuery\"},\"label\":\"Погиб\"},{\"input\":{\"query\":\"Additional.keyword : \\\"пропал в лесу\\\" and Status.keyword : \\\"найден\\\" \",\"language\":\"kuery\"},\"label\":\"Найден\"}]}}},\"columnOrder\":[\"cfd7bb37-0a17-4f9d-8741-6628fc842078\",\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"14-2. Пропавшие в лесах. Статус\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":239,\"w\":24,\"h\":15,\"i\":\"016d3005-56b2-422e-948a-d33c19c8017a\"},\"panelIndex\":\"016d3005-56b2-422e-948a-d33c19c8017a\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsPie\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-layer-30cd2d13-ea43-4293-93aa-06d10e7668ed\"}],\"state\":{\"visualization\":{\"shape\":\"pie\",\"layers\":[{\"layerId\":\"30cd2d13-ea43-4293-93aa-06d10e7668ed\",\"groups\":[\"24e00e59-26e1-4d2c-a0d6-396ac99c6e6f\"],\"metric\":\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\",\"numberDisplay\":\"percent\",\"categoryDisplay\":\"default\",\"legendDisplay\":\"default\",\"nestedLegend\":false,\"layerType\":\"data\"}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"30cd2d13-ea43-4293-93aa-06d10e7668ed\":{\"columns\":{\"24e00e59-26e1-4d2c-a0d6-396ac99c6e6f\":{\"label\":\"Filters\",\"dataType\":\"string\",\"operationType\":\"filters\",\"scale\":\"ordinal\",\"isBucketed\":true,\"params\":{\"filters\":[{\"input\":{\"query\":\"Additional.keyword : \\\"пропал на воде\\\" \",\"language\":\"kuery\"},\"label\":\"Пропал на воде\"},{\"input\":{\"query\":\"not Additional.keyword : \\\"пропал на воде\\\" \",\"language\":\"kuery\"},\"label\":\"Пропал не на воде\"}]}},\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\":{\"label\":\"Count of records\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\"}},\"columnOrder\":[\"24e00e59-26e1-4d2c-a0d6-396ac99c6e6f\",\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"14-3. Пропавшие на воде\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":239,\"w\":24,\"h\":15,\"i\":\"30644686-dc4a-41eb-883d-45374d54eea3\"},\"panelIndex\":\"30644686-dc4a-41eb-883d-45374d54eea3\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsPie\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-layer-30cd2d13-ea43-4293-93aa-06d10e7668ed\"}],\"state\":{\"visualization\":{\"shape\":\"pie\",\"layers\":[{\"layerId\":\"30cd2d13-ea43-4293-93aa-06d10e7668ed\",\"groups\":[\"cfd7bb37-0a17-4f9d-8741-6628fc842078\"],\"metric\":\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\",\"numberDisplay\":\"percent\",\"categoryDisplay\":\"default\",\"legendDisplay\":\"default\",\"nestedLegend\":false,\"layerType\":\"data\"}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"30cd2d13-ea43-4293-93aa-06d10e7668ed\":{\"columns\":{\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\":{\"label\":\"Count of records\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\"},\"cfd7bb37-0a17-4f9d-8741-6628fc842078\":{\"label\":\"Filters\",\"dataType\":\"string\",\"operationType\":\"filters\",\"scale\":\"ordinal\",\"isBucketed\":true,\"params\":{\"filters\":[{\"input\":{\"query\":\"Additional.keyword : \\\"пропал на воде\\\"   and Status : \\\"жив\\\"\",\"language\":\"kuery\"},\"label\":\"Жив\"},{\"input\":{\"query\":\"Additional.keyword : \\\"пропал на воде\\\"   and not Status : (\\\"жив\\\" or \\\"найден\\\" or \\\"погиб\\\")\",\"language\":\"kuery\"},\"label\":\"Не найден\"},{\"input\":{\"query\":\"Additional.keyword : \\\"пропал на воде\\\"   and Status : (\\\"погиб\\\")\",\"language\":\"kuery\"},\"label\":\"Погиб\"},{\"input\":{\"query\":\"Additional.keyword : \\\"пропал на воде\\\" and Status.keyword : \\\"найден\\\" \",\"language\":\"kuery\"},\"label\":\"Найден\"}]}}},\"columnOrder\":[\"cfd7bb37-0a17-4f9d-8741-6628fc842078\",\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"14-4. Пропавшие на воде. Статус\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":254,\"w\":24,\"h\":15,\"i\":\"815f1c34-70f8-4738-a319-dd43fdd9f2a6\"},\"panelIndex\":\"815f1c34-70f8-4738-a319-dd43fdd9f2a6\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsPie\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-layer-ec62db27-503b-47bd-9997-68fca43c2530\"}],\"state\":{\"visualization\":{\"shape\":\"pie\",\"layers\":[{\"layerId\":\"ec62db27-503b-47bd-9997-68fca43c2530\",\"groups\":[\"a17632ee-e81c-428e-b413-cf9a4a2fbf34\"],\"metric\":\"3d7737ef-3538-46a3-b10f-1637feac0624\",\"numberDisplay\":\"percent\",\"categoryDisplay\":\"default\",\"legendDisplay\":\"default\",\"nestedLegend\":false,\"layerType\":\"data\"}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"ec62db27-503b-47bd-9997-68fca43c2530\":{\"columns\":{\"a17632ee-e81c-428e-b413-cf9a4a2fbf34\":{\"label\":\"Filters\",\"dataType\":\"string\",\"operationType\":\"filters\",\"scale\":\"ordinal\",\"isBucketed\":true,\"params\":{\"filters\":[{\"input\":{\"query\":\"Location.value.type.keyword :\\\"город\\\" and not Location.value.type.keyword :(\\\"деревня\\\"  or \\\"посёлок\\\" or \\\"село\\\"  )\",\"language\":\"kuery\"},\"label\":\"Пропал в городе\"},{\"input\":{\"query\":\"Location.value.type.keyword :(\\\"деревня\\\"  or \\\"посёлок\\\" or \\\"село\\\"  )\",\"language\":\"kuery\"},\"label\":\"Пропал в деревенской области\"},{\"input\":{\"query\":\"not Location.value.type.keyword :\\\"город\\\" and not Location.value.type.keyword :(\\\"деревня\\\"  or \\\"посёлок\\\" or \\\"село\\\"  )\",\"language\":\"kuery\"},\"label\":\"Не указано\"}]}},\"3d7737ef-3538-46a3-b10f-1637feac0624\":{\"label\":\"Count of records\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\"}},\"columnOrder\":[\"a17632ee-e81c-428e-b413-cf9a4a2fbf34\",\"3d7737ef-3538-46a3-b10f-1637feac0624\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"16. Где пропадает больше людей - в крупных городах или деревнях\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":254,\"w\":24,\"h\":15,\"i\":\"6adfadd3-44ab-4678-9d5e-68291408e100\"},\"panelIndex\":\"6adfadd3-44ab-4678-9d5e-68291408e100\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsPie\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-layer-30cd2d13-ea43-4293-93aa-06d10e7668ed\"}],\"state\":{\"visualization\":{\"shape\":\"donut\",\"layers\":[{\"layerId\":\"30cd2d13-ea43-4293-93aa-06d10e7668ed\",\"groups\":[\"24e00e59-26e1-4d2c-a0d6-396ac99c6e6f\"],\"metric\":\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\",\"numberDisplay\":\"percent\",\"categoryDisplay\":\"default\",\"legendDisplay\":\"default\",\"nestedLegend\":false,\"layerType\":\"data\"}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"30cd2d13-ea43-4293-93aa-06d10e7668ed\":{\"columns\":{\"24e00e59-26e1-4d2c-a0d6-396ac99c6e6f\":{\"label\":\"Filters\",\"dataType\":\"string\",\"operationType\":\"filters\",\"scale\":\"ordinal\",\"isBucketed\":true,\"params\":{\"filters\":[{\"input\":{\"query\":\"Additional : \\\"нуждается в медпомощи\\\"\",\"language\":\"kuery\"},\"label\":\"Нуждается в медпомощи\"},{\"input\":{\"query\":\"not Additional: \\\"нуждается в медпомощи\\\"\",\"language\":\"kuery\"},\"label\":\"Не нуждается в медпомощи\"}]}},\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\":{\"label\":\"Count of records\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\"}},\"columnOrder\":[\"24e00e59-26e1-4d2c-a0d6-396ac99c6e6f\",\"ec4bc875-7607-471b-b6ab-cc7d9a1dd46a\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"12. Пропавшие, нуждающиеся в медицинской помощи\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":281,\"w\":24,\"h\":15,\"i\":\"2a21213b-7ec3-48f8-9574-f9c1fc3cb7d0\"},\"panelIndex\":\"2a21213b-7ec3-48f8-9574-f9c1fc3cb7d0\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-layer-89f7770e-570a-4b02-a76e-06f4dbc38735\"},{\"name\":\"filter-index-pattern-0\",\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\"}],\"state\":{\"visualization\":{\"title\":\"Empty XY chart\",\"legend\":{\"isVisible\":true,\"position\":\"right\",\"isInside\":false,\"showSingleSeries\":false},\"valueLabels\":\"hide\",\"preferredSeriesType\":\"bar_stacked\",\"layers\":[{\"layerId\":\"89f7770e-570a-4b02-a76e-06f4dbc38735\",\"accessors\":[\"6a61ac2a-f259-40b4-bd72-ce9635059c83\",\"8275ad1f-79e7-404a-acc3-8287401fabee\",\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2\"],\"position\":\"top\",\"seriesType\":\"bar_stacked\",\"showGridlines\":false,\"layerType\":\"data\",\"xAccessor\":\"a8eca530-1919-4ecb-9914-c43a2ea1f2ed\",\"yConfig\":[{\"forAccessor\":\"6a61ac2a-f259-40b4-bd72-ce9635059c83\",\"color\":\"#6092c0\",\"axisMode\":\"auto\"},{\"forAccessor\":\"8275ad1f-79e7-404a-acc3-8287401fabee\",\"color\":\"#e7664c\"},{\"forAccessor\":\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2\",\"color\":\"#c9d3db\"}]}],\"yRightExtent\":{\"mode\":\"full\"},\"yLeftExtent\":{\"mode\":\"full\"},\"yTitle\":\"Отношение найденных к общему количеству заявлений\"},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[{\"meta\":{\"params\":{\"gte\":0,\"lt\":101},\"alias\":null,\"negate\":false,\"disabled\":false,\"type\":\"range\",\"key\":\"Age.years\",\"indexRefName\":\"filter-index-pattern-0\"},\"range\":{\"Age.years\":{\"gte\":0,\"lt\":101}},\"$state\":{\"store\":\"appState\"}}],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"89f7770e-570a-4b02-a76e-06f4dbc38735\":{\"columns\":{\"a8eca530-1919-4ecb-9914-c43a2ea1f2ed\":{\"label\":\"Возраст\",\"dataType\":\"number\",\"operationType\":\"range\",\"sourceField\":\"Age.years\",\"isBucketed\":true,\"scale\":\"interval\",\"params\":{\"type\":\"histogram\",\"ranges\":[{\"from\":0,\"to\":1000,\"label\":\"\"}],\"maxBars\":\"auto\"},\"customLabel\":true},\"6a61ac2a-f259-40b4-bd72-ce9635059c83X0\":{\"label\":\"Part of Найден, жив\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"filter\":{\"query\":\"Status.keyword : жив\",\"language\":\"kuery\"},\"customLabel\":true},\"6a61ac2a-f259-40b4-bd72-ce9635059c83X1\":{\"label\":\"Part of Найден, жив\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"customLabel\":true},\"6a61ac2a-f259-40b4-bd72-ce9635059c83X2\":{\"label\":\"Part of Найден, жив\",\"dataType\":\"number\",\"operationType\":\"math\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"tinymathAst\":{\"type\":\"function\",\"name\":\"divide\",\"args\":[\"6a61ac2a-f259-40b4-bd72-ce9635059c83X0\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X1\"],\"location\":{\"min\":0,\"max\":43},\"text\":\"count(kql='Status.keyword : жив') / count()\"}},\"references\":[\"6a61ac2a-f259-40b4-bd72-ce9635059c83X0\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X1\"],\"customLabel\":true},\"6a61ac2a-f259-40b4-bd72-ce9635059c83\":{\"label\":\"Жив\",\"dataType\":\"number\",\"operationType\":\"formula\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"formula\":\"count(kql='Status.keyword : жив') / count()\",\"isFormulaBroken\":false,\"format\":{\"id\":\"percent\",\"params\":{\"decimals\":0}}},\"references\":[\"6a61ac2a-f259-40b4-bd72-ce9635059c83X2\"],\"customLabel\":true},\"8275ad1f-79e7-404a-acc3-8287401fabeeX0\":{\"label\":\"Part of Погиб\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"filter\":{\"query\":\"Status.keyword : (погиб)\",\"language\":\"kuery\"},\"customLabel\":true},\"8275ad1f-79e7-404a-acc3-8287401fabeeX1\":{\"label\":\"Part of Погиб\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"customLabel\":true},\"8275ad1f-79e7-404a-acc3-8287401fabeeX2\":{\"label\":\"Part of Погиб\",\"dataType\":\"number\",\"operationType\":\"math\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"tinymathAst\":{\"type\":\"function\",\"name\":\"divide\",\"args\":[\"8275ad1f-79e7-404a-acc3-8287401fabeeX0\",\"8275ad1f-79e7-404a-acc3-8287401fabeeX1\"],\"location\":{\"min\":0,\"max\":47},\"text\":\"count(kql='Status.keyword : (погиб)') / count()\"}},\"references\":[\"8275ad1f-79e7-404a-acc3-8287401fabeeX0\",\"8275ad1f-79e7-404a-acc3-8287401fabeeX1\"],\"customLabel\":true},\"8275ad1f-79e7-404a-acc3-8287401fabee\":{\"label\":\"Погиб\",\"dataType\":\"number\",\"operationType\":\"formula\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"formula\":\"count(kql='Status.keyword : (погиб)') / count()\",\"isFormulaBroken\":false,\"format\":{\"id\":\"percent\",\"params\":{\"decimals\":0}}},\"references\":[\"8275ad1f-79e7-404a-acc3-8287401fabeeX2\"],\"customLabel\":true},\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2X0\":{\"label\":\"Part of Найден\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"filter\":{\"query\":\"Status.keyword : найден\",\"language\":\"kuery\"},\"customLabel\":true},\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2X1\":{\"label\":\"Part of Найден\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"customLabel\":true},\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2X2\":{\"label\":\"Part of Найден\",\"dataType\":\"number\",\"operationType\":\"math\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"tinymathAst\":{\"type\":\"function\",\"name\":\"divide\",\"args\":[\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2X0\",\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2X1\"],\"location\":{\"min\":0,\"max\":46},\"text\":\"count(kql='Status.keyword : найден') / count()\"}},\"references\":[\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2X0\",\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2X1\"],\"customLabel\":true},\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2\":{\"label\":\"Найден\",\"dataType\":\"number\",\"operationType\":\"formula\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"formula\":\"count(kql='Status.keyword : найден') / count()\",\"isFormulaBroken\":false,\"format\":{\"id\":\"percent\",\"params\":{\"decimals\":0}}},\"references\":[\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2X2\"],\"customLabel\":true}},\"columnOrder\":[\"a8eca530-1919-4ecb-9914-c43a2ea1f2ed\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X0\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X1\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X2\",\"8275ad1f-79e7-404a-acc3-8287401fabee\",\"8275ad1f-79e7-404a-acc3-8287401fabeeX0\",\"8275ad1f-79e7-404a-acc3-8287401fabeeX1\",\"8275ad1f-79e7-404a-acc3-8287401fabeeX2\",\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2\",\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2X0\",\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2X1\",\"5e7800ce-e7bd-4049-a90b-cdd2335f11f2X2\"],\"incompleteColumns\":{}}}}}}},\"enhancements\":{},\"hidePanelTitles\":false},\"title\":\"6. Зависимость шанса быть найденным от возраста пропавшего\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":281,\"w\":24,\"h\":15,\"i\":\"f77aa788-dc24-4dde-bc4a-8b418a9bb58e\"},\"panelIndex\":\"f77aa788-dc24-4dde-bc4a-8b418a9bb58e\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-layer-6da0b317-022b-438c-8fc7-311e907ea31d\"},{\"name\":\"filter-index-pattern-0\",\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\"}],\"state\":{\"visualization\":{\"legend\":{\"isVisible\":true,\"position\":\"right\"},\"valueLabels\":\"hide\",\"fittingFunction\":\"None\",\"yTitle\":\"Отношение к общему количеству заявлений\",\"yLeftExtent\":{\"mode\":\"full\"},\"yRightExtent\":{\"mode\":\"full\"},\"axisTitlesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"tickLabelsVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"labelsOrientation\":{\"x\":0,\"yLeft\":0,\"yRight\":0},\"gridlinesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"preferredSeriesType\":\"area\",\"layers\":[{\"layerId\":\"6da0b317-022b-438c-8fc7-311e907ea31d\",\"accessors\":[\"a3e56ee2-3771-466c-a29b-d2fa34f706f5\",\"c4c05154-4237-4aab-abd3-d0f107afc492\"],\"position\":\"top\",\"seriesType\":\"area\",\"showGridlines\":false,\"layerType\":\"data\",\"xAccessor\":\"063c6194-9875-4a8a-892a-4663297f29f5\",\"yConfig\":[{\"forAccessor\":\"a3e56ee2-3771-466c-a29b-d2fa34f706f5\",\"color\":\"#6092c0\"},{\"forAccessor\":\"c4c05154-4237-4aab-abd3-d0f107afc492\",\"color\":\"#d36086\"}]}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[{\"meta\":{\"params\":{\"gte\":0,\"lt\":700},\"alias\":null,\"negate\":false,\"disabled\":false,\"type\":\"range\",\"key\":\"MissedDays\",\"indexRefName\":\"filter-index-pattern-0\"},\"range\":{\"MissedDays\":{\"gte\":0,\"lt\":700}},\"$state\":{\"store\":\"appState\"}}],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"6da0b317-022b-438c-8fc7-311e907ea31d\":{\"columns\":{\"063c6194-9875-4a8a-892a-4663297f29f5\":{\"label\":\"Количество дней с момента обращения\",\"dataType\":\"number\",\"operationType\":\"range\",\"sourceField\":\"MissedDays\",\"isBucketed\":true,\"scale\":\"interval\",\"params\":{\"type\":\"histogram\",\"ranges\":[{\"from\":0,\"to\":1000,\"label\":\"\"}],\"maxBars\":\"auto\"},\"customLabel\":true},\"c4c05154-4237-4aab-abd3-d0f107afc492X0\":{\"label\":\"Part of Найден, погиб\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"filter\":{\"query\":\"Status.keyword : (погиб)\",\"language\":\"kuery\"},\"customLabel\":true},\"c4c05154-4237-4aab-abd3-d0f107afc492X1\":{\"label\":\"Part of Найден, погиб\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"customLabel\":true},\"c4c05154-4237-4aab-abd3-d0f107afc492X2\":{\"label\":\"Part of Найден, погиб\",\"dataType\":\"number\",\"operationType\":\"math\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"tinymathAst\":{\"type\":\"function\",\"name\":\"divide\",\"args\":[\"c4c05154-4237-4aab-abd3-d0f107afc492X0\",\"c4c05154-4237-4aab-abd3-d0f107afc492X1\"],\"location\":{\"min\":0,\"max\":47},\"text\":\"count(kql='Status.keyword : (погиб)') / count()\"}},\"references\":[\"c4c05154-4237-4aab-abd3-d0f107afc492X0\",\"c4c05154-4237-4aab-abd3-d0f107afc492X1\"],\"customLabel\":true},\"c4c05154-4237-4aab-abd3-d0f107afc492\":{\"label\":\"Погиб\",\"dataType\":\"number\",\"operationType\":\"formula\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"formula\":\"count(kql='Status.keyword : (погиб)') / count()\",\"isFormulaBroken\":false,\"format\":{\"id\":\"percent\",\"params\":{\"decimals\":0}}},\"references\":[\"c4c05154-4237-4aab-abd3-d0f107afc492X2\"],\"customLabel\":true},\"a3e56ee2-3771-466c-a29b-d2fa34f706f5X0\":{\"label\":\"Part of Найден жив\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"filter\":{\"query\":\"Status.keyword : (жив)\",\"language\":\"kuery\"},\"customLabel\":true},\"a3e56ee2-3771-466c-a29b-d2fa34f706f5X1\":{\"label\":\"Part of Найден жив\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"customLabel\":true},\"a3e56ee2-3771-466c-a29b-d2fa34f706f5X2\":{\"label\":\"Part of Найден жив\",\"dataType\":\"number\",\"operationType\":\"math\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"tinymathAst\":{\"type\":\"function\",\"name\":\"divide\",\"args\":[\"a3e56ee2-3771-466c-a29b-d2fa34f706f5X0\",\"a3e56ee2-3771-466c-a29b-d2fa34f706f5X1\"],\"location\":{\"min\":0,\"max\":45},\"text\":\"count(kql='Status.keyword : (жив)') / count()\"}},\"references\":[\"a3e56ee2-3771-466c-a29b-d2fa34f706f5X0\",\"a3e56ee2-3771-466c-a29b-d2fa34f706f5X1\"],\"customLabel\":true},\"a3e56ee2-3771-466c-a29b-d2fa34f706f5\":{\"label\":\"Жив\",\"dataType\":\"number\",\"operationType\":\"formula\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"formula\":\"count(kql='Status.keyword : (жив)') / count()\",\"isFormulaBroken\":false,\"format\":{\"id\":\"percent\",\"params\":{\"decimals\":0}}},\"references\":[\"a3e56ee2-3771-466c-a29b-d2fa34f706f5X2\"],\"customLabel\":true}},\"columnOrder\":[\"063c6194-9875-4a8a-892a-4663297f29f5\",\"a3e56ee2-3771-466c-a29b-d2fa34f706f5X0\",\"c4c05154-4237-4aab-abd3-d0f107afc492\",\"a3e56ee2-3771-466c-a29b-d2fa34f706f5\",\"c4c05154-4237-4aab-abd3-d0f107afc492X0\",\"a3e56ee2-3771-466c-a29b-d2fa34f706f5X1\",\"a3e56ee2-3771-466c-a29b-d2fa34f706f5X2\",\"c4c05154-4237-4aab-abd3-d0f107afc492X1\",\"c4c05154-4237-4aab-abd3-d0f107afc492X2\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"7. Зависимость шанса быть найденным  от количества дней, прошедших с момента начала поисков\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":296,\"w\":24,\"h\":15,\"i\":\"430568d3-7225-49ef-a8b8-9f83553b2549\"},\"panelIndex\":\"430568d3-7225-49ef-a8b8-9f83553b2549\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"name\":\"indexpattern-datasource-layer-89f7770e-570a-4b02-a76e-06f4dbc38735\"},{\"name\":\"filter-index-pattern-0\",\"type\":\"index-pattern\",\"id\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\"}],\"state\":{\"visualization\":{\"legend\":{\"isVisible\":true,\"position\":\"right\",\"isInside\":false,\"showSingleSeries\":false},\"valueLabels\":\"hide\",\"fittingFunction\":\"None\",\"yTitle\":\"Процент пропавших\",\"yLeftExtent\":{\"mode\":\"full\"},\"yRightExtent\":{\"mode\":\"full\"},\"axisTitlesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"tickLabelsVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"labelsOrientation\":{\"x\":0,\"yLeft\":0,\"yRight\":0},\"gridlinesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"preferredSeriesType\":\"area\",\"layers\":[{\"layerId\":\"89f7770e-570a-4b02-a76e-06f4dbc38735\",\"accessors\":[\"6a61ac2a-f259-40b4-bd72-ce9635059c83\",\"8275ad1f-79e7-404a-acc3-8287401fabee\"],\"position\":\"top\",\"seriesType\":\"area\",\"showGridlines\":false,\"layerType\":\"data\",\"xAccessor\":\"a8eca530-1919-4ecb-9914-c43a2ea1f2ed\",\"yConfig\":[{\"forAccessor\":\"6a61ac2a-f259-40b4-bd72-ce9635059c83\",\"color\":\"#6092c0\",\"axisMode\":\"auto\"},{\"forAccessor\":\"8275ad1f-79e7-404a-acc3-8287401fabee\",\"color\":\"#ca8eae\"}]}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[{\"meta\":{\"params\":{\"gte\":0,\"lt\":101},\"alias\":null,\"negate\":false,\"disabled\":false,\"type\":\"range\",\"key\":\"Age.years\",\"indexRefName\":\"filter-index-pattern-0\"},\"range\":{\"Age.years\":{\"gte\":0,\"lt\":101}},\"$state\":{\"store\":\"appState\"}}],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"89f7770e-570a-4b02-a76e-06f4dbc38735\":{\"columns\":{\"a8eca530-1919-4ecb-9914-c43a2ea1f2ed\":{\"label\":\"Возраст\",\"dataType\":\"number\",\"operationType\":\"range\",\"sourceField\":\"Age.years\",\"isBucketed\":true,\"scale\":\"interval\",\"params\":{\"type\":\"histogram\",\"ranges\":[{\"from\":0,\"to\":1000,\"label\":\"\"}],\"maxBars\":\"auto\"},\"customLabel\":true},\"6a61ac2a-f259-40b4-bd72-ce9635059c83X0\":{\"label\":\"Part of Мужчины\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"filter\":{\"query\":\"Gender.keyword :\\\"мужчина\\\"\",\"language\":\"kuery\"},\"customLabel\":true},\"6a61ac2a-f259-40b4-bd72-ce9635059c83X1\":{\"label\":\"Part of Мужчины\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"customLabel\":true},\"6a61ac2a-f259-40b4-bd72-ce9635059c83X2\":{\"label\":\"Part of Мужчины\",\"dataType\":\"number\",\"operationType\":\"math\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"tinymathAst\":{\"type\":\"function\",\"name\":\"divide\",\"args\":[\"6a61ac2a-f259-40b4-bd72-ce9635059c83X0\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X1\"],\"location\":{\"min\":0,\"max\":48},\"text\":\"count(kql='Gender.keyword :\\\"мужчина\\\"') / count()\"}},\"references\":[\"6a61ac2a-f259-40b4-bd72-ce9635059c83X0\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X1\"],\"customLabel\":true},\"6a61ac2a-f259-40b4-bd72-ce9635059c83\":{\"label\":\"Мужчины\",\"dataType\":\"number\",\"operationType\":\"formula\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"formula\":\"count(kql='Gender.keyword :\\\"мужчина\\\"') / count()\",\"isFormulaBroken\":false,\"format\":{\"id\":\"percent\",\"params\":{\"decimals\":0}}},\"references\":[\"6a61ac2a-f259-40b4-bd72-ce9635059c83X2\"],\"customLabel\":true},\"8275ad1f-79e7-404a-acc3-8287401fabeeX0\":{\"label\":\"Part of Женщины\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"filter\":{\"query\":\"Gender.keyword :\\\"женщина\\\"\",\"language\":\"kuery\"},\"customLabel\":true},\"8275ad1f-79e7-404a-acc3-8287401fabeeX1\":{\"label\":\"Part of Женщины\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"customLabel\":true},\"8275ad1f-79e7-404a-acc3-8287401fabeeX2\":{\"label\":\"Part of Женщины\",\"dataType\":\"number\",\"operationType\":\"math\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"tinymathAst\":{\"type\":\"function\",\"name\":\"divide\",\"args\":[\"8275ad1f-79e7-404a-acc3-8287401fabeeX0\",\"8275ad1f-79e7-404a-acc3-8287401fabeeX1\"],\"location\":{\"min\":0,\"max\":48},\"text\":\"count(kql='Gender.keyword :\\\"женщина\\\"') / count()\"}},\"references\":[\"8275ad1f-79e7-404a-acc3-8287401fabeeX0\",\"8275ad1f-79e7-404a-acc3-8287401fabeeX1\"],\"customLabel\":true},\"8275ad1f-79e7-404a-acc3-8287401fabee\":{\"label\":\"Женщины\",\"dataType\":\"number\",\"operationType\":\"formula\",\"isBucketed\":false,\"scale\":\"ratio\",\"params\":{\"formula\":\"count(kql='Gender.keyword :\\\"женщина\\\"') / count()\",\"isFormulaBroken\":false,\"format\":{\"id\":\"percent\",\"params\":{\"decimals\":0}}},\"references\":[\"8275ad1f-79e7-404a-acc3-8287401fabeeX2\"],\"customLabel\":true}},\"columnOrder\":[\"a8eca530-1919-4ecb-9914-c43a2ea1f2ed\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X0\",\"8275ad1f-79e7-404a-acc3-8287401fabee\",\"8275ad1f-79e7-404a-acc3-8287401fabeeX0\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X1\",\"6a61ac2a-f259-40b4-bd72-ce9635059c83X2\",\"8275ad1f-79e7-404a-acc3-8287401fabeeX1\",\"8275ad1f-79e7-404a-acc3-8287401fabeeX2\"],\"incompleteColumns\":{}}}}}}},\"enhancements\":{},\"hidePanelTitles\":false},\"title\":\"13. Распределение по количеству пропавших людей в зависимости от возраста и пола\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":296,\"w\":24,\"h\":15,\"i\":\"37951c14-8a1f-4178-aa88-ff60d2f5c9c5\"},\"panelIndex\":\"37951c14-8a1f-4178-aa88-ff60d2f5c9c5\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsXY\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"410d5660-5058-11ec-a943-6f2ea970b129\",\"name\":\"indexpattern-datasource-layer-f25a0ca7-8151-4c01-9207-b32c492726da\"}],\"state\":{\"visualization\":{\"legend\":{\"isVisible\":true,\"position\":\"right\"},\"valueLabels\":\"hide\",\"fittingFunction\":\"None\",\"yRightExtent\":{\"mode\":\"full\"},\"axisTitlesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"tickLabelsVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"labelsOrientation\":{\"x\":0,\"yLeft\":0,\"yRight\":0},\"gridlinesVisibilitySettings\":{\"x\":true,\"yLeft\":true,\"yRight\":true},\"preferredSeriesType\":\"area\",\"layers\":[{\"layerId\":\"f25a0ca7-8151-4c01-9207-b32c492726da\",\"seriesType\":\"area\",\"xAccessor\":\"835aa0d9-93bd-44fe-bd5d-f2435b979b70\",\"accessors\":[\"febcee89-199c-4f75-856a-183bf5035df6\"],\"layerType\":\"data\"}]},\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"f25a0ca7-8151-4c01-9207-b32c492726da\":{\"columns\":{\"835aa0d9-93bd-44fe-bd5d-f2435b979b70\":{\"label\":\"Возраст\",\"dataType\":\"number\",\"operationType\":\"terms\",\"scale\":\"ordinal\",\"sourceField\":\"Age.years\",\"isBucketed\":true,\"params\":{\"size\":100,\"orderBy\":{\"type\":\"alphabetical\",\"fallback\":false},\"orderDirection\":\"asc\",\"otherBucket\":false,\"missingBucket\":false},\"customLabel\":true},\"febcee89-199c-4f75-856a-183bf5035df6\":{\"label\":\"Пропали после конфликта\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\",\"filter\":{\"query\":\"Additional.keyword : \\\"пропал после конфликта\\\" \",\"language\":\"kuery\"},\"customLabel\":true}},\"columnOrder\":[\"835aa0d9-93bd-44fe-bd5d-f2435b979b70\",\"febcee89-199c-4f75-856a-183bf5035df6\"],\"incompleteColumns\":{}}}}}}},\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"Число пропавших после конфликта в зависимости от возраста\"},{\"version\":\"7.15.2\",\"type\":\"visualization\",\"gridData\":{\"x\":0,\"y\":269,\"w\":48,\"h\":12,\"i\":\"49ef6b91-55a0-4f8d-a627-46c545f6e897\"},\"panelIndex\":\"49ef6b91-55a0-4f8d-a627-46c545f6e897\",\"embeddableConfig\":{\"savedVis\":{\"title\":\"\",\"description\":\"\",\"type\":\"markdown\",\"params\":{\"fontSize\":12,\"openLinksInNewTab\":false,\"markdown\":\"## Некоторые интересные зависимости\\n\\nЗдесь собраны задачи, в которых анализируется зависимость величин друг от друга. \\n\\n* В целом можно сказать, что между возрастом пропавшего и шансом его найти нет сильной зависимости. Результат также можно связать с активностью людей на форумах. Наблюдается спад найденных для людей среднего возраста (25-65), так как люди активнее реагируют на посты о детях или о стариках.\\n* Статистика говорит, что не надо отчаиваться, и человек может быть найден даже спустя годы после начала поисков. Однако точкой перегиба является порог в 20 дней, после него человек вероятнее всего будет найден погибшим.\\n* Мужчины пропадают чаще, чем женщины\\n* Чаще всего после конфликтов пропадают подростки\"},\"uiState\":{},\"data\":{\"aggs\":[],\"searchSource\":{\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filter\":[]}}},\"enhancements\":{}}},{\"version\":\"7.15.2\",\"type\":\"visualization\",\"gridData\":{\"x\":0,\"y\":311,\"w\":48,\"h\":9,\"i\":\"1b595600-9a21-42ca-84d5-6728e8e7e0d4\"},\"panelIndex\":\"1b595600-9a21-42ca-84d5-6728e8e7e0d4\",\"embeddableConfig\":{\"savedVis\":{\"title\":\"\",\"description\":\"\",\"type\":\"markdown\",\"params\":{\"fontSize\":12,\"openLinksInNewTab\":false,\"markdown\":\"## Использование авиации\\n\\nВо время работы с форумом заметили, что для некоторых поисков применяется авиация (вертолёты, небольшие планеры, дроны).  Тут представлены результаты анализа записей, в которых упоминается использование авиации\\n\\n* Авиация в основном используется в центральных районах,  приближенных к Москве\\n* Использование авиации повышает шансы найти пропавших людей\"},\"uiState\":{},\"data\":{\"aggs\":[],\"searchSource\":{\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filter\":[]}}},\"hidePanelTitles\":true,\"enhancements\":{}}},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":320,\"w\":24,\"h\":15,\"i\":\"0dad8d41-8b43-4108-bc31-3d2a6fd163c3\"},\"panelIndex\":\"0dad8d41-8b43-4108-bc31-3d2a6fd163c3\",\"embeddableConfig\":{\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"17-1. Топ-10 регионов, где для поиска используют авиацию\",\"panelRefName\":\"panel_0dad8d41-8b43-4108-bc31-3d2a6fd163c3\"},{\"version\":\"7.15.2\",\"type\":\"lens\",\"gridData\":{\"x\":24,\"y\":320,\"w\":24,\"h\":15,\"i\":\"5f241211-3c97-4c93-a7be-f684a726defc\"},\"panelIndex\":\"5f241211-3c97-4c93-a7be-f684a726defc\",\"embeddableConfig\":{\"hidePanelTitles\":false,\"enhancements\":{}},\"title\":\"17-2. Повышает ли авиация шансы быть найденным?\",\"panelRefName\":\"panel_5f241211-3c97-4c93-a7be-f684a726defc\"}]",
+        "optionsJSON": "{\"useMargins\":true,\"syncColors\":false,\"hidePanelTitles\":false}",
+        "version": 1,
+        "timeRestore": false,
+        "kibanaSavedObjectMeta": {
+          "searchSourceJSON": "{\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filter\":[{\"meta\":{\"type\":\"spatial_filter\",\"negate\":false,\"key\":\"LocationCoordinates\",\"alias\":\"within shape\",\"disabled\":false,\"value\":\"\"},\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"LocationCoordinates\"}},{\"geo_shape\":{\"ignore_unmapped\":true,\"LocationCoordinates\":{\"relation\":\"WITHIN\",\"shape\":{\"coordinates\":[[[31.19624,69.79579],[28.43262,68.9243],[29.95988,67.60502],[29.01444,66.90207],[30.03261,63.71654],[31.6326,62.86675],[27.5599,60.48728],[27.12354,57.60911],[27.99626,56.09827],[26.61445,55.69048],[21.3054,55.36116],[19.70541,54.52573],[23.70538,53.88772],[23.63265,51.6441],[22.46902,48.56695],[24.79628,47.59525],[27.92353,48.56695],[29.88716,46.55517],[28.28717,45.49477],[29.88716,45.18806],[32.06896,46.80465],[32.50532,45.6475],[32.7235,44.1537],[35.85076,43.47147],[39.92346,43.47147],[47.9234,41.21417],[48.65067,41.86738],[49.30521,46.20397],[52.57792,41.7047],[55.85063,41.48715],[55.99608,44.98267],[58.83242,45.59664],[62.0324,43.68222],[66.25056,42.8348],[68.50509,40.60961],[71.41416,42.94138],[74.61414,43.207],[80.06865,42.35296],[80.43228,45.13678],[83.1959,47.30015],[85.88679,47.25081],[87.92314,49.37849],[92.72311,50.68644],[96.50491,49.89658],[98.54126,50.36279],[98.83216,52.09316],[102.25032,51.37251],[102.54123,50.36279],[104.43213,50.03692],[107.99574,49.89658],[110.54118,49.04593],[114.3957,50.31637],[116.94114,49.75583],[115.4866,47.8399],[118.61385,47.8399],[120.06839,46.705],[120.28657,52.80236],[123.55927,53.5866],[126.10471,53.02164],[127.55925,49.94341],[130.46832,48.99824],[130.83195,47.74217],[133.08649,47.74217],[134.61375,48.42237],[133.08649,45.18806],[131.05013,45.2393],[130.75923,42.51399],[135.8501,42.99459],[141.95915,46.79469],[141.52279,54.00757],[148.21366,57.83437],[157.08633,48.36442],[192.14065,66.23112],[190.3952,72.09158],[142.10461,76.94398],[105.59576,77.98519],[53.1947,76.44775],[31.19624,69.79579]]],\"type\":\"Polygon\"}}}}]}},\"$state\":{\"store\":\"appState\"}}]}"
+        }
+      },
+      "references": [
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "b44812f3-5e98-4656-98df-994fa08f2cb6:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "b44812f3-5e98-4656-98df-994fa08f2cb6:indexpattern-datasource-layer-e01ee4eb-169d-4cd4-8789-401fc836228b"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "d05624bc-1a7a-40ad-9741-6260bc94d840:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "d05624bc-1a7a-40ad-9741-6260bc94d840:indexpattern-datasource-layer-89f7770e-570a-4b02-a76e-06f4dbc38735"
+        },
+        {
+          "name": "d05624bc-1a7a-40ad-9741-6260bc94d840:filter-index-pattern-0",
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "c1e031c6-5a55-4823-9d8a-ef7daa3e4fad:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "c1e031c6-5a55-4823-9d8a-ef7daa3e4fad:indexpattern-datasource-layer-51900cc2-e5a4-4606-b8ae-db4c8158c4fb"
+        },
+        {
+          "name": "34dd711d-8ea3-4229-8187-28373f169994:panel_34dd711d-8ea3-4229-8187-28373f169994",
+          "type": "lens",
+          "id": "dcf91aa0-5855-11ec-9d7d-13c530dff790"
+        },
+        {
+          "name": "2fc711cc-5ba6-4ef9-b03c-34d1f5c4903d:panel_2fc711cc-5ba6-4ef9-b03c-34d1f5c4903d",
+          "type": "map",
+          "id": "12697b90-5855-11ec-9d7d-13c530dff790"
+        },
+        {
+          "name": "a51a4391-0df3-4414-be77-6f8caabe67ce:panel_a51a4391-0df3-4414-be77-6f8caabe67ce",
+          "type": "lens",
+          "id": "41c9fb40-51fb-11ec-be76-41ebdfd8897e"
+        },
+        {
+          "name": "b6d27e38-cdc6-4ac2-9b90-e2692a8c98d0:panel_b6d27e38-cdc6-4ac2-9b90-e2692a8c98d0",
+          "type": "lens",
+          "id": "487e2090-5748-11ec-8b66-31e17ed02b82"
+        },
+        {
+          "name": "51386e35-82aa-4fb2-a665-05992c50916b:panel_51386e35-82aa-4fb2-a665-05992c50916b",
+          "type": "lens",
+          "id": "8892f9f0-5859-11ec-9d7d-13c530dff790"
+        },
+        {
+          "name": "87d96375-7f5f-4c2b-8e55-ad9d3fd7f606:panel_87d96375-7f5f-4c2b-8e55-ad9d3fd7f606",
+          "type": "lens",
+          "id": "5d51c8d0-5858-11ec-9d7d-13c530dff790"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "b8776061-4568-4cf6-858c-9f6c9d3d5723:indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "b8776061-4568-4cf6-858c-9f6c9d3d5723:indexpattern-datasource-layer-a586e33f-ef59-42d1-9d4d-38082bb664de",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "d11bcb8a-1c32-49d6-bdc1-c58a905a2e17:indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "d11bcb8a-1c32-49d6-bdc1-c58a905a2e17:indexpattern-datasource-layer-a586e33f-ef59-42d1-9d4d-38082bb664de",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "15da80b6-85e9-4d40-b3c0-1f559621f67c:indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "15da80b6-85e9-4d40-b3c0-1f559621f67c:indexpattern-datasource-layer-2fd8846f-bc54-4b2a-b82e-d7c8996e8ac8",
+          "type": "index-pattern"
+        },
+        {
+          "name": "2300f537-6380-4192-a3fa-09a2719b0c87:panel_2300f537-6380-4192-a3fa-09a2719b0c87",
+          "type": "lens",
+          "id": "c5a93680-573f-11ec-8b66-31e17ed02b82"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "a3454aa4-b009-4d9f-8bc1-a424d18becda:indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "a3454aa4-b009-4d9f-8bc1-a424d18becda:indexpattern-datasource-layer-8502bc26-3154-41b4-904e-f05ae8556b40",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "68e493f4-1318-4db9-9707-1641000ffa65:indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "68e493f4-1318-4db9-9707-1641000ffa65:indexpattern-datasource-layer-8502bc26-3154-41b4-904e-f05ae8556b40",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "346ce78c-5be8-49d3-a37e-16e5022358e0:indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "346ce78c-5be8-49d3-a37e-16e5022358e0:indexpattern-datasource-layer-0d272cfb-0a95-404f-bd80-6cd8241f9bab",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "f7f6a469-c87b-4160-913d-6118853c67e3:indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "f7f6a469-c87b-4160-913d-6118853c67e3:indexpattern-datasource-layer-0d272cfb-0a95-404f-bd80-6cd8241f9bab",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "eeac104c-08b0-49e0-8166-ea52d9fc3015:indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "eeac104c-08b0-49e0-8166-ea52d9fc3015:indexpattern-datasource-layer-60b02af6-e0c7-43a4-a22d-cd6a5aa28858",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "9ecc08ce-6240-46e2-a04e-3659ddde91d3:indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "9ecc08ce-6240-46e2-a04e-3659ddde91d3:indexpattern-datasource-layer-60b02af6-e0c7-43a4-a22d-cd6a5aa28858",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "4e18c545-47c3-479d-a41d-ef7586a27b43:indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "4e18c545-47c3-479d-a41d-ef7586a27b43:indexpattern-datasource-layer-cb7c9cb8-7e9b-478e-a5e3-8fe3287829f2",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "a5303de3-f79f-4d31-9d93-0bf786878c23:indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "a5303de3-f79f-4d31-9d93-0bf786878c23:indexpattern-datasource-layer-60b02af6-e0c7-43a4-a22d-cd6a5aa28858",
+          "type": "index-pattern"
+        },
+        {
+          "name": "97976765-105b-4c5a-b4bb-64647f27378b:panel_97976765-105b-4c5a-b4bb-64647f27378b",
+          "type": "lens",
+          "id": "c00ce7e0-5144-11ec-b7f0-cb44a8e3860d"
+        },
+        {
+          "name": "78147437-06ab-48ed-a044-87bac893a359:panel_78147437-06ab-48ed-a044-87bac893a359",
+          "type": "lens",
+          "id": "b8d3a8c0-52b5-11ec-9b6a-999e7ed0520c"
+        },
+        {
+          "name": "771778cb-185c-4801-9fd4-470973fd39d8:panel_771778cb-185c-4801-9fd4-470973fd39d8",
+          "type": "lens",
+          "id": "625aa3f0-5435-11ec-ac8d-d9a5913df372"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "f0f352c8-0324-4bf1-95fa-9cf1f61e5a95:indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "f0f352c8-0324-4bf1-95fa-9cf1f61e5a95:indexpattern-datasource-layer-0d272cfb-0a95-404f-bd80-6cd8241f9bab",
+          "type": "index-pattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "82c493d3-b67e-45f7-ad5e-cf9d73c9038b:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "82c493d3-b67e-45f7-ad5e-cf9d73c9038b:indexpattern-datasource-layer-0d272cfb-0a95-404f-bd80-6cd8241f9bab"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "5e95e4b7-0086-41bc-8a14-54331b70f65f:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "5e95e4b7-0086-41bc-8a14-54331b70f65f:indexpattern-datasource-layer-30cd2d13-ea43-4293-93aa-06d10e7668ed"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "99958a8c-ae14-4209-80f5-139dc075b23b:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "99958a8c-ae14-4209-80f5-139dc075b23b:indexpattern-datasource-layer-30cd2d13-ea43-4293-93aa-06d10e7668ed"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "016d3005-56b2-422e-948a-d33c19c8017a:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "016d3005-56b2-422e-948a-d33c19c8017a:indexpattern-datasource-layer-30cd2d13-ea43-4293-93aa-06d10e7668ed"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "30644686-dc4a-41eb-883d-45374d54eea3:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "30644686-dc4a-41eb-883d-45374d54eea3:indexpattern-datasource-layer-30cd2d13-ea43-4293-93aa-06d10e7668ed"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "815f1c34-70f8-4738-a319-dd43fdd9f2a6:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "815f1c34-70f8-4738-a319-dd43fdd9f2a6:indexpattern-datasource-layer-ec62db27-503b-47bd-9997-68fca43c2530"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "6adfadd3-44ab-4678-9d5e-68291408e100:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "6adfadd3-44ab-4678-9d5e-68291408e100:indexpattern-datasource-layer-30cd2d13-ea43-4293-93aa-06d10e7668ed"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "2a21213b-7ec3-48f8-9574-f9c1fc3cb7d0:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "2a21213b-7ec3-48f8-9574-f9c1fc3cb7d0:indexpattern-datasource-layer-89f7770e-570a-4b02-a76e-06f4dbc38735"
+        },
+        {
+          "name": "2a21213b-7ec3-48f8-9574-f9c1fc3cb7d0:filter-index-pattern-0",
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "f77aa788-dc24-4dde-bc4a-8b418a9bb58e:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "f77aa788-dc24-4dde-bc4a-8b418a9bb58e:indexpattern-datasource-layer-6da0b317-022b-438c-8fc7-311e907ea31d"
+        },
+        {
+          "name": "f77aa788-dc24-4dde-bc4a-8b418a9bb58e:filter-index-pattern-0",
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "430568d3-7225-49ef-a8b8-9f83553b2549:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "430568d3-7225-49ef-a8b8-9f83553b2549:indexpattern-datasource-layer-89f7770e-570a-4b02-a76e-06f4dbc38735"
+        },
+        {
+          "name": "430568d3-7225-49ef-a8b8-9f83553b2549:filter-index-pattern-0",
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb"
+        },
+        {
+          "type": "index-pattern",
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "37951c14-8a1f-4178-aa88-ff60d2f5c9c5:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "37951c14-8a1f-4178-aa88-ff60d2f5c9c5:indexpattern-datasource-layer-f25a0ca7-8151-4c01-9207-b32c492726da"
+        },
+        {
+          "name": "0dad8d41-8b43-4108-bc31-3d2a6fd163c3:panel_0dad8d41-8b43-4108-bc31-3d2a6fd163c3",
+          "type": "lens",
+          "id": "2efe8050-52b2-11ec-9b6a-999e7ed0520c"
+        },
+        {
+          "name": "5f241211-3c97-4c93-a7be-f684a726defc:panel_5f241211-3c97-4c93-a7be-f684a726defc",
+          "type": "lens",
+          "id": "ae86f820-52b2-11ec-9b6a-999e7ed0520c"
+        },
+        {
+          "id": "034a7070-5854-11ec-9d7d-13c530dff790",
+          "type": "tag",
+          "name": "tag-034a7070-5854-11ec-9d7d-13c530dff790"
+        }
+      ],
+      "migrationVersion": {
+        "dashboard": "7.15.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+      "type": "index-pattern",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-05T12:52:00.583Z",
+      "version": "WzE0MzUwLDE3XQ==",
+      "attributes": {
+        "fieldAttrs": "{\"Location\":{\"count\":1},\"Location.keyword\":{\"count\":1},\"LocationCoordinates\":{\"count\":1},\"Age.years\":{\"count\":2},\"Status\":{\"count\":2},\"Status.keyword\":{\"count\":2},\"Signs.characteristic\":{\"count\":3},\"Signs.values\":{\"count\":2},\"Gender\":{\"count\":2},\"ShortLocation\":{\"count\":2}}",
+        "title": "topics*",
+        "timeFieldName": "",
+        "fields": "[]",
+        "typeMeta": "{}",
+        "runtimeFieldMap": "{}"
+      },
+      "references": [],
+      "migrationVersion": {
+        "index-pattern": "7.11.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "dcf91aa0-5855-11ec-9d7d-13c530dff790",
+      "type": "lens",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-08T18:37:14.442Z",
+      "version": "WzE0NDIwLDE3XQ==",
+      "attributes": {
+        "title": "Где чаще всего пропадают люди",
+        "visualizationType": "lnsXY",
+        "state": {
+          "visualization": {
+            "legend": {
+              "isVisible": true,
+              "position": "right"
+            },
+            "valueLabels": "hide",
+            "fittingFunction": "None",
+            "yLeftExtent": {
+              "mode": "full"
+            },
+            "yRightExtent": {
+              "mode": "full"
+            },
+            "axisTitlesVisibilitySettings": {
+              "x": true,
+              "yLeft": true,
+              "yRight": true
+            },
+            "tickLabelsVisibilitySettings": {
+              "x": true,
+              "yLeft": true,
+              "yRight": true
+            },
+            "labelsOrientation": {
+              "x": 0,
+              "yLeft": 0,
+              "yRight": 0
+            },
+            "gridlinesVisibilitySettings": {
+              "x": true,
+              "yLeft": true,
+              "yRight": true
+            },
+            "preferredSeriesType": "bar_horizontal",
+            "layers": [
+              {
+                "layerId": "8533f6ce-c8ea-4e30-8ea4-5e6882db60e0",
+                "accessors": [
+                  "681c87b9-80f7-44ed-87dc-a7e143b90892"
+                ],
+                "position": "top",
+                "seriesType": "bar_horizontal",
+                "showGridlines": false,
+                "layerType": "data",
+                "xAccessor": "5460e6c3-24aa-4bc5-9b92-eb31217fc680"
+              }
+            ]
+          },
+          "query": {
+            "query": "",
+            "language": "kuery"
+          },
+          "filters": [],
+          "datasourceStates": {
+            "indexpattern": {
+              "layers": {
+                "8533f6ce-c8ea-4e30-8ea4-5e6882db60e0": {
+                  "columns": {
+                    "681c87b9-80f7-44ed-87dc-a7e143b90892": {
+                      "label": "Количество заявлений с 2010 года",
+                      "dataType": "number",
+                      "operationType": "count",
+                      "isBucketed": false,
+                      "scale": "ratio",
+                      "sourceField": "Records",
+                      "customLabel": true
+                    },
+                    "5460e6c3-24aa-4bc5-9b92-eb31217fc680": {
+                      "label": "Топ регионов, где пропадает больше всего людей",
+                      "dataType": "string",
+                      "operationType": "terms",
+                      "scale": "ordinal",
+                      "sourceField": "ShortLocation.keyword",
+                      "isBucketed": true,
+                      "params": {
+                        "size": 10,
+                        "orderBy": {
+                          "type": "column",
+                          "columnId": "681c87b9-80f7-44ed-87dc-a7e143b90892"
+                        },
+                        "orderDirection": "desc",
+                        "otherBucket": false,
+                        "missingBucket": false
+                      },
+                      "customLabel": true
+                    }
+                  },
+                  "columnOrder": [
+                    "5460e6c3-24aa-4bc5-9b92-eb31217fc680",
+                    "681c87b9-80f7-44ed-87dc-a7e143b90892"
+                  ],
+                  "incompleteColumns": {}
+                }
+              }
+            }
+          }
+        }
+      },
+      "references": [
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "name": "indexpattern-datasource-layer-8533f6ce-c8ea-4e30-8ea4-5e6882db60e0"
+        }
+      ],
+      "migrationVersion": {
+        "lens": "7.15.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "12697b90-5855-11ec-9d7d-13c530dff790",
+      "type": "map",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-08T18:31:34.601Z",
+      "version": "WzE0NDE1LDE3XQ==",
+      "attributes": {
+        "title": "Где чаще всего пропадают люди",
+        "description": "",
+        "layerListJSON": "[{\"sourceDescriptor\":{\"type\":\"EMS_TMS\",\"isAutoSelect\":true},\"id\":\"8d83f701-4e3f-4284-a957-2d003758c281\",\"label\":null,\"minZoom\":0,\"maxZoom\":24,\"alpha\":1,\"visible\":true,\"style\":{\"type\":\"TILE\"},\"includeInFitToBounds\":true,\"type\":\"VECTOR_TILE\"},{\"id\":\"42404036-a0c3-416c-9f1f-ca804c6f55f6\",\"sourceDescriptor\":{\"geoField\":\"LocationCoordinates\",\"id\":\"ebd5f5ff-e21e-4022-bde6-fb669014e681\",\"label\":\"topics*\",\"scalingType\":\"CLUSTERS\",\"tooltipProperties\":[\"LocationCoordinates\"],\"type\":\"ES_SEARCH\",\"indexPatternRefName\":\"layer_1_source_index_pattern\"},\"type\":\"BLENDED_VECTOR\",\"visible\":false,\"style\":{}},{\"sourceDescriptor\":{\"geoField\":\"LocationCoordinates\",\"requestType\":\"point\",\"id\":\"c43412d7-26ef-4b09-a044-fa9f22ff832a\",\"type\":\"ES_GEO_GRID\",\"applyGlobalQuery\":true,\"applyGlobalTime\":true,\"metrics\":[{\"type\":\"count\"}],\"resolution\":\"COARSE\",\"indexPatternRefName\":\"layer_2_source_index_pattern\"},\"style\":{\"type\":\"VECTOR\",\"properties\":{\"icon\":{\"type\":\"STATIC\",\"options\":{\"value\":\"marker\"}},\"fillColor\":{\"type\":\"DYNAMIC\",\"options\":{\"color\":\"Reds\",\"colorCategory\":\"palette_0\",\"field\":{\"name\":\"doc_count\",\"origin\":\"source\"},\"fieldMetaOptions\":{\"isEnabled\":true,\"sigma\":3},\"type\":\"ORDINAL\",\"useCustomColorRamp\":false}},\"lineColor\":{\"type\":\"STATIC\",\"options\":{\"color\":\"#FFF\"}},\"lineWidth\":{\"type\":\"STATIC\",\"options\":{\"size\":0}},\"iconSize\":{\"type\":\"DYNAMIC\",\"options\":{\"minSize\":7,\"maxSize\":32,\"field\":{\"name\":\"doc_count\",\"origin\":\"source\"},\"fieldMetaOptions\":{\"isEnabled\":true,\"sigma\":3}}},\"iconOrientation\":{\"type\":\"STATIC\",\"options\":{\"orientation\":0}},\"labelText\":{\"type\":\"DYNAMIC\",\"options\":{\"field\":{\"name\":\"doc_count\",\"origin\":\"source\"}}},\"labelColor\":{\"type\":\"STATIC\",\"options\":{\"color\":\"#000000\"}},\"labelSize\":{\"type\":\"STATIC\",\"options\":{\"size\":14}},\"labelBorderColor\":{\"type\":\"STATIC\",\"options\":{\"color\":\"#FFFFFF\"}},\"symbolizeAs\":{\"options\":{\"value\":\"circle\"}},\"labelBorderSize\":{\"options\":{\"size\":\"SMALL\"}}},\"isTimeAware\":true},\"id\":\"ff1ba16a-1153-4054-9457-e2049f627ee1\",\"label\":\"Пропавшие в регионах\",\"minZoom\":0,\"maxZoom\":24,\"alpha\":1,\"visible\":true,\"includeInFitToBounds\":true,\"type\":\"VECTOR\",\"joins\":[]}]",
+        "mapStateJSON": "{\"zoom\":2.4,\"center\":{\"lon\":77.83441,\"lat\":58.70991},\"timeFilters\":{\"from\":\"now+15y/y\",\"to\":\"now\"},\"refreshConfig\":{\"isPaused\":true,\"interval\":0},\"query\":{\"language\":\"kuery\",\"query\":\"\"},\"filters\":[{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"LocationCoordinates\"}},{\"geo_shape\":{\"ignore_unmapped\":true,\"LocationCoordinates\":{\"relation\":\"WITHIN\",\"shape\":{\"coordinates\":[[[31.19873,69.91764],[28.69761,68.23727],[30.46311,67.68524],[28.99186,66.89004],[30.46311,65.64689],[30.16886,63.7618],[31.34586,63.10382],[27.22637,60.67919],[28.40336,55.72744],[34.5826,51.81833],[35.7596,50.05707],[39.73196,49.58245],[40.17334,47.93382],[38.11359,47.33901],[31.78723,45.20372],[33.25848,43.94618],[48.41232,41.45997],[56.0628,41.34962],[56.50417,45.30729],[58.71104,45.51386],[68.71552,40.46007],[80.33837,42.44469],[80.33837,45.20372],[87.6946,49.19941],[99.31745,52.18065],[103.43694,50.24561],[111.5288,49.3913],[114.47129,50.3396],[118.59078,49.48697],[121.23902,53.25007],[125.21139,53.16195],[127.56538,49.96252],[130.94925,47.93382],[134.48024,48.32661],[133.30325,45.41067],[130.655,44.78756],[130.36075,42.76955],[133.74462,43.09271],[137.12849,45.41067],[140.2181,48.81337],[141.10085,53.16195],[156.84319,51.3613],[163.42677,52.10741],[182.99435,63.24913],[193.88157,67.18784],[179.61048,73.55675],[146.06606,74.79962],[148.10942,77.62597],[94.85029,81.43343],[31.19873,69.91764]]],\"type\":\"Polygon\"}}}}]}},\"meta\":{\"index\":\"ef0cd1a0-4f77-11ec-b4de-4946803edccb\",\"type\":\"custom\",\"disabled\":false,\"negate\":false,\"alias\":\"within shape\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"must\\\":[{\\\"exists\\\":{\\\"field\\\":\\\"LocationCoordinates\\\"}},{\\\"geo_shape\\\":{\\\"ignore_unmapped\\\":true,\\\"LocationCoordinates\\\":{\\\"relation\\\":\\\"WITHIN\\\",\\\"shape\\\":{\\\"coordinates\\\":[[[31.19873,69.91764],[28.69761,68.23727],[30.46311,67.68524],[28.99186,66.89004],[30.46311,65.64689],[30.16886,63.7618],[31.34586,63.10382],[27.22637,60.67919],[28.40336,55.72744],[34.5826,51.81833],[35.7596,50.05707],[39.73196,49.58245],[40.17334,47.93382],[38.11359,47.33901],[31.78723,45.20372],[33.25848,43.94618],[48.41232,41.45997],[56.0628,41.34962],[56.50417,45.30729],[58.71104,45.51386],[68.71552,40.46007],[80.33837,42.44469],[80.33837,45.20372],[87.6946,49.19941],[99.31745,52.18065],[103.43694,50.24561],[111.5288,49.3913],[114.47129,50.3396],[118.59078,49.48697],[121.23902,53.25007],[125.21139,53.16195],[127.56538,49.96252],[130.94925,47.93382],[134.48024,48.32661],[133.30325,45.41067],[130.655,44.78756],[130.36075,42.76955],[133.74462,43.09271],[137.12849,45.41067],[140.2181,48.81337],[141.10085,53.16195],[156.84319,51.3613],[163.42677,52.10741],[182.99435,63.24913],[193.88157,67.18784],[179.61048,73.55675],[146.06606,74.79962],[148.10942,77.62597],[94.85029,81.43343],[31.19873,69.91764]]],\\\"type\\\":\\\"Polygon\\\"}}}}]}}\"},\"$state\":{\"store\":\"appState\"}}],\"settings\":{\"autoFitToDataBounds\":false,\"backgroundColor\":\"#ffffff\",\"disableInteractive\":false,\"disableTooltipControl\":false,\"hideToolbarOverlay\":false,\"hideLayerControl\":false,\"hideViewControl\":false,\"initialLocation\":\"LAST_SAVED_LOCATION\",\"fixedLocation\":{\"lat\":0,\"lon\":0,\"zoom\":2},\"browserLocation\":{\"zoom\":2},\"maxZoom\":24,\"minZoom\":0,\"showScaleControl\":false,\"showSpatialFilters\":true,\"showTimesliderToggleButton\":true,\"spatialFiltersAlpa\":0.3,\"spatialFiltersFillColor\":\"#DA8B45\",\"spatialFiltersLineColor\":\"#DA8B45\"}}",
+        "uiStateJSON": "{\"isLayerTOCOpen\":false,\"openTOCDetails\":[]}"
+      },
+      "references": [
+        {
+          "name": "layer_1_source_index_pattern",
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb"
+        },
+        {
+          "name": "layer_2_source_index_pattern",
+          "type": "index-pattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb"
+        }
+      ],
+      "migrationVersion": {
+        "map": "7.14.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "41c9fb40-51fb-11ec-be76-41ebdfd8897e",
+      "type": "lens",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-08T19:02:52.444Z",
+      "version": "WzE0NDczLDE3XQ==",
+      "attributes": {
+        "description": "",
+        "state": {
+          "visualization": {
+            "shape": "donut",
+            "layers": [
+              {
+                "legendDisplay": "default",
+                "layerType": "data",
+                "nestedLegend": false,
+                "percentDecimals": 2,
+                "layerId": "dd200248-cd25-4ed8-9c10-fdfdb0d86095",
+                "truncateLegend": false,
+                "metric": "d2c24473-a7be-4d41-aed3-022026f94520",
+                "numberDisplay": "percent",
+                "groups": [
+                  "b3e5e4bc-140b-422b-a7dd-0d414ac7a1c7"
+                ],
+                "categoryDisplay": "default"
+              }
+            ],
+            "palette": {
+              "name": "default",
+              "type": "palette"
+            }
+          },
+          "query": {
+            "query": "",
+            "language": "kuery"
+          },
+          "datasourceStates": {
+            "indexpattern": {
+              "layers": {
+                "dd200248-cd25-4ed8-9c10-fdfdb0d86095": {
+                  "columnOrder": [
+                    "b3e5e4bc-140b-422b-a7dd-0d414ac7a1c7",
+                    "d2c24473-a7be-4d41-aed3-022026f94520"
+                  ],
+                  "columns": {
+                    "d2c24473-a7be-4d41-aed3-022026f94520": {
+                      "filter": {
+                        "query": "Status.keyword : (\"жив\" or \"погиб\" or \"найден\" )",
+                        "language": "kuery"
+                      },
+                      "sourceField": "Records",
+                      "isBucketed": false,
+                      "dataType": "number",
+                      "scale": "ratio",
+                      "operationType": "count",
+                      "customLabel": true,
+                      "label": "Найдены (живые или погибшие)"
+                    },
+                    "b3e5e4bc-140b-422b-a7dd-0d414ac7a1c7": {
+                      "sourceField": "ShortLocation.keyword",
+                      "isBucketed": true,
+                      "dataType": "string",
+                      "scale": "ordinal",
+                      "operationType": "terms",
+                      "customLabel": true,
+                      "label": "Регионы",
+                      "params": {
+                        "otherBucket": true,
+                        "missingBucket": false,
+                        "size": 10,
+                        "orderBy": {
+                          "columnId": "d2c24473-a7be-4d41-aed3-022026f94520",
+                          "type": "column"
+                        },
+                        "orderDirection": "desc"
+                      }
+                    }
+                  },
+                  "incompleteColumns": {}
+                }
+              }
+            }
+          },
+          "filters": []
+        },
+        "title": "3",
+        "visualizationType": "lnsPie"
+      },
+      "references": [
+        {
+          "name": "indexpattern-datasource-current-indexpattern",
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "type": "index-pattern"
+        },
+        {
+          "name": "indexpattern-datasource-layer-dd200248-cd25-4ed8-9c10-fdfdb0d86095",
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "type": "index-pattern"
+        }
+      ],
+      "migrationVersion": {
+        "lens": "7.15.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "487e2090-5748-11ec-8b66-31e17ed02b82",
+      "type": "lens",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-08T18:59:44.492Z",
+      "version": "WzE0NDcwLDE3XQ==",
+      "attributes": {
+        "description": "",
+        "state": {
+          "visualization": {
+            "layerType": "data",
+            "layerId": "dd200248-cd25-4ed8-9c10-fdfdb0d86095",
+            "columns": [
+              {
+                "columnId": "d2c24473-a7be-4d41-aed3-022026f94520",
+                "alignment": "center"
+              },
+              {
+                "isTransposed": false,
+                "columnId": "118218f4-5ddc-43cf-a9b5-a61fecf83f42"
+              },
+              {
+                "isTransposed": false,
+                "hidden": true,
+                "columnId": "c4410d4a-4460-45c7-ab51-e775d7e3f7fe"
+              }
+            ],
+            "sorting": {
+              "columnId": "d2c24473-a7be-4d41-aed3-022026f94520",
+              "direction": "desc"
+            }
+          },
+          "query": {
+            "query": "",
+            "language": "kuery"
+          },
+          "datasourceStates": {
+            "indexpattern": {
+              "layers": {
+                "dd200248-cd25-4ed8-9c10-fdfdb0d86095": {
+                  "columnOrder": [
+                    "118218f4-5ddc-43cf-a9b5-a61fecf83f42",
+                    "d2c24473-a7be-4d41-aed3-022026f94520",
+                    "c4410d4a-4460-45c7-ab51-e775d7e3f7fe",
+                    "d2c24473-a7be-4d41-aed3-022026f94520X0",
+                    "d2c24473-a7be-4d41-aed3-022026f94520X1",
+                    "d2c24473-a7be-4d41-aed3-022026f94520X2"
+                  ],
+                  "columns": {
+                    "c4410d4a-4460-45c7-ab51-e775d7e3f7fe": {
+                      "filter": {
+                        "query": "Status.keyword : \"погиб\"  or Status.keyword : \"жив\" ",
+                        "language": "kuery"
+                      },
+                      "sourceField": "Records",
+                      "isBucketed": false,
+                      "dataType": "number",
+                      "scale": "ratio",
+                      "operationType": "count",
+                      "label": "Count of records",
+                      "params": {
+                        "format": {
+                          "id": "number",
+                          "params": {
+                            "decimals": 0
+                          }
+                        }
+                      }
+                    },
+                    "d2c24473-a7be-4d41-aed3-022026f94520": {
+                      "isBucketed": false,
+                      "references": [
+                        "d2c24473-a7be-4d41-aed3-022026f94520X2"
+                      ],
+                      "dataType": "number",
+                      "scale": "ratio",
+                      "operationType": "formula",
+                      "customLabel": true,
+                      "label": "Процент найденных (погибших и живых)",
+                      "params": {
+                        "isFormulaBroken": false,
+                        "format": {
+                          "id": "percent",
+                          "params": {
+                            "decimals": 2
+                          }
+                        },
+                        "formula": "count(kql='Status.keyword : ( \"найден\" or \"жив\" or \"погиб\" )') / count()"
+                      }
+                    },
+                    "118218f4-5ddc-43cf-a9b5-a61fecf83f42": {
+                      "sourceField": "ShortLocation.keyword",
+                      "isBucketed": true,
+                      "dataType": "string",
+                      "scale": "ordinal",
+                      "operationType": "terms",
+                      "customLabel": true,
+                      "label": "Регион",
+                      "params": {
+                        "otherBucket": false,
+                        "missingBucket": false,
+                        "size": 50,
+                        "orderBy": {
+                          "columnId": "c4410d4a-4460-45c7-ab51-e775d7e3f7fe",
+                          "type": "column"
+                        },
+                        "orderDirection": "desc"
+                      }
+                    },
+                    "d2c24473-a7be-4d41-aed3-022026f94520X2": {
+                      "isBucketed": false,
+                      "references": [
+                        "d2c24473-a7be-4d41-aed3-022026f94520X0",
+                        "d2c24473-a7be-4d41-aed3-022026f94520X1"
+                      ],
+                      "dataType": "number",
+                      "scale": "ratio",
+                      "operationType": "math",
+                      "label": "Part of Процент погибших",
+                      "customLabel": true,
+                      "params": {
+                        "tinymathAst": {
+                          "args": [
+                            "d2c24473-a7be-4d41-aed3-022026f94520X0",
+                            "d2c24473-a7be-4d41-aed3-022026f94520X1"
+                          ],
+                          "name": "divide",
+                          "location": {
+                            "min": 0,
+                            "max": 72
+                          },
+                          "text": "count(kql='Status.keyword : ( \"найден\" or \"жив\" or \"погиб\" )') / count()",
+                          "type": "function"
+                        }
+                      }
+                    },
+                    "d2c24473-a7be-4d41-aed3-022026f94520X1": {
+                      "sourceField": "Records",
+                      "isBucketed": false,
+                      "dataType": "number",
+                      "scale": "ratio",
+                      "operationType": "count",
+                      "label": "Part of Процент погибших",
+                      "customLabel": true
+                    },
+                    "d2c24473-a7be-4d41-aed3-022026f94520X0": {
+                      "sourceField": "Records",
+                      "filter": {
+                        "query": "Status.keyword : ( \"найден\" or \"жив\" or \"погиб\" )",
+                        "language": "kuery"
+                      },
+                      "isBucketed": false,
+                      "dataType": "number",
+                      "scale": "ratio",
+                      "operationType": "count",
+                      "label": "Part of Процент погибших",
+                      "customLabel": true
+                    }
+                  },
+                  "incompleteColumns": {}
+                }
+              }
+            }
+          },
+          "filters": []
+        },
+        "title": "3 (copy 5)",
+        "visualizationType": "lnsDatatable"
+      },
+      "references": [
+        {
+          "name": "indexpattern-datasource-current-indexpattern",
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "type": "index-pattern"
+        },
+        {
+          "name": "indexpattern-datasource-layer-dd200248-cd25-4ed8-9c10-fdfdb0d86095",
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "type": "index-pattern"
+        }
+      ],
+      "migrationVersion": {
+        "lens": "7.15.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "8892f9f0-5859-11ec-9d7d-13c530dff790",
+      "type": "lens",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-08T19:03:56.388Z",
+      "version": "WzE0NDc4LDE3XQ==",
+      "attributes": {
+        "description": "",
+        "state": {
+          "visualization": {
+            "shape": "donut",
+            "layers": [
+              {
+                "legendDisplay": "default",
+                "layerType": "data",
+                "nestedLegend": false,
+                "percentDecimals": 2,
+                "layerId": "dd200248-cd25-4ed8-9c10-fdfdb0d86095",
+                "truncateLegend": false,
+                "metric": "d2c24473-a7be-4d41-aed3-022026f94520",
+                "numberDisplay": "percent",
+                "groups": [
+                  "b3e5e4bc-140b-422b-a7dd-0d414ac7a1c7"
+                ],
+                "categoryDisplay": "default"
+              }
+            ],
+            "palette": {
+              "name": "default",
+              "type": "palette"
+            }
+          },
+          "query": {
+            "query": "",
+            "language": "kuery"
+          },
+          "datasourceStates": {
+            "indexpattern": {
+              "layers": {
+                "dd200248-cd25-4ed8-9c10-fdfdb0d86095": {
+                  "columnOrder": [
+                    "b3e5e4bc-140b-422b-a7dd-0d414ac7a1c7",
+                    "d2c24473-a7be-4d41-aed3-022026f94520"
+                  ],
+                  "columns": {
+                    "d2c24473-a7be-4d41-aed3-022026f94520": {
+                      "filter": {
+                        "query": "Status.keyword : \"погиб\" ",
+                        "language": "kuery"
+                      },
+                      "sourceField": "Records",
+                      "isBucketed": false,
+                      "dataType": "number",
+                      "scale": "ratio",
+                      "operationType": "count",
+                      "customLabel": true,
+                      "label": "Погибли"
+                    },
+                    "b3e5e4bc-140b-422b-a7dd-0d414ac7a1c7": {
+                      "sourceField": "ShortLocation.keyword",
+                      "isBucketed": true,
+                      "dataType": "string",
+                      "scale": "ordinal",
+                      "operationType": "terms",
+                      "customLabel": true,
+                      "label": "Регионы",
+                      "params": {
+                        "otherBucket": true,
+                        "missingBucket": false,
+                        "size": 10,
+                        "orderBy": {
+                          "columnId": "d2c24473-a7be-4d41-aed3-022026f94520",
+                          "type": "column"
+                        },
+                        "orderDirection": "desc"
+                      }
+                    }
+                  },
+                  "incompleteColumns": {}
+                }
+              }
+            }
+          },
+          "filters": []
+        },
+        "title": "3 (copy 3)",
+        "visualizationType": "lnsPie"
+      },
+      "references": [
+        {
+          "name": "indexpattern-datasource-current-indexpattern",
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "type": "index-pattern"
+        },
+        {
+          "name": "indexpattern-datasource-layer-dd200248-cd25-4ed8-9c10-fdfdb0d86095",
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "type": "index-pattern"
+        }
+      ],
+      "migrationVersion": {
+        "lens": "7.15.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "5d51c8d0-5858-11ec-9d7d-13c530dff790",
+      "type": "lens",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-08T18:55:08.765Z",
+      "version": "WzE0NDY0LDE3XQ==",
+      "attributes": {
+        "description": "",
+        "state": {
+          "datasourceStates": {
+            "indexpattern": {
+              "layers": {
+                "dd200248-cd25-4ed8-9c10-fdfdb0d86095": {
+                  "columnOrder": [
+                    "118218f4-5ddc-43cf-a9b5-a61fecf83f42",
+                    "d2c24473-a7be-4d41-aed3-022026f94520",
+                    "d2c24473-a7be-4d41-aed3-022026f94520X2",
+                    "d2c24473-a7be-4d41-aed3-022026f94520X0",
+                    "d2c24473-a7be-4d41-aed3-022026f94520X1",
+                    "c4410d4a-4460-45c7-ab51-e775d7e3f7fe"
+                  ],
+                  "columns": {
+                    "118218f4-5ddc-43cf-a9b5-a61fecf83f42": {
+                      "customLabel": true,
+                      "dataType": "string",
+                      "isBucketed": true,
+                      "label": "Регион",
+                      "operationType": "terms",
+                      "params": {
+                        "missingBucket": false,
+                        "orderBy": {
+                          "columnId": "c4410d4a-4460-45c7-ab51-e775d7e3f7fe",
+                          "type": "column"
+                        },
+                        "orderDirection": "desc",
+                        "otherBucket": false,
+                        "size": 50
+                      },
+                      "scale": "ordinal",
+                      "sourceField": "ShortLocation.keyword"
+                    },
+                    "c4410d4a-4460-45c7-ab51-e775d7e3f7fe": {
+                      "dataType": "number",
+                      "filter": {
+                        "language": "kuery",
+                        "query": "Status.keyword : \"погиб\"  or Status.keyword : \"жив\" "
+                      },
+                      "isBucketed": false,
+                      "label": "Count of records",
+                      "operationType": "count",
+                      "params": {
+                        "format": {
+                          "id": "number",
+                          "params": {
+                            "decimals": 0
+                          }
+                        }
+                      },
+                      "scale": "ratio",
+                      "sourceField": "Records"
+                    },
+                    "d2c24473-a7be-4d41-aed3-022026f94520": {
+                      "customLabel": true,
+                      "dataType": "number",
+                      "isBucketed": false,
+                      "label": "Процент погибших",
+                      "operationType": "formula",
+                      "params": {
+                        "format": {
+                          "id": "percent",
+                          "params": {
+                            "decimals": 2
+                          }
+                        },
+                        "formula": "count(kql='Status.keyword : \"погиб\" ') / count(kql='Status.keyword : \"жив\" or Status.keyword : \"погиб\" ')",
+                        "isFormulaBroken": false
+                      },
+                      "references": [
+                        "d2c24473-a7be-4d41-aed3-022026f94520X2"
+                      ],
+                      "scale": "ratio"
+                    },
+                    "d2c24473-a7be-4d41-aed3-022026f94520X0": {
+                      "customLabel": true,
+                      "dataType": "number",
+                      "filter": {
+                        "language": "kuery",
+                        "query": "Status.keyword : \"погиб\" "
+                      },
+                      "isBucketed": false,
+                      "label": "Part of Процент погибших",
+                      "operationType": "count",
+                      "scale": "ratio",
+                      "sourceField": "Records"
+                    },
+                    "d2c24473-a7be-4d41-aed3-022026f94520X1": {
+                      "customLabel": true,
+                      "dataType": "number",
+                      "filter": {
+                        "language": "kuery",
+                        "query": "Status.keyword : \"жив\" or Status.keyword : \"погиб\" "
+                      },
+                      "isBucketed": false,
+                      "label": "Part of Процент погибших",
+                      "operationType": "count",
+                      "scale": "ratio",
+                      "sourceField": "Records"
+                    },
+                    "d2c24473-a7be-4d41-aed3-022026f94520X2": {
+                      "customLabel": true,
+                      "dataType": "number",
+                      "isBucketed": false,
+                      "label": "Part of Процент погибших",
+                      "operationType": "math",
+                      "params": {
+                        "tinymathAst": {
+                          "args": [
+                            "d2c24473-a7be-4d41-aed3-022026f94520X0",
+                            "d2c24473-a7be-4d41-aed3-022026f94520X1"
+                          ],
+                          "location": {
+                            "max": 105,
+                            "min": 0
+                          },
+                          "name": "divide",
+                          "text": "count(kql='Status.keyword : \"погиб\" ') / count(kql='Status.keyword : \"жив\" or Status.keyword : \"погиб\" ')",
+                          "type": "function"
+                        }
+                      },
+                      "references": [
+                        "d2c24473-a7be-4d41-aed3-022026f94520X0",
+                        "d2c24473-a7be-4d41-aed3-022026f94520X1"
+                      ],
+                      "scale": "ratio"
+                    }
+                  },
+                  "incompleteColumns": {}
+                }
+              }
+            }
+          },
+          "filters": [],
+          "query": {
+            "language": "kuery",
+            "query": ""
+          },
+          "visualization": {
+            "columns": [
+              {
+                "alignment": "center",
+                "columnId": "d2c24473-a7be-4d41-aed3-022026f94520"
+              },
+              {
+                "columnId": "118218f4-5ddc-43cf-a9b5-a61fecf83f42",
+                "isTransposed": false
+              },
+              {
+                "columnId": "c4410d4a-4460-45c7-ab51-e775d7e3f7fe",
+                "hidden": true,
+                "isTransposed": false
+              }
+            ],
+            "layerId": "dd200248-cd25-4ed8-9c10-fdfdb0d86095",
+            "layerType": "data",
+            "sorting": {
+              "columnId": "d2c24473-a7be-4d41-aed3-022026f94520",
+              "direction": "desc"
+            }
+          }
+        },
+        "title": "3 (copy 2)",
+        "visualizationType": "lnsDatatable"
+      },
+      "references": [
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "indexpattern-datasource-layer-dd200248-cd25-4ed8-9c10-fdfdb0d86095",
+          "type": "index-pattern"
+        }
+      ],
+      "migrationVersion": {
+        "lens": "7.15.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+      "type": "index-pattern",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-08T17:35:59.547Z",
+      "version": "WzE0Mzk5LDE3XQ==",
+      "attributes": {
+        "fieldAttrs": "{}",
+        "fieldFormatMap": "{\"Season\":{\"id\":\"string\",\"params\":{\"parsedUrl\":{\"origin\":\"http://localhost:5601\",\"pathname\":\"/app/lens\",\"basePath\":\"\"},\"pattern\":\"0,0.[000]\",\"transform\":false}}}",
+        "fields": "[]",
+        "runtimeFieldMap": "{}",
+        "timeFieldName": "",
+        "title": "topics",
+        "typeMeta": "{}"
+      },
+      "references": [],
+      "migrationVersion": {
+        "index-pattern": "7.11.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "c5a93680-573f-11ec-8b66-31e17ed02b82",
+      "type": "lens",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-08T17:35:59.547Z",
+      "version": "WzE0NDAwLDE3XQ==",
+      "attributes": {
+        "description": null,
+        "state": {
+          "datasourceStates": {
+            "indexpattern": {
+              "layers": {
+                "1284d353-a0e7-4e86-a2bc-89f2372c055a": {
+                  "columnOrder": [
+                    "d48ae62e-8c0c-4193-ab66-5f5b64742126",
+                    "c54f8e6f-a03e-4b55-828c-39d1c07ed672",
+                    "19dcfbb2-aed6-4507-a061-de673c0f593f",
+                    "37454f7f-e5f3-4c08-a9c5-7fe3475949b8"
+                  ],
+                  "columns": {
+                    "19dcfbb2-aed6-4507-a061-de673c0f593f": {
+                      "customLabel": true,
+                      "dataType": "number",
+                      "isBucketed": false,
+                      "label": "Медианное число отвечающих",
+                      "operationType": "median",
+                      "scale": "ratio",
+                      "sourceField": "UniqueUsers"
+                    },
+                    "37454f7f-e5f3-4c08-a9c5-7fe3475949b8": {
+                      "dataType": "number",
+                      "isBucketed": false,
+                      "label": "Count of records",
+                      "operationType": "count",
+                      "scale": "ratio",
+                      "sourceField": "Records"
+                    },
+                    "c54f8e6f-a03e-4b55-828c-39d1c07ed672": {
+                      "customLabel": true,
+                      "dataType": "number",
+                      "isBucketed": false,
+                      "label": "Среднее число отвечающих",
+                      "operationType": "average",
+                      "params": {
+                        "format": {
+                          "id": "number",
+                          "params": {
+                            "decimals": 0
+                          }
+                        }
+                      },
+                      "scale": "ratio",
+                      "sourceField": "UniqueUsers"
+                    },
+                    "d48ae62e-8c0c-4193-ab66-5f5b64742126": {
+                      "customLabel": true,
+                      "dataType": "string",
+                      "isBucketed": true,
+                      "label": "Регион",
+                      "operationType": "terms",
+                      "params": {
+                        "missingBucket": false,
+                        "orderBy": {
+                          "columnId": "37454f7f-e5f3-4c08-a9c5-7fe3475949b8",
+                          "type": "column"
+                        },
+                        "orderDirection": "desc",
+                        "otherBucket": false,
+                        "size": 200
+                      },
+                      "scale": "ordinal",
+                      "sourceField": "ShortLocation.keyword"
+                    }
+                  },
+                  "incompleteColumns": {}
+                }
+              }
+            }
+          },
+          "filters": [],
+          "query": {
+            "language": "kuery",
+            "query": ""
+          },
+          "visualization": {
+            "columns": [
+              {
+                "columnId": "d48ae62e-8c0c-4193-ab66-5f5b64742126"
+              },
+              {
+                "alignment": "center",
+                "colorMode": "none",
+                "columnId": "c54f8e6f-a03e-4b55-828c-39d1c07ed672",
+                "hidden": false,
+                "summaryRow": "none"
+              },
+              {
+                "alignment": "center",
+                "columnId": "19dcfbb2-aed6-4507-a061-de673c0f593f",
+                "isTransposed": false
+              },
+              {
+                "columnId": "37454f7f-e5f3-4c08-a9c5-7fe3475949b8",
+                "hidden": true,
+                "isTransposed": false
+              }
+            ],
+            "layerId": "1284d353-a0e7-4e86-a2bc-89f2372c055a",
+            "layerType": "data",
+            "sorting": {
+              "direction": "none"
+            }
+          }
+        },
+        "title": "17. В каких регионах для поиска используют авиацию и повышает ли это шансы быть найденным? (copy 3)",
+        "visualizationType": "lnsDatatable"
+      },
+      "references": [
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "indexpattern-datasource-layer-1284d353-a0e7-4e86-a2bc-89f2372c055a",
+          "type": "index-pattern"
+        }
+      ],
+      "migrationVersion": {
+        "lens": "7.15.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "c00ce7e0-5144-11ec-b7f0-cb44a8e3860d",
+      "type": "lens",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-05T13:02:08.411Z",
+      "version": "WzE0MzYyLDE3XQ==",
+      "attributes": {
+        "title": "Какие приметы чаще указывают",
+        "visualizationType": "lnsPie",
+        "state": {
+          "visualization": {
+            "shape": "donut",
+            "layers": [
+              {
+                "legendDisplay": "default",
+                "nestedLegend": false,
+                "layerType": "data",
+                "layerId": "059e72b7-8db7-4c8f-a442-3cc79d778f8d",
+                "metric": "868dc97a-9b4a-4bd3-9069-e45732e61257",
+                "numberDisplay": "percent",
+                "groups": [
+                  "e46bb85f-9c5c-4866-8a0c-21da86539f8b"
+                ],
+                "categoryDisplay": "default"
+              }
+            ]
+          },
+          "query": {
+            "query": "Signs.characteristic.keyword : \"Рост\" ",
+            "language": "kuery"
+          },
+          "datasourceStates": {
+            "indexpattern": {
+              "layers": {
+                "059e72b7-8db7-4c8f-a442-3cc79d778f8d": {
+                  "columnOrder": [
+                    "e46bb85f-9c5c-4866-8a0c-21da86539f8b",
+                    "868dc97a-9b4a-4bd3-9069-e45732e61257",
+                    "868dc97a-9b4a-4bd3-9069-e45732e61257X0"
+                  ],
+                  "columns": {
+                    "868dc97a-9b4a-4bd3-9069-e45732e61257X0": {
+                      "sourceField": "Records",
+                      "filter": {
+                        "query": "",
+                        "language": "kuery"
+                      },
+                      "isBucketed": false,
+                      "dataType": "number",
+                      "scale": "ratio",
+                      "operationType": "count",
+                      "label": "Part of count(kql='')",
+                      "customLabel": true
+                    },
+                    "868dc97a-9b4a-4bd3-9069-e45732e61257": {
+                      "isBucketed": false,
+                      "references": [
+                        "868dc97a-9b4a-4bd3-9069-e45732e61257X0"
+                      ],
+                      "dataType": "number",
+                      "scale": "ratio",
+                      "operationType": "formula",
+                      "label": "count(kql='')",
+                      "params": {
+                        "isFormulaBroken": false,
+                        "formula": "count(kql='')"
+                      }
+                    },
+                    "e46bb85f-9c5c-4866-8a0c-21da86539f8b": {
+                      "isBucketed": true,
+                      "dataType": "string",
+                      "scale": "ordinal",
+                      "operationType": "filters",
+                      "label": "Список примет",
+                      "customLabel": true,
+                      "params": {
+                        "filters": [
+                          {
+                            "input": {
+                              "query": "Signs.characteristic.keyword : \"Рост\" ",
+                              "language": "kuery"
+                            },
+                            "label": "Рост"
+                          },
+                          {
+                            "input": {
+                              "query": "Signs.characteristic.keyword : \"Волосы\" ",
+                              "language": "kuery"
+                            },
+                            "label": "Цвет волос"
+                          },
+                          {
+                            "input": {
+                              "query": "Signs.characteristic.keyword : \"Глаза\" or \"Цвет глаз\"",
+                              "language": "kuery"
+                            },
+                            "label": "Цвет глаз"
+                          },
+                          {
+                            "input": {
+                              "query": "Signs.characteristic.keyword : \"Одежда\"",
+                              "language": "kuery"
+                            },
+                            "label": "Одежда"
+                          },
+                          {
+                            "input": {
+                              "query": "Signs.characteristic.keyword : \"Телосложение\"",
+                              "language": "kuery"
+                            },
+                            "label": "Телосложение"
+                          },
+                          {
+                            "input": {
+                              "query": "Signs.characteristic.keyword : \"Приметы\" ",
+                              "language": "kuery"
+                            },
+                            "label": "Особые приметы"
+                          },
+                          {
+                            "input": {
+                              "query": "Signs.characteristic.keyword : \"С собой\" ",
+                              "language": "kuery"
+                            },
+                            "label": "С собой"
+                          },
+                          {
+                            "input": {
+                              "query": "Signs.characteristic.keyword : \"Размер обуви\" ",
+                              "language": "kuery"
+                            },
+                            "label": "Размер обуви"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "incompleteColumns": {}
+                }
+              }
+            }
+          },
+          "filters": []
+        },
+        "description": null
+      },
+      "references": [
+        {
+          "name": "indexpattern-datasource-current-indexpattern",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "type": "index-pattern"
+        },
+        {
+          "name": "indexpattern-datasource-layer-059e72b7-8db7-4c8f-a442-3cc79d778f8d",
+          "id": "ef0cd1a0-4f77-11ec-b4de-4946803edccb",
+          "type": "index-pattern"
+        }
+      ],
+      "migrationVersion": {
+        "lens": "7.15.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "b8d3a8c0-52b5-11ec-9b6a-999e7ed0520c",
+      "type": "lens",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-08T17:35:59.547Z",
+      "version": "WzE0NDAzLDE3XQ==",
+      "attributes": {
+        "description": null,
+        "state": {
+          "datasourceStates": {
+            "indexpattern": {
+              "layers": {
+                "1284d353-a0e7-4e86-a2bc-89f2372c055a": {
+                  "columnOrder": [
+                    "28b1bf8d-72b0-491a-a362-9fbb48b2c48a",
+                    "c54f8e6f-a03e-4b55-828c-39d1c07ed672"
+                  ],
+                  "columns": {
+                    "28b1bf8d-72b0-491a-a362-9fbb48b2c48a": {
+                      "dataType": "string",
+                      "isBucketed": true,
+                      "label": "Filters",
+                      "operationType": "filters",
+                      "params": {
+                        "filters": [
+                          {
+                            "input": {
+                              "language": "kuery",
+                              "query": "Status.keyword : \"жив\" "
+                            },
+                            "label": "Живы"
+                          },
+                          {
+                            "input": {
+                              "language": "kuery",
+                              "query": "Status.keyword : \"найден\" "
+                            },
+                            "label": "Найдены"
+                          },
+                          {
+                            "input": {
+                              "language": "kuery",
+                              "query": "Status.keyword : \"погиб\" "
+                            },
+                            "label": "Погибли"
+                          },
+                          {
+                            "input": {
+                              "language": "kuery",
+                              "query": "Status.keyword : \"не найден\" "
+                            },
+                            "label": "Ещё не найдены"
+                          }
+                        ]
+                      },
+                      "scale": "ordinal"
+                    },
+                    "c54f8e6f-a03e-4b55-828c-39d1c07ed672": {
+                      "customLabel": true,
+                      "dataType": "number",
+                      "isBucketed": false,
+                      "label": "Пропавшие",
+                      "operationType": "count",
+                      "scale": "ratio",
+                      "sourceField": "Records"
+                    }
+                  },
+                  "incompleteColumns": {}
+                }
+              }
+            }
+          },
+          "filters": [],
+          "query": {
+            "language": "kuery",
+            "query": ""
+          },
+          "visualization": {
+            "layers": [
+              {
+                "categoryDisplay": "default",
+                "groups": [
+                  "28b1bf8d-72b0-491a-a362-9fbb48b2c48a"
+                ],
+                "layerId": "1284d353-a0e7-4e86-a2bc-89f2372c055a",
+                "layerType": "data",
+                "legendDisplay": "default",
+                "metric": "c54f8e6f-a03e-4b55-828c-39d1c07ed672",
+                "nestedLegend": false,
+                "numberDisplay": "percent"
+              }
+            ],
+            "palette": {
+              "name": "default",
+              "type": "palette"
+            },
+            "shape": "pie"
+          }
+        },
+        "title": "17. В каких регионах для поиска используют авиацию и повышает ли это шансы быть найденным? (copy 1)",
+        "visualizationType": "lnsPie"
+      },
+      "references": [
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "indexpattern-datasource-layer-1284d353-a0e7-4e86-a2bc-89f2372c055a",
+          "type": "index-pattern"
+        }
+      ],
+      "migrationVersion": {
+        "lens": "7.15.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "625aa3f0-5435-11ec-ac8d-d9a5913df372",
+      "type": "lens",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-08T17:35:59.547Z",
+      "version": "WzE0NDA0LDE3XQ==",
+      "attributes": {
+        "description": null,
+        "state": {
+          "datasourceStates": {
+            "indexpattern": {
+              "layers": {
+                "1284d353-a0e7-4e86-a2bc-89f2372c055a": {
+                  "columnOrder": [
+                    "28b1bf8d-72b0-491a-a362-9fbb48b2c48a",
+                    "c54f8e6f-a03e-4b55-828c-39d1c07ed672"
+                  ],
+                  "columns": {
+                    "28b1bf8d-72b0-491a-a362-9fbb48b2c48a": {
+                      "dataType": "string",
+                      "isBucketed": true,
+                      "label": "Filters",
+                      "operationType": "filters",
+                      "params": {
+                        "filters": [
+                          {
+                            "input": {
+                              "language": "kuery",
+                              "query": "Status.keyword : \"жив\" and PublishedDate >= 2021"
+                            },
+                            "label": "Живы"
+                          },
+                          {
+                            "input": {
+                              "language": "kuery",
+                              "query": "Status.keyword : \"найден\" and PublishedDate >= 2021"
+                            },
+                            "label": "Найдены"
+                          },
+                          {
+                            "input": {
+                              "language": "kuery",
+                              "query": "Status.keyword : \"погиб\"  and PublishedDate >= 2021"
+                            },
+                            "label": "Погибли"
+                          },
+                          {
+                            "input": {
+                              "language": "kuery",
+                              "query": "Status.keyword : \"не найден\"  and PublishedDate >= 2021"
+                            },
+                            "label": "Ещё не найдены"
+                          }
+                        ]
+                      },
+                      "scale": "ordinal"
+                    },
+                    "c54f8e6f-a03e-4b55-828c-39d1c07ed672": {
+                      "customLabel": true,
+                      "dataType": "number",
+                      "isBucketed": false,
+                      "label": "Пропавшие",
+                      "operationType": "count",
+                      "scale": "ratio",
+                      "sourceField": "Records"
+                    }
+                  },
+                  "incompleteColumns": {}
+                }
+              }
+            }
+          },
+          "filters": [],
+          "query": {
+            "language": "kuery",
+            "query": ""
+          },
+          "visualization": {
+            "layers": [
+              {
+                "categoryDisplay": "default",
+                "groups": [
+                  "28b1bf8d-72b0-491a-a362-9fbb48b2c48a"
+                ],
+                "layerId": "1284d353-a0e7-4e86-a2bc-89f2372c055a",
+                "layerType": "data",
+                "legendDisplay": "default",
+                "metric": "c54f8e6f-a03e-4b55-828c-39d1c07ed672",
+                "nestedLegend": false,
+                "numberDisplay": "percent"
+              }
+            ],
+            "palette": {
+              "name": "default",
+              "type": "palette"
+            },
+            "shape": "pie"
+          }
+        },
+        "title": "17. В каких регионах для поиска используют авиацию и повышает ли это шансы быть найденным? (copy 2)",
+        "visualizationType": "lnsPie"
+      },
+      "references": [
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "indexpattern-datasource-layer-1284d353-a0e7-4e86-a2bc-89f2372c055a",
+          "type": "index-pattern"
+        }
+      ],
+      "migrationVersion": {
+        "lens": "7.15.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "2efe8050-52b2-11ec-9b6a-999e7ed0520c",
+      "type": "lens",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-08T17:35:59.547Z",
+      "version": "WzE0NDAxLDE3XQ==",
+      "attributes": {
+        "description": null,
+        "state": {
+          "datasourceStates": {
+            "indexpattern": {
+              "layers": {
+                "1284d353-a0e7-4e86-a2bc-89f2372c055a": {
+                  "columnOrder": [
+                    "d48ae62e-8c0c-4193-ab66-5f5b64742126",
+                    "c54f8e6f-a03e-4b55-828c-39d1c07ed672"
+                  ],
+                  "columns": {
+                    "c54f8e6f-a03e-4b55-828c-39d1c07ed672": {
+                      "customLabel": true,
+                      "dataType": "number",
+                      "filter": {
+                        "language": "kuery",
+                        "query": "Additional.keyword : \"работает авиация\" "
+                      },
+                      "isBucketed": false,
+                      "label": "Кол-во случаев работы авиации",
+                      "operationType": "count",
+                      "params": {},
+                      "scale": "ratio",
+                      "sourceField": "Records"
+                    },
+                    "d48ae62e-8c0c-4193-ab66-5f5b64742126": {
+                      "customLabel": true,
+                      "dataType": "string",
+                      "isBucketed": true,
+                      "label": "Регион",
+                      "operationType": "terms",
+                      "params": {
+                        "missingBucket": false,
+                        "orderBy": {
+                          "columnId": "c54f8e6f-a03e-4b55-828c-39d1c07ed672",
+                          "type": "column"
+                        },
+                        "orderDirection": "desc",
+                        "otherBucket": true,
+                        "size": 10
+                      },
+                      "scale": "ordinal",
+                      "sourceField": "ShortLocation.keyword"
+                    }
+                  },
+                  "incompleteColumns": {}
+                }
+              }
+            }
+          },
+          "filters": [],
+          "query": {
+            "language": "kuery",
+            "query": ""
+          },
+          "visualization": {
+            "columns": [
+              {
+                "columnId": "d48ae62e-8c0c-4193-ab66-5f5b64742126"
+              },
+              {
+                "alignment": "center",
+                "colorMode": "none",
+                "columnId": "c54f8e6f-a03e-4b55-828c-39d1c07ed672",
+                "hidden": false,
+                "summaryRow": "none"
+              }
+            ],
+            "layerId": "1284d353-a0e7-4e86-a2bc-89f2372c055a",
+            "layerType": "data",
+            "sorting": {
+              "direction": "none"
+            }
+          }
+        },
+        "title": "17. В каких регионах для поиска используют авиацию и повышает ли это шансы быть найденным?",
+        "visualizationType": "lnsDatatable"
+      },
+      "references": [
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "indexpattern-datasource-layer-1284d353-a0e7-4e86-a2bc-89f2372c055a",
+          "type": "index-pattern"
+        }
+      ],
+      "migrationVersion": {
+        "lens": "7.15.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "ae86f820-52b2-11ec-9b6a-999e7ed0520c",
+      "type": "lens",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-08T17:35:59.547Z",
+      "version": "WzE0NDAyLDE3XQ==",
+      "attributes": {
+        "description": null,
+        "state": {
+          "datasourceStates": {
+            "indexpattern": {
+              "layers": {
+                "1284d353-a0e7-4e86-a2bc-89f2372c055a": {
+                  "columnOrder": [
+                    "5eee407d-9bca-404a-a588-2c8260a2ec48",
+                    "f65971f3-99cc-4650-846a-75a105712394",
+                    "c54f8e6f-a03e-4b55-828c-39d1c07ed672"
+                  ],
+                  "columns": {
+                    "5eee407d-9bca-404a-a588-2c8260a2ec48": {
+                      "customLabel": true,
+                      "dataType": "string",
+                      "isBucketed": true,
+                      "label": "Статус",
+                      "operationType": "terms",
+                      "params": {
+                        "missingBucket": true,
+                        "orderBy": {
+                          "fallback": false,
+                          "type": "alphabetical"
+                        },
+                        "orderDirection": "asc",
+                        "otherBucket": false,
+                        "size": 7
+                      },
+                      "scale": "ordinal",
+                      "sourceField": "Status.keyword"
+                    },
+                    "c54f8e6f-a03e-4b55-828c-39d1c07ed672": {
+                      "customLabel": true,
+                      "dataType": "number",
+                      "isBucketed": false,
+                      "label": "Пропавшие",
+                      "operationType": "count",
+                      "scale": "ratio",
+                      "sourceField": "Records"
+                    },
+                    "f65971f3-99cc-4650-846a-75a105712394": {
+                      "customLabel": true,
+                      "dataType": "string",
+                      "isBucketed": true,
+                      "label": "Задействована ли авиация",
+                      "operationType": "filters",
+                      "params": {
+                        "filters": [
+                          {
+                            "input": {
+                              "language": "kuery",
+                              "query": "Additional.keyword : \"работает авиация\" "
+                            },
+                            "label": "Авиация"
+                          },
+                          {
+                            "input": {
+                              "language": "kuery",
+                              "query": "not Additional.keyword : \"работает авиация\" "
+                            },
+                            "label": "Без авиации"
+                          }
+                        ]
+                      },
+                      "scale": "ordinal"
+                    }
+                  },
+                  "incompleteColumns": {}
+                }
+              }
+            }
+          },
+          "filters": [],
+          "query": {
+            "language": "kuery",
+            "query": ""
+          },
+          "visualization": {
+            "axisTitlesVisibilitySettings": {
+              "x": true,
+              "yLeft": true,
+              "yRight": true
+            },
+            "fittingFunction": "None",
+            "gridlinesVisibilitySettings": {
+              "x": true,
+              "yLeft": true,
+              "yRight": true
+            },
+            "labelsOrientation": {
+              "x": 0,
+              "yLeft": 0,
+              "yRight": 0
+            },
+            "layers": [
+              {
+                "accessors": [
+                  "c54f8e6f-a03e-4b55-828c-39d1c07ed672"
+                ],
+                "layerId": "1284d353-a0e7-4e86-a2bc-89f2372c055a",
+                "layerType": "data",
+                "palette": {
+                  "name": "temperature",
+                  "type": "palette"
+                },
+                "seriesType": "bar_percentage_stacked",
+                "splitAccessor": "5eee407d-9bca-404a-a588-2c8260a2ec48",
+                "xAccessor": "f65971f3-99cc-4650-846a-75a105712394"
+              }
+            ],
+            "legend": {
+              "isVisible": true,
+              "position": "right",
+              "shouldTruncate": false
+            },
+            "preferredSeriesType": "bar_percentage_stacked",
+            "tickLabelsVisibilitySettings": {
+              "x": true,
+              "yLeft": true,
+              "yRight": true
+            },
+            "valueLabels": "hide",
+            "yLeftExtent": {
+              "mode": "full"
+            },
+            "yRightExtent": {
+              "mode": "full"
+            }
+          }
+        },
+        "title": "17. В каких регионах для поиска используют авиацию и повышает ли это шансы быть найденным? (copy)",
+        "visualizationType": "lnsXY"
+      },
+      "references": [
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "indexpattern-datasource-current-indexpattern",
+          "type": "index-pattern"
+        },
+        {
+          "id": "410d5660-5058-11ec-a943-6f2ea970b129",
+          "name": "indexpattern-datasource-layer-1284d353-a0e7-4e86-a2bc-89f2372c055a",
+          "type": "index-pattern"
+        }
+      ],
+      "migrationVersion": {
+        "lens": "7.15.0"
+      },
+      "coreMigrationVersion": "7.15.2"
+    },
+    {
+      "id": "034a7070-5854-11ec-9d7d-13c530dff790",
+      "type": "tag",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2021-12-08T18:23:59.735Z",
+      "version": "WzE0NDEwLDE3XQ==",
+      "attributes": {
+        "name": "prod",
+        "description": "",
+        "color": "#9170B8"
+      },
+      "references": [],
+      "coreMigrationVersion": "7.15.2"
+    }
+  ]
+}

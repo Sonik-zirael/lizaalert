@@ -4,6 +4,7 @@ from datetime import datetime
 from lizaalert.rules import *
 from lizaalert.text_parser import *
 import json
+import pyspark
 from joblib import Parallel, delayed
 import logging
 from pathlib import Path
@@ -93,13 +94,15 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
 
 
 def parse_general(data: dict,
+                  process_type: str,
                   batch_size: int = 1000,
                   start_batch: int = 0,
                   batch_number: int = None,
                   n_proc: int = -2,
                   result_dir: str = '../tmp',
                   regions_as_keys: bool = True,
-                  parsed_common_prefix: str = ''):
+                  parsed_common_prefix: str = '',
+                  spark_context: pyspark.SparkContext = None):
     Path(result_dir).mkdir(parents=True, exist_ok=True)
     error_batch = False
     process_data = []
@@ -121,40 +124,67 @@ def parse_general(data: dict,
                     offset += 1
                     continue
 
-                # Параллелим вычисления внутри пакета и задействуем все cpu кроме одного
-                process_data.append((post, post_data, okrug, region))
-                if len(process_data) == batch_size:
+                if process_type == "consistent":
+                    # Без распараллеливания
                     try:
-                        json_dict = Parallel(n_jobs=n_proc)(
-                            delayed(parallel_parsing)(post, post_data, okrug, region) for post, post_data, okrug, region
-                            in process_data)
-                        batch_file_name = parsed_common_prefix + str(cur_batch) + '.json'
-                        batch_file_path = os.path.join(result_dir, batch_file_name)
-                        with open(batch_file_path, "w", encoding='utf-8') as out_file:
-                            json.dump(json_dict, out_file, ensure_ascii=False, indent=4)
+                        json_dict.append(parallel_parsing(post, post_data, okrug, region))
+                        if (offset + 1) % batch_size == 0:
+                            batch_file_name = parsed_common_prefix + str(cur_batch) + '.json'
+                            batch_file_path = os.path.join(result_dir, batch_file_name)
+                            with open(batch_file_path, "w", encoding='utf-8') as out_file:
+                                json.dump(json_dict, out_file, ensure_ascii=False, indent=4)
+                            json_dict.clear()
                     except Exception as e:
                         logging.error("Batch {} was not parsed: {}".format(cur_batch, e))
-                        process_data.clear()
-                    process_data.clear()
+                        json_dict.clear()
+                        error_batch = True
 
-                # Без распараллеливания
-                # try:
-                #     json_dict.append(parallel_parsing(post, post_data, okrug, region))
-                #     if (offset + 1) % batch_size == 0:
-                #         batch_file_name = parsed_common_prefix + str(cur_batch) + '.json'
-                #         batch_file_path = os.path.join(result_dir, batch_file_name)
-                #         with open(batch_file_path, "w", encoding='utf-8') as out_file:
-                #             json.dump(json_dict, out_file, ensure_ascii=False, indent=4)
-                #         json_dict.clear()
-                # except Exception as e:
-                #     logging.error("Batch {} was not parsed: {}".format(cur_batch, e))
-                #     json_dict.clear()
-                #     error_batch = True
+                elif process_type == "parallel":
+                    # Параллелим вычисления внутри пакета средствами Python и задействуем все cpu кроме одного
+                    process_data.append((post, post_data, okrug, region))
+                    if len(process_data) == batch_size:
+                        try:
+                            json_dict = Parallel(n_jobs=n_proc)(
+                                delayed(parallel_parsing)(post, post_data, okrug, region) for post, post_data, okrug, region
+                                in process_data)
+                            batch_file_name = parsed_common_prefix + str(cur_batch) + '.json'
+                            batch_file_path = os.path.join(result_dir, batch_file_name)
+                            with open(batch_file_path, "w", encoding='utf-8') as out_file:
+                                json.dump(json_dict, out_file, ensure_ascii=False, indent=4)
+                        except Exception as e:
+                            logging.error("Batch {} was not parsed: {}".format(cur_batch, e))
+                            process_data.clear()
+                        process_data.clear()
+
+                elif process_type == "spark" and spark_context is not None:
+                    # Распараллеливание средствами Spark
+                    process_data.append((post, post_data))
+                    if len(process_data) == batch_size:
+                        try:
+                            json_dict = spark_context\
+                                .parallelize(process_data)\
+                                .map(lambda x: parallel_parsing(x[0], x[1], okrug, region))\
+                                .collect()
+
+                            batch_file_name = parsed_common_prefix + str(cur_batch) + '.json'
+                            batch_file_path = os.path.join(result_dir, batch_file_name)
+                            with open(batch_file_path, "w", encoding='utf-8') as out_file:
+                                json.dump(json_dict, out_file, ensure_ascii=False, indent=4)
+                        except Exception as e:
+                            logging.error("Batch {} was not parsed: {}".format(cur_batch, e))
+                            process_data.clear()
+                        process_data.clear()
 
                 offset += 1
 
-    # Оставшийся неполный пакет с распараллеливанием
-    if process_data:
+    if process_type == "consistent" and json_dict:
+        # Оставшийся неполный пакет без распараллеливания
+        with open("../temp/okrug_parsed_{}.json".format(cur_batch + 1), "w") as write_file:
+            write_file.write(json.dumps(json_dict, ensure_ascii=False))
+        json_dict.clear()
+
+    elif process_type == "parallel" and process_data:
+        # Оставшийся неполный пакет с распараллеливанием средствами Python
         try:
             json_dict = Parallel(n_jobs=n_proc)(
                 delayed(parallel_parsing)(post, post_data, okrug, region) for post, post_data, okrug, region in
@@ -167,15 +197,26 @@ def parse_general(data: dict,
             logging.error("Batch {} was not parsed: {}".format(cur_batch + 1, e))
         process_data.clear()
 
-    # Оставшийся неполный пакет без распараллеливания
-    # if json_dict:
-    #     with open("../temp/okrug_parsed_{}.json".format(cur_batch + 1), "w") as write_file:
-    #         write_file.write(json.dumps(json_dict, ensure_ascii=False))
-    #     json_dict.clear()
+    elif process_type == "spark" and spark_context is not None and process_data:
+        # Оставшийся неполный пакет с распараллеливанием с помощью Spark
+        try:
+            json_dict = spark_context \
+                .parallelize(process_data) \
+                .map(lambda x: parallel_parsing(x[0], x[1], okrug, region)) \
+                .collect()
+
+            batch_file_name = parsed_common_prefix + str(cur_batch) + '.json'
+            batch_file_path = os.path.join(result_dir, batch_file_name)
+            with open(batch_file_path, "w", encoding='utf-8') as out_file:
+                json.dump(json_dict, out_file, ensure_ascii=False, indent=4)
+        except Exception as e:
+            logging.error("Batch {} was not parsed: {}".format(cur_batch + 1, e))
+        process_data.clear()
 
     pass
 
 
+# Just deprecated function
 def parse_okrug_json(data, batch_size=1000, start_batch=0, batch_number=None):
     Path("../temp").mkdir(parents=True, exist_ok=True)
     error_batch = False
@@ -241,6 +282,7 @@ def parse_okrug_json(data, batch_size=1000, start_batch=0, batch_number=None):
     #     json_dict.clear()
 
 
+# Just deprecated function
 def parse_archive_json(data, batch_size=1000, start_batch=0, batch_number=None):
     Path("../temp").mkdir(parents=True, exist_ok=True)
     error_batch = False

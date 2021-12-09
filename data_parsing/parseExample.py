@@ -8,14 +8,16 @@ from typing import Tuple
 import zipfile
 
 from kafka import KafkaConsumer
+from pyspark.sql import SparkSession
 
-from lizaalert.parser import parse_archive_json, parse_okrug_json, parse_general
+from lizaalert.parser import parse_general
 
-DEFAULT_JSON_DATA_FILE_NAME='data.json'
+DEFAULT_JSON_DATA_FILE_NAME = 'data.json'
 KAFKA_BATCH_SIZE = 1
 KAFKA_N_PROC = 1
 KAFKA_BATCHES_TO_PROCESS = -1
 KAFKA_START_BATCH = 0
+PROCESS_TYPE = "parallel"
 ITERATIONS_NO_CHANGE_KAFKA_CONSUMER_LIFETIME = 10
 
 
@@ -62,6 +64,14 @@ def parse_arguments() -> argparse.Namespace:
                                        'specified value, if dataset has not enough entries to '
                                        'form specified number of batches of batch_size. '
                                        'Default is -1 for all batches.')
+    batch_multiproc_group.add_argument('--process_type', type=str, required=False,
+                                       default="parallel",
+                                       choices=("consistent", "parallel", "spark"),
+                                       help='Specifies in which mode program will be executed. '
+                                            'Set "consistent" to make program parse data consistently. '
+                                            'Set "parallel" to make program parse data in parallel with python tools. '
+                                            'Set "spark" to make program parse data in parallel with spark. '
+                                            'Default is "parallel". ')
     batch_multiproc_group.add_argument('--parallel_processes', type=int, required=False, default=-2,
                                        help='Number of processes of parsing to launch in parallel.'
                                        ' Greatly impacts memory usage. '
@@ -90,6 +100,7 @@ def validate_arguments(ns: argparse.Namespace) -> Tuple[bool, str]:
         ns.start_batch = KAFKA_START_BATCH
         ns.batches_to_process = KAFKA_BATCHES_TO_PROCESS
         ns.parallel_processes = KAFKA_N_PROC
+        ns.process_type = PROCESS_TYPE
     else:
         if ns.batch_size < 1:
             return (False, 'batch_size must be a 1 or more.')
@@ -115,6 +126,14 @@ if ns.debug:
 else:
     logging.basicConfig(level=logging.WARNING, format='[%(levelname)s] %(filename)s: %(message)s')
 
+sc = None
+if ns.process_type == "spark":
+    spark = SparkSession.builder\
+        .master('local[*]') \
+        .appName('LizaAlertSpark')\
+        .getOrCreate()
+    sc = spark.sparkContext
+
 if ns.mode == 'archive':
     for archive_path, archive_data_format in ns.archive:
         if not (os.path.exists(archive_path) and
@@ -131,7 +150,10 @@ if ns.mode == 'archive':
                 data = json.load(io.TextIOWrapper(data_file_bytes, encoding='utf-8'))
 
         archive_name_no_ext = os.path.splitext(os.path.split(archive_path)[1])[0]
-        parse_general(data=data,
+
+        parse_general(process_type=ns.process_type,
+                      spark_context=sc,
+                      data=data,
                       batch_size=ns.batch_size,
                       start_batch=ns.start_batch,
                       batch_number=ns.batches_to_process,
@@ -167,7 +189,9 @@ else:
                                 message_string, topic_name)
 
             ns.start_batch += 1
-            parse_general(data=message_data,
+            parse_general(process_type=ns.process_type,
+                          spark_context=sc,
+                          data=message_data,
                           batch_size=ns.batch_size,
                           start_batch=ns.start_batch,
                           batch_number=ns.batches_to_process,
@@ -177,3 +201,5 @@ else:
                           parsed_common_prefix='kafka_parsed_')
     consumer.commit()
     consumer.close()
+
+sc.stop()

@@ -13,4 +13,9 @@
 * Шаповалова Ирина гр. 3530904/10202
 
 ## Архитектура проекта
-![Project architecture](Architecture.png)
+
+1. С картиночками и без Spark
+   ![Project architecture without Spark](Architecture.png)
+
+2. Без картиночек, но со Spark
+   ![Project architecture with Spark](Architecture_spark.png)

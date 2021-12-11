@@ -31,8 +31,9 @@ args = parser.parse_args()
 if (args.mode) == 'archive':
     print('Work with archive')
     indices = ['topics']
-    # es.delete_by_query(index=indices, body={"query": {"match_all": {}}})    # this will clean all data in db
-    # es.indices.delete(index=indices)    # this will drop index
+    if es.indices.exists(index=indices):
+        es.delete_by_query(index=indices, body={"query": {"match_all": {}}})    # this will clean all data in db
+        es.indices.delete(index=indices)    # this will drop index
     es.indices.create(index=indices, body=mappingsElastic)  # this will create index with mapping. Nesseccery to store coordinates as geo_point
 
     parsed_data_zip = zipfile.ZipFile(r"../parsed.zip", "r")

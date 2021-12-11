@@ -8,6 +8,7 @@ from typing import Tuple
 import zipfile
 
 from kafka import KafkaConsumer
+from kafka.producer.kafka import KafkaProducer
 from pyspark.sql import SparkSession
 
 from lizaalert.parser import parse_general
@@ -183,7 +184,7 @@ else:
             # break
         for message in consumer:
             print('Msg')
-            consumer.commit()
+            # consumer.commit()
             iterations_without_change = 0
             message_string = message.value.decode('utf-8')
             try:

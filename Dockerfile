@@ -43,16 +43,23 @@ RUN /etc/init.d/elasticsearch start && \
     python3 load_data.py
 
 # Pass dashboard config to Kibana
-COPY export.json /lizaalert/
+COPY export_original_dashboard.json /lizaalert/
 RUN /etc/init.d/elasticsearch start && \
     while ! curl -s 127.0.0.1:9200; do sleep 1; done && \
     service kibana start && \
     while ! curl -s 127.0.0.1:5601 || [ $(curl -s 127.0.0.1:5601) = "Kibana server is not ready yet" ] ; do sleep 1; done && \
     cd /lizaalert && \
-    curl -X POST -H "Content-Type: application/json" -H "kbn-xsrf: true" -d @export.json http://localhost:5601/api/kibana/dashboards/import
+    curl -X POST -H "Content-Type: application/json" -H "kbn-xsrf: true" -d @export_original_dashboard.json http://localhost:5601/api/kibana/dashboards/import
+
+# Install kafka
+COPY kafka_2.13-2.8.1.tgz /
+RUN apt install -y -qq tar && \
+    tar -xzf kafka_2.13-2.8.1.tgz && \
+    rm kafka_2.13-2.8.1.tgz && \
+    mv kafka_2.13-2.8.1 kafka
 
 # Create start script
-RUN echo "/etc/init.d/elasticsearch start;\nservice kibana start;\nwhile true; do sleep 1; done;" > start_script.sh
+RUN echo "/etc/init.d/elasticsearch start\nservice kibana start\n/kafka/bin/zookeeper-server-start.sh /kafka/config/zookeeper.properties & > zookeper.log >&1\n/kafka/bin/kafka-server-start.sh /kafka/config/server.properties & > kafka.log >&1\nwhile true; do sleep 1; done;" > start_script.sh
 
 EXPOSE 5601
 

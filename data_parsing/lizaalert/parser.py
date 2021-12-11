@@ -96,6 +96,7 @@ def parallel_parsing(post, post_data, okrug=None, region=None):
 
 
 def parse_general(data: dict,
+                  process_type: str,
                   producer,
                   batch_size: int = 1000,
                   start_batch: int = 0,
@@ -139,7 +140,7 @@ def parse_general(data: dict,
                         batch_file_path = os.path.join(result_dir, batch_file_name)
                         with open(batch_file_path, "w", encoding='utf-8') as out_file:
                             json.dump(json_dict, out_file, ensure_ascii=False, indent=4)
-                        print('Send message to data loading')
+                        print('Send message to data loading consistent')
                         producer.send('parsed_data_1', json.dumps(json_dict).encode('utf-8'))
                         producer.flush()
                     except Exception as e:
@@ -159,6 +160,9 @@ def parse_general(data: dict,
                             batch_file_path = os.path.join(result_dir, batch_file_name)
                             with open(batch_file_path, "w", encoding='utf-8') as out_file:
                                 json.dump(json_dict, out_file, ensure_ascii=False, indent=4)
+                            print('Send message to data loading parallel')
+                            producer.send('parsed_data_1', json.dumps(json_dict).encode('utf-8'))
+                            producer.flush()
                         except Exception as e:
                             logging.error("Batch {} was not parsed: {}".format(cur_batch, e))
                             process_data.clear()

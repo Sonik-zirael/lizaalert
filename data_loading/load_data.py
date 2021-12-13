@@ -93,7 +93,7 @@ else:
     es.indices.create(index=indices, body=mappingsElastic)  # this will create index with mapping. Nesseccery to store coordinates as geo_point
     topic_name = "parsed_data_1"
     consumer = KafkaConsumer(topic_name, auto_offset_reset='earliest',
-                             bootstrap_servers=['localhost:9092'], api_version=(0, 10), consumer_timeout_ms=1000,
+                             bootstrap_servers=['kafka:9092'], api_version=(0, 10), consumer_timeout_ms=1000,
                              group_id='load_data_group')
     is_end_flag = False
     iterations_without_change = 0

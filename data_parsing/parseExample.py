@@ -168,13 +168,13 @@ else:
     archive_topic = 'archive_topic'
     topic_name = 'archive_topic'
     consumer = KafkaConsumer(topic_name, auto_offset_reset='earliest',
-                             bootstrap_servers=['localhost:9092'], api_version=(0, 10),
+                             bootstrap_servers=['kafka:9092'], api_version=(0, 10),
                             #  consumer_timeout_ms=1000,
                              group_id='parse_data_group',
                              request_timeout_ms=100000,
                              session_timeout_ms=99000,
                              max_poll_records=100,)
-    producer = KafkaProducer(bootstrap_servers=['localhost:9092'], api_version=(0, 10))
+    producer = KafkaProducer(bootstrap_servers=['kafka:9092'], api_version=(0, 10))
     is_end_flag = False
     iterations_without_change = 0
     while True:

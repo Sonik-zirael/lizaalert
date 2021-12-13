@@ -153,6 +153,7 @@ def parse_general(data: dict,
                     process_data.append((post, post_data, okrug, region))
                     if len(process_data) == batch_size:
                         try:
+                            print(n_proc)
                             json_dict = Parallel(n_jobs=n_proc)(
                                 delayed(parallel_parsing)(post, post_data, okrug, region) for post, post_data, okrug, region
                                 in process_data)

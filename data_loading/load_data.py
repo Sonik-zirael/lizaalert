@@ -18,7 +18,7 @@ ctx = ssl.create_default_context(cafile=certifi.where())
 geopy.geocoders.options.default_ssl_context = ctx
 
 
-es = Elasticsearch()
+es = Elasticsearch("http://elasticsearch:9200",)
 
 parser = argparse.ArgumentParser(description='This part manages data loading')
 parser.add_argument('--mode', type=str, required=True,

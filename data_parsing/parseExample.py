@@ -66,7 +66,7 @@ def parse_arguments() -> argparse.Namespace:
                                        'form specified number of batches of batch_size. '
                                        'Default is -1 for all batches.')
     batch_multiproc_group.add_argument('--process_type', type=str, required=False,
-                                       default="parallel",
+                                       default="consistent",
                                        choices=("consistent", "parallel", "spark"),
                                        help='Specifies in which mode program will be executed. '
                                             'Set "consistent" to make program parse data consistently. '

@@ -133,9 +133,7 @@ def parse_general(data: dict,
                 if process_type == "consistent":
                     # Без распараллеливания
                     try:
-                        json_dict = Parallel(n_jobs=n_proc)(
-                            delayed(parallel_parsing)(post, post_data, okrug, region) for post, post_data, okrug, region
-                            in process_data)
+                        json_dict.append(parallel_parsing(post, post_data, okrug, region))
                         batch_file_name = parsed_common_prefix + str(cur_batch) + '.json'
                         batch_file_path = os.path.join(result_dir, batch_file_name)
                         with open(batch_file_path, "w", encoding='utf-8') as out_file:
@@ -143,6 +141,7 @@ def parse_general(data: dict,
                         print('Send message to data loading consistent')
                         producer.send('parsed_data_1', json.dumps(json_dict).encode('utf-8'))
                         producer.flush()
+                        json_dict.clear()
                     except Exception as e:
                         logging.error("Batch {} was not parsed: {}".format(cur_batch, e))
                         json_dict.clear()

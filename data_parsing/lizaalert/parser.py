@@ -129,6 +129,7 @@ def parse_general(data: dict,
                 #     continue
 
                 print('2')
+                process_type = "consistent"
 
                 if process_type == "consistent":
                     # Без распараллеливания
@@ -146,7 +147,6 @@ def parse_general(data: dict,
                         logging.error("Batch {} was not parsed: {}".format(cur_batch, e))
                         json_dict.clear()
                         error_batch = True
-
                 elif process_type == "parallel":
                     # Параллелим вычисления внутри пакета средствами Python и задействуем все cpu кроме одного
                     process_data.append((post, post_data, okrug, region))

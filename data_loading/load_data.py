@@ -5,7 +5,8 @@ import random
 import ssl
 import zipfile
 import argparse
-from datetime import datetime, time
+from datetime import datetime
+import time
 
 import certifi
 import geopy.geocoders
@@ -93,8 +94,8 @@ else:
         es.delete_by_query(index=indices, body={"query": {"match_all": {}}})    # this will clean all data in db
         es.indices.delete(index=indices)    # this will drop index
     es.indices.create(index=indices, body=mappingsElastic)  # this will create index with mapping. Nesseccery to store coordinates as geo_point
-    # random_number = random.randint(280, 320)
-    # time.sleep(random_number)
+    random_number = random.randint(280, 320)
+    time.sleep(random_number)
 
     parsed_data_zip = zipfile.ZipFile(r"../parsed.zip", "r")
 

@@ -96,6 +96,7 @@ else:
     # random_number = random.randint(280, 330)
     # time.sleep(random_number)
     print("Got parsed data, start loading into elastic!")
+    logging.warning('Got parsed data, start loading into elastic!')
 
     parsed_data_zip = zipfile.ZipFile(r"../parsed.zip", "r")
 

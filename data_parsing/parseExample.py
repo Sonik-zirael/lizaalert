@@ -10,6 +10,7 @@ import zipfile
 from kafka import KafkaConsumer
 from kafka.producer.kafka import KafkaProducer
 from pyspark.sql import SparkSession
+from data_parsing.lizaalert.rules import TIME
 
 from lizaalert.parser import parse_general
 
@@ -186,9 +187,10 @@ else:
         for message in consumer:
             print('Msg')
             # consumer.commit()
-            if iterations >= 3:
+            if iterations >= 15:
                 break
             iterations = iterations + 1
+            TIME.sleep(5)
             iterations_without_change = 0
             message_string = message.value.decode('utf-8')
             try:

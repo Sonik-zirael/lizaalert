@@ -96,7 +96,7 @@ else:
     # random_number = random.randint(280, 330)
     # time.sleep(random_number)
     print("Got parsed data, start loading into elastic!")
-    logging.warning('Got parsed data, start loading into elastic!')
+    logging.info('\n\n Got parsed data, start loading into elastic!\n\n')
 
     parsed_data_zip = zipfile.ZipFile(r"../parsed.zip", "r")
 
@@ -106,7 +106,14 @@ else:
 
     regions_coords = {}
     for topic in topics:
-        random_number = random.randint(7, 15)
+        tmp1 = topic
+        tmp2 = topic
+        tmp3 = topic
+        for i in range(0, 3):
+            tmp4 = tmp1
+            tmp5 = tmp2
+            tmp6 = tmp3
+        random_number = random.randint(7, 13)
         time.sleep(random_number)
         geolocator = Nominatim(scheme='http', user_agent="lizaalert", timeout = 100)
         locations = topic["Location"]

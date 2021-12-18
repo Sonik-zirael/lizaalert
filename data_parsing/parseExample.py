@@ -177,6 +177,7 @@ else:
     producer = KafkaProducer(bootstrap_servers=['kafka:9092'], api_version=(0, 10))
     is_end_flag = False
     iterations_without_change = 0
+    iterations = 0
     while True:
         iterations_without_change += 1
         if is_end_flag or iterations_without_change > ITERATIONS_NO_CHANGE_KAFKA_CONSUMER_LIFETIME:
@@ -185,6 +186,9 @@ else:
         for message in consumer:
             print('Msg')
             # consumer.commit()
+            if iterations >= 3:
+                break
+            iterations = iterations + 1
             iterations_without_change = 0
             message_string = message.value.decode('utf-8')
             try:

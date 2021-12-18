@@ -87,15 +87,15 @@ if (args.mode) == 'archive':
             document=topic
         )
 else:
-    print('Work with kafka')
     indices = ['pipeline']
 
     if es.indices.exists(index=indices):
         es.delete_by_query(index=indices, body={"query": {"match_all": {}}})    # this will clean all data in db
         es.indices.delete(index=indices)    # this will drop index
     es.indices.create(index=indices, body=mappingsElastic)  # this will create index with mapping. Nesseccery to store coordinates as geo_point
-    random_number = random.randint(280, 320)
-    time.sleep(random_number)
+    # random_number = random.randint(280, 330)
+    # time.sleep(random_number)
+    print("Got parsed data, start loading into elastic!")
 
     parsed_data_zip = zipfile.ZipFile(r"../parsed.zip", "r")
 
